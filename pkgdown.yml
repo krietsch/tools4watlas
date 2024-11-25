@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   basic_workflows: basic_workflows.html
   load_and_process_data: load_and_process_data.html
-last_built: 2024-11-22T14:12Z
+last_built: 2024-11-25T07:33Z
 urls:
   reference: https://krietsch.github.io/tools4watlas/reference
   article: https://krietsch.github.io/tools4watlas/articles
