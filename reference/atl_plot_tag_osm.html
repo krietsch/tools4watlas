@@ -62,35 +62,46 @@
 
 
 <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>A dataframe with the tracking data. Can include multiple tags, but one tag is selected for plotting.</p></dd>
+<dd><p>A dataframe with the tracking data. Can include multiple tags,
+but one tag is selected for plotting.</p></dd>
 
 
 <dt id="arg-tag">tag<a class="anchor" aria-label="anchor" href="#arg-tag"></a></dt>
-<dd><p>The four-digit tag number as character to plot. Defaults to plotting the first tag in <code>data</code>.</p></dd>
+<dd><p>The four-digit tag number as character to plot. Defaults to
+plotting the first tag in <code>data</code>.</p></dd>
 
 
 <dt id="arg-mapid">mapID<a class="anchor" aria-label="anchor" href="#arg-mapid"></a></dt>
-<dd><p>An map-object generated with the function <code><a href="https://rdrr.io/pkg/OpenStreetMap/man/openmap.html" class="external-link">OpenStreetMap::openmap()</a></code>.</p></dd>
+<dd><p>An map-object generated with the function
+<code><a href="https://rdrr.io/pkg/OpenStreetMap/man/openmap.html" class="external-link">OpenStreetMap::openmap()</a></code>.</p></dd>
 
 
 <dt id="arg-color-by">color_by<a class="anchor" aria-label="anchor" href="#arg-color-by"></a></dt>
-<dd><p>Either <code>"time"</code>, <code>"SD"</code>, or <code>"NBS"</code>, which are respectively used to colour the localization with the relative time (hours), variance in the localizations as the maximum of VARX and VARY, or the Number of Base Stations (NBS) used to calculate the localization. Defaults to "time".</p></dd>
+<dd><p>Either <code>"time"</code>, <code>"SD"</code>, or <code>"NBS"</code>, which
+are respectively used to colour the localization with the relative
+time (hours), variance in the localizations as the maximum of VARX
+and VARY, or the Number of Base Stations (NBS) used to calculate the
+localization. Defaults to "time".</p></dd>
 
 
 <dt id="arg-fullname">fullname<a class="anchor" aria-label="anchor" href="#arg-fullname"></a></dt>
-<dd><p>If specified the plot will be saved in this path with this name (include extension). Defaults to NULL and plotting in a graphics window.</p></dd>
+<dd><p>If specified the plot will be saved in this path with this
+name (include extension). Defaults to NULL and plotting in a graphics window.</p></dd>
 
 
 <dt id="arg-ppi">ppi<a class="anchor" aria-label="anchor" href="#arg-ppi"></a></dt>
-<dd><p>The pixels per inch, which is used to calculate the dimensions of the plotting region from <code>mapID</code>. Deafults to 96.</p></dd>
+<dd><p>The pixels per inch, which is used to calculate the dimensions of
+the plotting region from <code>mapID</code>. Deafults to 96.</p></dd>
 
 
 <dt id="arg-towers">towers<a class="anchor" aria-label="anchor" href="#arg-towers"></a></dt>
-<dd><p>A dataframe with coordinates of receiver stations (named <code>X</code> and <code>Y</code>).</p></dd>
+<dd><p>A dataframe with coordinates of receiver stations
+(named <code>X</code> and <code>Y</code>).</p></dd>
 
 
 <dt id="arg-legend">Legend<a class="anchor" aria-label="anchor" href="#arg-legend"></a></dt>
-<dd><p>Passed to the <code>legend</code> function and sets the location of the legend in the plot.</p></dd>
+<dd><p>Passed to the <code>legend</code> function and sets the location of
+the legend in the plot.</p></dd>
 
 
 <dt id="arg-scalebar">Scalebar<a class="anchor" aria-label="anchor" href="#arg-scalebar"></a></dt>

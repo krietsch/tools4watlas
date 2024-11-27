@@ -106,17 +106,24 @@ WATLAS functions, we split the data by tag ID.</p>
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_data_csv.html">atl_get_data_csv</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading file: /home/runner/work/_temp/Library/tools4watlas/extdata/redknot_2707_WATLAS_exampledata.csv</span></span>
 <span></span>
+<span><span class="co"># change names to new format (redundant with new example data)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/setattr.html" class="external-link">setnames</a></span><span class="op">(</span><span class="va">data</span>,</span>
+<span>         old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TIME"</span>, <span class="st">"time"</span>, <span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"NBS"</span>, <span class="st">"VARX"</span>, <span class="st">"VARY"</span>, <span class="st">"COVXY"</span><span class="op">)</span>,</span>
+<span>         new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"datetime"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"nbs"</span>, <span class="st">"varx"</span>, <span class="st">"vary"</span>, <span class="st">"covxy"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">data</span><span class="op">[</span>, <span class="va">TAG</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span></span>
+<span></span>
 <span><span class="co"># Split data by ID</span></span>
-<span><span class="va">data_split</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span><span class="va">data</span>, by <span class="op">=</span> <span class="st">"TAG"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">data_split</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span><span class="va">data</span>, by <span class="op">=</span> <span class="st">"tag"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="sql-databases">SQL databases<a class="anchor" aria-label="anchor" href="#sql-databases"></a>
 </h3>
-<p>First select the desired tags and time period.</p>
+<div class="section level4">
+<h4 id="select-the-desired-tags-and-time-period">Select the desired tags and time period<a class="anchor" aria-label="anchor" href="#select-the-desired-tags-and-time-period"></a>
+</h4>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Tags for which data should be extracted form the database</span></span>
 <span><span class="va">tags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2707</span>, <span class="fl">2708</span><span class="op">)</span></span>
-<span><span class="va">tags</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_full_tag_id.html">atl_full_tag_id</a></span><span class="op">(</span><span class="va">tags</span><span class="op">)</span> <span class="co"># Change to long tag format (as in database)</span></span>
 <span></span>
 <span><span class="co"># Time period for which data should be extracted form the database</span></span>
 <span><span class="va">from</span> <span class="op">&lt;-</span> <span class="st">"2023-01-01 12:00:00"</span></span>
@@ -130,8 +137,8 @@ accessing remote SQL database)</p>
 <span>  <span class="co"># provide the correct path and file name, and sheet of the excel file. </span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org" class="external-link">readxl</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">alltags</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu">read_excel</span><span class="op">(</span><span class="st">"C:\\path\\tags_watlas_all.xlsx"</span>, </span>
-<span>                              sheet <span class="op">=</span> <span class="st">"tags_watlas_all"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span><span class="va">alltags</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu">read_excel</span><span class="op">(</span></span>
+<span>  <span class="st">"C:\\path\\tags_watlas_all.xlsx"</span>, sheet <span class="op">=</span> <span class="st">"tags_watlas_all"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Subset tag ID's using data.table </span></span>
@@ -146,8 +153,9 @@ accessing remote SQL database)</p>
 <span><span class="va">days</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="va">from</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">86400</span> <span class="op">*</span> <span class="va">days</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">to</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fl">3600</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
 <div class="section level4">
-<h4 id="local-sqlite-file">Local SQLite file<a class="anchor" aria-label="anchor" href="#local-sqlite-file"></a>
+<h4 id="extract-data-from-local-sqlite-file">Extract data from local SQLite file<a class="anchor" aria-label="anchor" href="#extract-data-from-local-sqlite-file"></a>
 </h4>
 <p>First, the path and file name of the local SQLite database need to be
 provided. Then, with the established connection, the database can be
@@ -155,7 +163,7 @@ queried for the selected tags and period. Here we will load the tagging
 data in a list where each entry is a dataframe with data of one tag.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">SQLiteDB</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"path"</span>, <span class="st">"SQLite_db_name"</span>, <span class="st">".sqlite"</span><span class="op">)</span></span>
-<span><span class="va">MyDBconnection</span> <span class="op">&lt;-</span> <span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html" class="external-link">SQLite</a></span><span class="op">(</span><span class="op">)</span>,<span class="va">SQLiteDB</span><span class="op">)</span></span>
+<span><span class="va">MyDBconnection</span> <span class="op">&lt;-</span> <span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html" class="external-link">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">SQLiteDB</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data_split</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
 <span>  <span class="va">tags</span>, </span>
@@ -168,7 +176,7 @@ data in a list where each entry is a dataframe with data of one tag.</p>
 <span><span class="op">)</span> </span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="remote-sql-database">Remote SQL-database<a class="anchor" aria-label="anchor" href="#remote-sql-database"></a>
+<h4 id="alternatively-extract-from-remote-sql-database">Alternatively, extract from remote SQL-database<a class="anchor" aria-label="anchor" href="#alternatively-extract-from-remote-sql-database"></a>
 </h4>
 <p>It is also possible to connect directly to a remote host.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -178,7 +186,7 @@ data in a list where each entry is a dataframe with data of one tag.</p>
 <span>  tracking_time_start <span class="op">=</span> <span class="va">from</span>,</span>
 <span>  tracking_time_end <span class="op">=</span> <span class="va">to</span>,</span>
 <span>  timezone <span class="op">=</span> <span class="st">"CET"</span>,</span>
-<span>  host<span class="op">=</span> <span class="st">"host"</span>, </span>
+<span>  host <span class="op">=</span> <span class="st">"host"</span>, </span>
 <span>  database <span class="op">=</span> <span class="st">"db"</span>,</span>
 <span>  username <span class="op">=</span> <span class="st">"username"</span>,</span>
 <span>  password <span class="op">=</span> <span class="st">"password"</span></span>
@@ -194,35 +202,32 @@ data in a list where each entry is a dataframe with data of one tag.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="6%">
-<col width="11%">
+<col width="7%">
 <col width="5%">
-<col width="11%">
-<col width="21%">
+<col width="13%">
+<col width="23%">
+<col width="10%">
 <col width="9%">
-<col width="8%">
 <col width="4%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
 </colgroup>
 <thead><tr class="header">
 <th align="right">posID</th>
-<th align="right">TAG</th>
 <th align="left">tag</th>
-<th align="right">TIME</th>
-<th align="left">time</th>
-<th align="right">X</th>
-<th align="right">Y</th>
-<th align="right">NBS</th>
-<th align="right">VARX</th>
-<th align="right">VARY</th>
-<th align="right">COVXY</th>
+<th align="right">time</th>
+<th align="left">datetime</th>
+<th align="right">x</th>
+<th align="right">y</th>
+<th align="right">nbs</th>
+<th align="right">varx</th>
+<th align="right">vary</th>
+<th align="right">covxy</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">3.1001e+10</td>
 <td align="left">2707</td>
 <td align="right">1662074702</td>
 <td align="left">2022-09-01 23:25:02</td>
@@ -235,7 +240,6 @@ data in a list where each entry is a dataframe with data of one tag.</p>
 </tr>
 <tr class="even">
 <td align="right">2</td>
-<td align="right">3.1001e+10</td>
 <td align="left">2707</td>
 <td align="right">1662074705</td>
 <td align="left">2022-09-01 23:25:05</td>
@@ -248,7 +252,6 @@ data in a list where each entry is a dataframe with data of one tag.</p>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
-<td align="right">3.1001e+10</td>
 <td align="left">2707</td>
 <td align="right">1662074708</td>
 <td align="left">2022-09-01 23:25:08</td>
@@ -261,7 +264,6 @@ data in a list where each entry is a dataframe with data of one tag.</p>
 </tr>
 <tr class="even">
 <td align="right">4</td>
-<td align="right">3.1001e+10</td>
 <td align="left">2707</td>
 <td align="right">1662074711</td>
 <td align="left">2022-09-01 23:25:11</td>
@@ -274,7 +276,6 @@ data in a list where each entry is a dataframe with data of one tag.</p>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
-<td align="right">3.1001e+10</td>
 <td align="left">2707</td>
 <td align="right">1662074717</td>
 <td align="left">2022-09-01 23:25:17</td>
@@ -287,7 +288,6 @@ data in a list where each entry is a dataframe with data of one tag.</p>
 </tr>
 <tr class="even">
 <td align="right">6</td>
-<td align="right">3.1001e+10</td>
 <td align="left">2707</td>
 <td align="right">1662074720</td>
 <td align="left">2022-09-01 23:25:20</td>
@@ -313,48 +313,44 @@ columns representing:</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><em>PosID</em></td>
+<td><em>posID</em></td>
 <td>Unique number for localizations</td>
 </tr>
 <tr class="even">
-<td><em>TAG</em></td>
-<td>11 digit WATLAS tag ID</td>
-</tr>
-<tr class="odd">
 <td><em>tag</em></td>
 <td>4 digit tag number (character), i.e. last 4 digits of the column
 ‘TAG’</td>
 </tr>
-<tr class="even">
-<td><em>TIME</em></td>
-<td>UNIX time (seconds)</td>
-</tr>
 <tr class="odd">
 <td><em>time</em></td>
+<td>UNIX time (seconds)</td>
+</tr>
+<tr class="even">
+<td><em>datetime</em></td>
 <td>Timestamp in POSIXct (UTC)</td>
 </tr>
-<tr class="even">
-<td><em>X</em></td>
+<tr class="odd">
+<td><em>x</em></td>
 <td>X-ccordinates in meters (UTM 31 N)</td>
 </tr>
-<tr class="odd">
-<td><em>Y</em></td>
+<tr class="even">
+<td><em>y</em></td>
 <td>Y-ccordinates in meters (UTM 31 N)</td>
 </tr>
-<tr class="even">
-<td><em>NBS</em></td>
+<tr class="odd">
+<td><em>nbs</em></td>
 <td>Number of Base Stations used in calculating coordinates</td>
 </tr>
-<tr class="odd">
-<td><em>VARX</em></td>
+<tr class="even">
+<td><em>varx</em></td>
 <td>Variance in estimating X-coordinates</td>
 </tr>
-<tr class="even">
-<td><em>VARY</em></td>
+<tr class="odd">
+<td><em>vary</em></td>
 <td>Variance in estimating Y-coordinates</td>
 </tr>
-<tr class="odd">
-<td><em>COVXY</em></td>
+<tr class="even">
+<td><em>covxy</em></td>
 <td>Co-variance between X- and Y-coordinates</td>
 </tr>
 </tbody>
@@ -376,14 +372,14 @@ many positions by tag and date we have.</p>
 <span></span>
 <span><span class="co"># N positions, first and last data by tag ID</span></span>
 <span><span class="va">data</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>N_positions <span class="op">=</span> <span class="va">.N</span>,</span>
-<span>         fist_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span>,</span>
-<span>         last_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span><span class="op">)</span>, <span class="va">tag</span><span class="op">]</span></span>
+<span>         fist_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">datetime</span><span class="op">)</span>,</span>
+<span>         last_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span>, <span class="va">tag</span><span class="op">]</span></span>
 <span><span class="co">#&gt;       tag N_positions           fist_data           last_data</span></span>
 <span><span class="co">#&gt;    &lt;char&gt;       &lt;int&gt;              &lt;POSc&gt;              &lt;POSc&gt;</span></span>
 <span><span class="co">#&gt; 1:   2707       33183 2022-09-01 23:25:02 2022-09-03 11:46:59</span></span>
 <span></span>
 <span><span class="co"># add data</span></span>
-<span><span class="va">data</span><span class="op">[</span>, <span class="va">date</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">data</span><span class="op">[</span>, <span class="va">date</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">datetime</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># N positions by species and day</span></span>
 <span><span class="va">data_subset</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>, <span class="va">.N</span>, by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">tag</span>, <span class="va">date</span><span class="op">)</span><span class="op">]</span></span>

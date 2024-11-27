@@ -4,13 +4,13 @@
 seconds using the interval argument.
 Both options make two important assumptions:
 (1) that timestamps are named TIME', and (2) all columns except the identity columns can be averaged in \code{R}. While the subsample' option returns a thinned dataset with all columns from
-the input data, the aggregate' option drops the column \code{COVXY}, since this cannot be propagated to the averaged position. Both options handle the column TIME' differently: while subsample' returns the actual timestamp (in UNIX TIME) of each sample, aggregate' returns the
+the input data, the aggregate' option drops the column \code{covxy}, since this cannot be propagated to the averaged position. Both options handle the column TIME' differently: while subsample' returns the actual timestamp (in UNIX TIME) of each sample, aggregate' returns the
 mean timestamp (also in UNIX TIME).
 In both cases, an extra column, time_agg, is added which has a uniform
 difference between each element corresponding to the user-defined thinning
 interval.
-The `aggregate' option only recognises errors named VARX and
-VARY.
+The `aggregate' option only recognises errors named varx and
+vary.
 If all of these columns are not present together the function assumes there
 is no measure of error, and drops those columns.
 If there is actually no measure of error, the function simply returns the
@@ -21,13 +21,13 @@ character vector to the id_columns argument."><meta property="og:description" co
 seconds using the interval argument.
 Both options make two important assumptions:
 (1) that timestamps are named TIME', and (2) all columns except the identity columns can be averaged in \code{R}. While the subsample' option returns a thinned dataset with all columns from
-the input data, the aggregate' option drops the column \code{COVXY}, since this cannot be propagated to the averaged position. Both options handle the column TIME' differently: while subsample' returns the actual timestamp (in UNIX TIME) of each sample, aggregate' returns the
+the input data, the aggregate' option drops the column \code{covxy}, since this cannot be propagated to the averaged position. Both options handle the column TIME' differently: while subsample' returns the actual timestamp (in UNIX TIME) of each sample, aggregate' returns the
 mean timestamp (also in UNIX TIME).
 In both cases, an extra column, time_agg, is added which has a uniform
 difference between each element corresponding to the user-defined thinning
 interval.
-The `aggregate' option only recognises errors named VARX and
-VARY.
+The `aggregate' option only recognises errors named varx and
+vary.
 If all of these columns are not present together the function assumes there
 is no measure of error, and drops those columns.
 If there is actually no measure of error, the function simply returns the
@@ -77,13 +77,13 @@ character vector to the id_columns argument."><meta property="og:image" content=
 seconds using the <code>interval</code> argument.
 Both options make two important assumptions:
 (1) that timestamps are named <code>TIME', and (2) all columns except the identity columns can be averaged in \code{R}. While the </code>subsample' option returns a thinned dataset with all columns from
-the input data, the <code>aggregate' option drops the column \code{COVXY}, since this cannot be propagated to the averaged position. Both options handle the column </code>TIME' differently: while <code>subsample' returns the actual timestamp (in UNIX TIME) of each sample, </code>aggregate' returns the
+the input data, the <code>aggregate' option drops the column \code{covxy}, since this cannot be propagated to the averaged position. Both options handle the column </code>TIME' differently: while <code>subsample' returns the actual timestamp (in UNIX TIME) of each sample, </code>aggregate' returns the
 mean timestamp (also in UNIX TIME).
 In both cases, an extra column, <code>time_agg</code>, is added which has a uniform
 difference between each element corresponding to the user-defined thinning
 interval.
-The `aggregate' option only recognises errors named <code>VARX</code> and
-<code>VARY</code>.
+The `aggregate' option only recognises errors named <code>varx</code> and
+<code>vary</code>.
 If all of these columns are not present together the function assumes there
 is no measure of error, and drops those columns.
 If there is actually no measure of error, the function simply returns the
@@ -107,7 +107,8 @@ character vector to the <code>id_columns</code> argument.</p>
 
 
 <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>Tracking data to aggregate. Must have columns <code>X</code> and <code>Y</code>, and a numeric column named <code>TIME</code>.</p></dd>
+<dd><p>Tracking data to aggregate. Must have columns <code>X</code> and
+<code>Y</code>, and a numeric column named <code>TIME</code>.</p></dd>
 
 
 <dt id="arg-interval">interval<a class="anchor" aria-label="anchor" href="#arg-interval"></a></dt>
