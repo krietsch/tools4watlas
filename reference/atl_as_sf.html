@@ -11,7 +11,7 @@ Additional attributes can also be retained in the resulting sf object."><meta pr
 
     <a class="navbar-brand me-2" href="../index.html">tools4watlas</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,7 +111,6 @@ any included attributes.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add the "value" and "category" columns to the sf object</span></span></span>
 <span class="r-in"><span><span class="va">d_sf</span> <span class="op">&lt;-</span> <span class="fu">atl_as_sf</span><span class="op">(</span><span class="va">data</span>, additional_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"value"</span>, <span class="st">"category"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Both 'cols_to_keep' and '..cols_to_keep' exist in calling scope. Please remove the '..cols_to_keep' variable in calling scope for clarity.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">d_sf</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 3 features and 2 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POINT</span>
@@ -126,7 +125,6 @@ any included attributes.</p>
 <span class="r-in"><span><span class="co"># Example usage when column names are "lon" and "lat"</span></span></span>
 <span class="r-in"><span><span class="va">data2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>lon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="cn">NA</span><span class="op">)</span>, lat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">50</span>, <span class="fl">60</span>, <span class="fl">70</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">d_sf2</span> <span class="op">&lt;-</span> <span class="fu">atl_as_sf</span><span class="op">(</span><span class="va">data2</span>, <span class="st">"lon"</span>, <span class="st">"lat"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Both 'cols_to_keep' and '..cols_to_keep' exist in calling scope. Please remove the '..cols_to_keep' variable in calling scope for clarity.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">d_sf2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 3 features and 0 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POINT</span>
@@ -144,7 +142,7 @@ any included attributes.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Allert Bijleveld, Pratik Gupte, Christine Beardsworth.</p>
+  <p>Developed by Allert Bijleveld, Pratik Gupte, Christine Beardsworth, Johannes Krietsch.</p>
 </div>
 
 <div class="pkgdown-footer-right">
