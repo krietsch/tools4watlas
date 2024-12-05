@@ -10,6 +10,7 @@
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_as_sf.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_bbox.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_check_data.html</loc></url>
+<url><loc>https://krietsch.github.io/tools4watlas/reference/atl_create_bm.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_filter_bounds.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_filter_covariates.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_full_tag_id.html</loc></url>
@@ -33,9 +34,13 @@
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atlas_make_boundingbox_for_osm.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atlas_make_spatialdataframe.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/index.html</loc></url>
+<url><loc>https://krietsch.github.io/tools4watlas/reference/lakes_sf.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/land.html</loc></url>
+<url><loc>https://krietsch.github.io/tools4watlas/reference/land_sf.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/mudflats.html</loc></url>
+<url><loc>https://krietsch.github.io/tools4watlas/reference/mudflats_sf.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/pipe.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/plot_map_osm.html</loc></url>
+<url><loc>https://krietsch.github.io/tools4watlas/reference/rivers_sf.html</loc></url>
 </urlset>
 
