@@ -3,6 +3,7 @@
 <url><loc>https://krietsch.github.io/tools4watlas/articles/basic_workflows.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/articles/index.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/articles/load_and_check_data.html</loc></url>
+<url><loc>https://krietsch.github.io/tools4watlas/articles/plot_data.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/articles/process_data.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/authors.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/index.html</loc></url>
@@ -33,6 +34,7 @@
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_within_polygon.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atlas_make_boundingbox_for_osm.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atlas_make_spatialdataframe.html</loc></url>
+<url><loc>https://krietsch.github.io/tools4watlas/reference/data_example.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/index.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/lakes_sf.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/land.html</loc></url>
