@@ -19,6 +19,8 @@
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_get_data_csv.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_get_spatial_bounds.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_get_speed.html</loc></url>
+<url><loc>https://krietsch.github.io/tools4watlas/reference/atl_make_boundingbox_for_osm.html</loc></url>
+<url><loc>https://krietsch.github.io/tools4watlas/reference/atl_make_spatialdataframe.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_median_smooth.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_patch_dist.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_patch_summary.html</loc></url>
@@ -32,8 +34,6 @@
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_thin_data.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_turning_angle.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/atl_within_polygon.html</loc></url>
-<url><loc>https://krietsch.github.io/tools4watlas/reference/atlas_make_boundingbox_for_osm.html</loc></url>
-<url><loc>https://krietsch.github.io/tools4watlas/reference/atlas_make_spatialdataframe.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/data_example.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/index.html</loc></url>
 <url><loc>https://krietsch.github.io/tools4watlas/reference/lakes_sf.html</loc></url>

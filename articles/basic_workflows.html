@@ -275,7 +275,7 @@ always plot the intermediate steps. Initially, the data is a
 a spatial object, i.e. a <em>SpatialPointsDataFrame</em>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#&gt; UTM 31N is the the default coordinate reference system.</span></span>
-<span><span class="va">data_spatial_utm</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/atlas_make_spatialdataframe.html">atlas_make_spatialdataframe</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="va">data_spatial_utm</span><span class="op">&lt;-</span><span class="fu">atlas_make_spatialdataframe</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#&gt; plot locations only</span></span>
 <span><span class="fu">sp</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">data_spatial_utm</span><span class="op">)</span> </span>
@@ -301,7 +301,7 @@ the track on a satellite image with the library
 <span><span class="va">bbox_utm</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/atl_get_spatial_bounds.html">atl_get_spatial_bounds</a></span><span class="op">(</span><span class="va">data_spatial_utm</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#&gt; Transform the bounding box to the osm coordinate reference system</span></span>
-<span><span class="va">Bbox_osm</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/atlas_make_boundingbox_for_osm.html">atlas_make_boundingbox_for_osm</a></span><span class="op">(</span><span class="va">bbox_utm</span>, buffer<span class="op">=</span><span class="fl">300</span>, </span>
+<span><span class="va">Bbox_osm</span><span class="op">&lt;-</span><span class="fu">atlas_make_boundingbox_for_osm</span><span class="op">(</span><span class="va">bbox_utm</span>, buffer<span class="op">=</span><span class="fl">300</span>, </span>
 <span>                    from_crs<span class="op">=</span> <span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://edzer.github.io/sp/reference/CRS-class.html" class="external-link">CRS</a></span><span class="op">(</span><span class="st">"+init=epsg:32631"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#&gt; Download the map from OpenStreetMap using the bounding box</span></span>
@@ -497,7 +497,7 @@ the OSM-map for plotting.</p>
 <span>        </span>
 <span><span class="co">#&gt; Transform the bounding box to the osm coordinate reference system </span></span>
 <span><span class="co">#&gt; for plotting with OpenStreetMap</span></span>
-<span>    <span class="va">bbox_osm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atlas_make_boundingbox_for_osm.html">atlas_make_boundingbox_for_osm</a></span><span class="op">(</span></span>
+<span>    <span class="va">bbox_osm</span> <span class="op">&lt;-</span> <span class="fu">atlas_make_boundingbox_for_osm</span><span class="op">(</span></span>
 <span>                            <span class="va">bbox_utm</span>,</span>
 <span>                            buffer<span class="op">=</span><span class="fl">1000</span>,</span>
 <span>                            from_crs<span class="op">=</span> <span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://edzer.github.io/sp/reference/CRS-class.html" class="external-link">CRS</a></span><span class="op">(</span><span class="st">"+init=epsg:32631"</span><span class="op">)</span></span>
