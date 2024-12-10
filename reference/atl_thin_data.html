@@ -3,13 +3,18 @@
 (specified by the method argument) over an interval specified in
 seconds using the interval argument.
 Both options make two important assumptions:
-(1) that timestamps are named TIME', and (2) all columns except the identity columns can be averaged in \code{R}. While the subsample' option returns a thinned dataset with all columns from
-the input data, the aggregate' option drops the column \code{covxy}, since this cannot be propagated to the averaged position. Both options handle the column TIME' differently: while subsample' returns the actual timestamp (in UNIX TIME) of each sample, aggregate' returns the
-mean timestamp (also in UNIX TIME).
+(1) that timestamps are named 'time' and 'datetime', and
+(2) all columns except the identity columns can be averaged in R.
+While the 'subsample' option returns a thinned dataset with all columns from
+the input data, the 'aggregate' option drops the column covxy, since
+this cannot be propagated to the averaged position.
+Both options handle the column 'time' differently: while 'subsample' returns
+the actual timestamp (in UNIX time) of each sample, 'aggregate' returns the
+mean timestamp (also in UNIX time).
 In both cases, an extra column, time_agg, is added which has a uniform
 difference between each element corresponding to the user-defined thinning
 interval.
-The `aggregate' option only recognises errors named varx and
+The 'aggregate' option only recognises errors named varx and
 vary.
 If all of these columns are not present together the function assumes there
 is no measure of error, and drops those columns.
@@ -20,13 +25,18 @@ character vector to the id_columns argument."><meta property="og:description" co
 (specified by the method argument) over an interval specified in
 seconds using the interval argument.
 Both options make two important assumptions:
-(1) that timestamps are named TIME', and (2) all columns except the identity columns can be averaged in \code{R}. While the subsample' option returns a thinned dataset with all columns from
-the input data, the aggregate' option drops the column \code{covxy}, since this cannot be propagated to the averaged position. Both options handle the column TIME' differently: while subsample' returns the actual timestamp (in UNIX TIME) of each sample, aggregate' returns the
-mean timestamp (also in UNIX TIME).
+(1) that timestamps are named 'time' and 'datetime', and
+(2) all columns except the identity columns can be averaged in R.
+While the 'subsample' option returns a thinned dataset with all columns from
+the input data, the 'aggregate' option drops the column covxy, since
+this cannot be propagated to the averaged position.
+Both options handle the column 'time' differently: while 'subsample' returns
+the actual timestamp (in UNIX time) of each sample, 'aggregate' returns the
+mean timestamp (also in UNIX time).
 In both cases, an extra column, time_agg, is added which has a uniform
 difference between each element corresponding to the user-defined thinning
 interval.
-The `aggregate' option only recognises errors named varx and
+The 'aggregate' option only recognises errors named varx and
 vary.
 If all of these columns are not present together the function assumes there
 is no measure of error, and drops those columns.
@@ -77,13 +87,18 @@ character vector to the id_columns argument."><meta property="og:image" content=
 (specified by the <code>method</code> argument) over an interval specified in
 seconds using the <code>interval</code> argument.
 Both options make two important assumptions:
-(1) that timestamps are named <code>TIME', and (2) all columns except the identity columns can be averaged in \code{R}. While the </code>subsample' option returns a thinned dataset with all columns from
-the input data, the <code>aggregate' option drops the column \code{covxy}, since this cannot be propagated to the averaged position. Both options handle the column </code>TIME' differently: while <code>subsample' returns the actual timestamp (in UNIX TIME) of each sample, </code>aggregate' returns the
-mean timestamp (also in UNIX TIME).
+(1) that timestamps are named 'time' and 'datetime', and
+(2) all columns except the identity columns can be averaged in <code>R</code>.
+While the 'subsample' option returns a thinned dataset with all columns from
+the input data, the 'aggregate' option drops the column <code>covxy</code>, since
+this cannot be propagated to the averaged position.
+Both options handle the column 'time' differently: while 'subsample' returns
+the actual timestamp (in UNIX time) of each sample, 'aggregate' returns the
+mean timestamp (also in UNIX time).
 In both cases, an extra column, <code>time_agg</code>, is added which has a uniform
 difference between each element corresponding to the user-defined thinning
 interval.
-The `aggregate' option only recognises errors named <code>varx</code> and
+The 'aggregate' option only recognises errors named <code>varx</code> and
 <code>vary</code>.
 If all of these columns are not present together the function assumes there
 is no measure of error, and drops those columns.
@@ -108,8 +123,8 @@ character vector to the <code>id_columns</code> argument.</p>
 
 
 <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>Tracking data to aggregate. Must have columns <code>X</code> and
-<code>Y</code>, and a numeric column named <code>TIME</code>.</p></dd>
+<dd><p>Tracking data to aggregate. Must have columns <code>x</code> and
+<code>y</code>, and a numeric column named <code>time</code>, as well as <code>datetime</code>.</p></dd>
 
 
 <dt id="arg-interval">interval<a class="anchor" aria-label="anchor" href="#arg-interval"></a></dt>
@@ -129,23 +144,80 @@ mean is taken.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A dataframe aggregated taking the mean over the interval.</p>
+    <p>A data.table with aggregated or subsampled data.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
-    <p>Pratik Gupte &amp; Allert Bijleveld</p>
+    <p>Pratik Gupte &amp; Allert Bijleveld &amp; Johannes Krietsch</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="va">thinned_data</span> <span class="op">&lt;-</span> <span class="fu">atl_thin_data</span><span class="op">(</span><span class="va">data</span>,</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  tag <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, each <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1696218721</span>, <span class="fl">1696218721</span> <span class="op">+</span> <span class="fl">92</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">15</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">data</span><span class="op">[</span>, <span class="va">datetime</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="va">time</span>, origin <span class="op">=</span> <span class="st">"1970-01-01"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        tag       time         x        y            datetime</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;char&gt;      &lt;num&gt;     &lt;num&gt;    &lt;num&gt;              &lt;POSc&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:      1 1696218721  8.599956 15.46815 2023-10-02 03:52:01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:      1 1696218731 10.255317 15.36295 2023-10-02 03:52:11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:      1 1696218741  7.562736 13.69546 2023-10-02 03:52:21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:      1 1696218751  9.994429 15.73778 2023-10-02 03:52:31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:      1 1696218761 10.621553 16.88850 2023-10-02 03:52:41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:      1 1696218771 11.148412 14.90255 2023-10-02 03:52:51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      1 1696218781  8.178182 14.06415 2023-10-02 03:53:01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:      1 1696218791  9.752675 14.98405 2023-10-02 03:53:11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:      1 1696218801  9.755800 14.17321 2023-10-02 03:53:21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:      1 1696218811  9.717295 13.48760 2023-10-02 03:53:31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:      2 1696218721  9.446301 15.93536 2023-10-02 03:52:01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12:      2 1696218731 10.628982 15.17649 2023-10-02 03:52:11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13:      2 1696218741 12.065025 15.24369 2023-10-02 03:52:21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14:      2 1696218751  8.369011 16.62355 2023-10-02 03:52:31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15:      2 1696218761 10.512427 15.11204 2023-10-02 03:52:41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16:      2 1696218771  8.136989 14.86600 2023-10-02 03:52:51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:      2 1696218781  9.477987 13.08991 2023-10-02 03:53:01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18:      2 1696218791  9.947398 14.72076 2023-10-02 03:53:11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19:      2 1696218801 10.542996 14.68655 2023-10-02 03:53:21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20:      2 1696218811  9.085925 16.06731 2023-10-02 03:53:31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        tag       time         x        y            datetime</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Thin the data by aggregation with a 60-second interval</span></span></span>
+<span class="r-in"><span><span class="va">thinned_aggregated</span> <span class="op">&lt;-</span> <span class="fu">atl_thin_data</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">data</span>,</span></span>
 <span class="r-in"><span>  interval <span class="op">=</span> <span class="fl">60</span>,</span></span>
-<span class="r-in"><span>  id_columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"animal_id"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  id_columns <span class="op">=</span> <span class="st">"tag"</span>,</span></span>
 <span class="r-in"><span>  method <span class="op">=</span> <span class="st">"aggregate"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Thin the data by subsampling with a 60-second interval</span></span></span>
+<span class="r-in"><span><span class="va">thinned_subsampled</span> <span class="op">&lt;-</span> <span class="fu">atl_thin_data</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">data</span>,</span></span>
+<span class="r-in"><span>  interval <span class="op">=</span> <span class="fl">60</span>,</span></span>
+<span class="r-in"><span>  id_columns <span class="op">=</span> <span class="st">"tag"</span>,</span></span>
+<span class="r-in"><span>  method <span class="op">=</span> <span class="st">"subsample"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># View results</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">thinned_aggregated</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       tag       time        x        y            datetime n_aggregated</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;char&gt;      &lt;num&gt;    &lt;num&gt;    &lt;num&gt;              &lt;POSc&gt;        &lt;int&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      1 1696218720 9.697067 15.34257 2023-10-02 03:52:00            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      1 1696218780 9.350988 14.17725 2023-10-02 03:53:00            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      2 1696218720 9.859789 15.49285 2023-10-02 03:52:00            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      2 1696218780 9.763577 14.64113 2023-10-02 03:53:00            4</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">thinned_subsampled</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       tag       time        x        y            datetime n_subsampled</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;char&gt;      &lt;num&gt;    &lt;num&gt;    &lt;num&gt;              &lt;POSc&gt;        &lt;int&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      1 1696218721 8.599956 15.46815 2023-10-02 03:52:01            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      1 1696218781 8.178182 14.06415 2023-10-02 03:53:01            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      2 1696218721 9.446301 15.93536 2023-10-02 03:52:01            6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      2 1696218781 9.477987 13.08991 2023-10-02 03:53:01            4</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
