@@ -243,18 +243,16 @@ is possible to save the plot as a .png. If necesarry, the legend can
 also be located elsewhere on the plot with Legend.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load example data</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data_example</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data_example</span></span>
 <span></span>
-<span><span class="co"># transform to sp</span></span>
-<span><span class="va">d_sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_make_spatialdataframe.html">atl_make_spatialdataframe</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in CPL_crs_from_input(x): GDAL Message 1: +init=epsg:XXXX syntax is</span></span>
-<span><span class="co">## deprecated. It might return a CRS with a non-EPSG compliant axis order.</span></span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Plot the tracking data with a simple background </span></span>
-<span><span class="fu"><a href="../reference/atl_plot_tag.html">atl_plot_tag</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d_sp</span>, tag <span class="op">=</span> <span class="cn">NULL</span>, fullname <span class="op">=</span> <span class="cn">NULL</span>, buffer <span class="op">=</span> <span class="fl">1</span>, </span>
+<span><span class="co"># Transform to sf</span></span>
+<span><span class="va">d_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_as_sf.html">atl_as_sf</a></span><span class="op">(</span><span class="va">data</span>, additional_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot the tracking data with a simple background</span></span>
+<span><span class="fu"><a href="../reference/atl_plot_tag.html">atl_plot_tag</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d_sf</span>, tag <span class="op">=</span> <span class="cn">NULL</span>, fullname <span class="op">=</span> <span class="cn">NULL</span>, buffer <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>             color_by <span class="op">=</span> <span class="st">"time"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Make sure that data has the UTM 31N coordinate reference system."</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] "Ensure that data has the UTM 31N coordinate reference system."</span></span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Note: function opens device and therefore the plot is not shown in markdown</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -265,15 +263,17 @@ plot the track on a satellite image with the library OpenStreetMap. The
 region of the the satellite image can be extended by specifying a buffer
 (in meters) in the function atlas_make_boundingbox_for_osm. The other
 options are similar to atl_plot_tag (see earlier).</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Obtain the extent of tracking data for retrieving the satellite imagery</span></span>
 <span><span class="va">bbox_utm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_spatial_bounds.html">atl_get_spatial_bounds</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Transform the bounding box to the osm coordinate reference system</span></span>
 <span><span class="va">bbox_osm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_make_boundingbox_for_osm.html">atl_make_boundingbox_for_osm</a></span><span class="op">(</span><span class="va">bbox_utm</span>, buffer <span class="op">=</span> <span class="fl">300</span>, </span>
-<span>                                         from_crs <span class="op">=</span> <span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://edzer.github.io/sp/reference/CRS-class.html" class="external-link">CRS</a></span><span class="op">(</span><span class="st">"+init=epsg:32631"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Download the map from OpenStreetMap using the bounding box</span></span>
+<span>                                         from_crs <span class="op">=</span> <span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://edzer.github.io/sp/reference/CRS-class.html" class="external-link">CRS</a></span><span class="op">(</span><span class="st">"+init=epsg:32631"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning in CPL_crs_from_input(x): GDAL Message 1: +init=epsg:XXXX syntax is</span></span>
+<span><span class="co">## deprecated. It might return a CRS with a non-EPSG compliant axis order.</span></span></code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Download the map from OpenStreetMap using the bounding box</span></span>
 <span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu">OpenStreetMap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/openmap.html" class="external-link">openmap</a></span><span class="op">(</span><span class="va">bbox_osm</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>, <span class="va">bbox_osm</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span>, type <span class="op">=</span> <span class="st">'bing'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Transform to sp</span></span>
