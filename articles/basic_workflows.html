@@ -104,16 +104,16 @@ example data with tools4watlas.</p>
 provided. Then, with the established connection, the database can be
 queried for a particular tags and periods.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">SQLiteDB</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"path"</span>, <span class="st">"SQLite_db_name"</span>, <span class="st">".sqlite"</span><span class="op">)</span></span>
-<span><span class="va">MyDBconnection</span> <span class="op">&lt;-</span> <span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html" class="external-link">SQLite</a></span><span class="op">(</span><span class="op">)</span>,<span class="va">SQLiteDB</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">SQLiteDB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"path"</span>, <span class="st">"SQLite_db_name"</span>, <span class="st">".sqlite"</span><span class="op">)</span></span>
+<span><span class="va">MyDBconnection</span> <span class="op">&lt;-</span> <span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html" class="external-link">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">SQLiteDB</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_data.html">atl_get_data</a></span><span class="op">(</span></span>
 <span>  tag <span class="op">=</span> <span class="fl">31001002707</span>,</span>
-<span>    tracking_time_start <span class="op">=</span> <span class="st">"2022-09-02 01:25:00"</span>,</span>
-<span>    tracking_time_end <span class="op">=</span> <span class="st">"2022-09-03 13:47:00"</span>,</span>
-<span>    timezone <span class="op">=</span> <span class="st">"CET"</span>,</span>
-<span>    SQLiteDB<span class="op">=</span><span class="va">SQLiteDB</span>,</span>
-<span>    use_connection <span class="op">=</span> <span class="va">MyDBconnection</span></span>
+<span>  tracking_time_start <span class="op">=</span> <span class="st">"2022-09-02 01:25:00"</span>,</span>
+<span>  tracking_time_end <span class="op">=</span> <span class="st">"2022-09-03 13:47:00"</span>,</span>
+<span>  timezone <span class="op">=</span> <span class="st">"CET"</span>,</span>
+<span>  SQLiteDB <span class="op">=</span> <span class="va">SQLiteDB</span>,</span>
+<span>  use_connection <span class="op">=</span> <span class="va">MyDBconnection</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level5">
@@ -122,14 +122,15 @@ queried for a particular tags and periods.</p>
 <p>It is also possible to connect directly to a remote host.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_data.html">atl_get_data</a></span><span class="op">(</span></span>
-<span>    tag <span class="op">=</span> <span class="fl">31001002707</span>,</span>
-<span>    tracking_time_start <span class="op">=</span> <span class="st">"2022-09-02 01:25:00"</span>,</span>
-<span>    tracking_time_end <span class="op">=</span> <span class="st">"2022-09-03 13:47:00"</span>,</span>
-<span>    timezone <span class="op">=</span> <span class="st">"CET"</span>,</span>
-<span>    host <span class="op">=</span> <span class="st">"host"</span>, </span>
-<span>    database <span class="op">=</span> <span class="st">"db"</span>,</span>
-<span>    username <span class="op">=</span> <span class="st">"username"</span>,</span>
-<span>    password <span class="op">=</span> <span class="st">"password"</span><span class="op">)</span>            </span></code></pre></div>
+<span>  tag <span class="op">=</span> <span class="fl">31001002707</span>,</span>
+<span>  tracking_time_start <span class="op">=</span> <span class="st">"2022-09-02 01:25:00"</span>,</span>
+<span>  tracking_time_end <span class="op">=</span> <span class="st">"2022-09-03 13:47:00"</span>,</span>
+<span>  timezone <span class="op">=</span> <span class="st">"CET"</span>,</span>
+<span>  host <span class="op">=</span> <span class="st">"host"</span>,</span>
+<span>  database <span class="op">=</span> <span class="st">"db"</span>,</span>
+<span>  username <span class="op">=</span> <span class="st">"username"</span>,</span>
+<span>  password <span class="op">=</span> <span class="st">"password"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -154,22 +155,23 @@ but a spatial polygon could also be used (see
 <em>?atl_filter_bounds</em>).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_filter_bounds.html">atl_filter_bounds</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">data</span>,</span>
-<span>    x_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">639470</span>, <span class="fl">639471</span><span class="op">)</span>,</span>
-<span>    y_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5887143</span>, <span class="fl">5887144</span><span class="op">)</span>,</span>
-<span>    sf_polygon <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>    remove_inside <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  x_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">639470</span>, <span class="fl">639471</span><span class="op">)</span>,</span>
+<span>  y_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5887143</span>, <span class="fl">5887144</span><span class="op">)</span>,</span>
+<span>  sf_polygon <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  remove_inside <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>For filtering data, the general <em>atl_filter_covariates</em>
 function can also be used. For example, filtering on a range of
 coordinates and a time period:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_filter_covariates.html">atl_filter_covariates</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">data</span>,</span>
-<span>    filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"between(time, '2022-09-02 01:25:00', '2022-09-03 13:47:00')"</span>,</span>
-<span>    <span class="st">"between(X, 649686, 651938)"</span><span class="op">)</span> </span>
-<span><span class="op">)</span>               </span></code></pre></div>
+<span>    <span class="st">"between(X, 649686, 651938)"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="basic-processing">Basic processing<a class="anchor" aria-label="anchor" href="#basic-processing"></a>
@@ -179,12 +181,12 @@ for instance, calculating speeds and turning angles from consecutive
 localizations. Speed can then later be used for filtering potentially
 erroneous localizations.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#&gt; calculate speed between consecutive localizations        </span></span>
-<span><span class="va">data</span><span class="op">$</span><span class="va">speed_in</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_speed.html">atl_get_speed</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, time <span class="op">=</span> <span class="st">"TIME"</span>, type <span class="op">=</span> <span class="st">"in"</span><span class="op">)</span> </span>
-<span><span class="va">data</span><span class="op">$</span><span class="va">speed_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_speed.html">atl_get_speed</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, time <span class="op">=</span> <span class="st">"TIME"</span>, type <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="co">#&gt; calculate speed between consecutive localizations</span></span>
+<span><span class="va">data</span><span class="op">$</span><span class="va">speed_in</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_speed.html">atl_get_speed</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, time <span class="op">=</span> <span class="st">"TIME"</span>, type <span class="op">=</span> <span class="st">"in"</span><span class="op">)</span></span>
+<span><span class="va">data</span><span class="op">$</span><span class="va">speed_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_speed.html">atl_get_speed</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, time <span class="op">=</span> <span class="st">"TIME"</span>, type <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#&gt; calculate angle between consecutive localizations        </span></span>
-<span><span class="va">data</span><span class="op">$</span><span class="va">angle</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_turning_angle.html">atl_turning_angle</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, time <span class="op">=</span> <span class="st">"TIME"</span><span class="op">)</span> </span></code></pre></div>
+<span><span class="co">#&gt; calculate angle between consecutive localizations</span></span>
+<span><span class="va">data</span><span class="op">$</span><span class="va">angle</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_turning_angle.html">atl_turning_angle</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, time <span class="op">=</span> <span class="st">"TIME"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="filtering">Filtering<a class="anchor" aria-label="anchor" href="#filtering"></a>
@@ -193,17 +195,17 @@ erroneous localizations.</p>
 applying basic filtering on the variances in estimating x- and
 y-coordinates and speed.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">VARmax</span>  <span class="op">&lt;-</span> <span class="fl">5000</span> <span class="co"># variance in meters squared</span></span>
+<code class="sourceCode R"><span><span class="va">VARmax</span> <span class="op">&lt;-</span> <span class="fl">5000</span> <span class="co"># variance in meters squared</span></span>
 <span><span class="va">speed_max</span> <span class="op">&lt;-</span> <span class="fl">35</span> <span class="co"># meters per second</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_filter_covariates.html">atl_filter_covariates</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">data</span>,</span>
-<span>    filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>        <span class="st">"VARX &lt; VARmax"</span>, </span>
-<span>        <span class="st">"VARY &lt; VARmax"</span>,</span>
-<span>        <span class="st">"speed_in &lt; speed_max"</span>,</span>
-<span>        <span class="st">"speed_out &lt; speed_max"</span></span>
-<span>      <span class="op">)</span></span>
+<span>  data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"VARX &lt; VARmax"</span>,</span>
+<span>    <span class="st">"VARY &lt; VARmax"</span>,</span>
+<span>    <span class="st">"speed_in &lt; speed_max"</span>,</span>
+<span>    <span class="st">"speed_out &lt; speed_max"</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -217,12 +219,12 @@ such as a median filter can be applied.</p>
 <p>After smoothing the data, the speeds and angles need to be
 recalculated.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span><span class="op">$</span><span class="va">speed_in</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_speed.html">atl_get_speed</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">data</span>, time<span class="op">=</span><span class="st">"TIME"</span>, type <span class="op">=</span> <span class="st">"in"</span><span class="op">)</span> </span>
-<span><span class="va">data</span><span class="op">$</span><span class="va">speed_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_speed.html">atl_get_speed</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">data</span>, time<span class="op">=</span><span class="st">"TIME"</span>, type <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="va">data</span><span class="op">$</span><span class="va">speed_in</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_speed.html">atl_get_speed</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, time <span class="op">=</span> <span class="st">"TIME"</span>, type <span class="op">=</span> <span class="st">"in"</span><span class="op">)</span></span>
+<span><span class="va">data</span><span class="op">$</span><span class="va">speed_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_speed.html">atl_get_speed</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, time <span class="op">=</span> <span class="st">"TIME"</span>, type <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#&gt; Note that the distance between smooted localization can be zero, and </span></span>
-<span><span class="co">#&gt; therefore, the angle cannot be calculated and a warning and NaNs are returned    </span></span>
-<span><span class="va">data</span><span class="op">$</span><span class="va">angle</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_turning_angle.html">atl_turning_angle</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, time <span class="op">=</span> <span class="st">"TIME"</span><span class="op">)</span> </span></code></pre></div>
+<span><span class="co">#&gt; Note that the distance between smooted localization can be zero, and</span></span>
+<span><span class="co">#&gt; therefore, the angle cannot be calculated and a warning and NaNs are returned</span></span>
+<span><span class="va">data</span><span class="op">$</span><span class="va">angle</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_turning_angle.html">atl_turning_angle</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, time <span class="op">=</span> <span class="st">"TIME"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="adding-tidal-data">Adding tidal data<a class="anchor" aria-label="anchor" href="#adding-tidal-data"></a>
@@ -231,23 +233,27 @@ recalculated.</p>
 adding environmental data, such as waterlevels.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#&gt; load the tidal data using the library data.table</span></span>
-<span><span class="va">tides_filename</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example_tide_data_UTC.csv"</span>, </span>
-<span>                              package<span class="op">=</span><span class="st">"tools4watlas"</span><span class="op">)</span></span>
-<span><span class="va">tide_data_highres_filename</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, </span>
-<span>                                          <span class="st">"example_tide_data_highres_UTC.csv"</span>, </span>
-<span>                                          package <span class="op">=</span> <span class="st">"tools4watlas"</span><span class="op">)</span></span>
+<span><span class="va">tides_filename</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example_tide_data_UTC.csv"</span>,</span>
+<span>  package <span class="op">=</span> <span class="st">"tools4watlas"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">tide_data_highres_filename</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
+<span>  <span class="st">"example_tide_data_highres_UTC.csv"</span>,</span>
+<span>  package <span class="op">=</span> <span class="st">"tools4watlas"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">tides</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">tides_filename</span><span class="op">)</span></span>
 <span><span class="va">tide_data_highres</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">tide_data_highres_filename</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#&gt; add the tidal data to the tracking data. Note that we use an offset </span></span>
-<span><span class="co">#&gt; of 30 min becasue of the delay in water flow between the tidal gauge </span></span>
+<span><span class="co">#&gt; add the tidal data to the tracking data. Note that we use an offset</span></span>
+<span><span class="co">#&gt; of 30 min becasue of the delay in water flow between the tidal gauge</span></span>
 <span><span class="co">#&gt; and the location of the example tracking data (the islet of Griend)</span></span>
 <span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_add_tidaldata.html">atl_add_tidaldata</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, </span>
-<span>                          tide_data <span class="op">=</span> <span class="va">tides</span>, </span>
-<span>                          tide_data_highres <span class="op">=</span> <span class="va">tide_data_highres</span>, </span>
-<span>                          waterdata_resolution <span class="op">=</span> <span class="st">"10 minute"</span>, </span>
-<span>                          Offset <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_add_tidaldata.html">atl_add_tidaldata</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  tide_data <span class="op">=</span> <span class="va">tides</span>,</span>
+<span>  tide_data_highres <span class="op">=</span> <span class="va">tide_data_highres</span>,</span>
+<span>  waterdata_resolution <span class="op">=</span> <span class="st">"10 minute"</span>,</span>
+<span>  Offset <span class="op">=</span> <span class="fl">30</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data-selection">Data selection<a class="anchor" aria-label="anchor" href="#data-selection"></a>
@@ -258,12 +264,13 @@ example select a low tide period from -2.5 hours to +2.5 hours around
 low tide <a href="https://royalsocietypublishing.org/doi/10.1098/rspb.2015.1557" class="external-link">(Bijleveld
 et al. 2016)</a>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#&gt; select the low tide periode for a particular tide as specified by tideID </span></span>
+<code class="sourceCode R"><span><span class="co">#&gt; select the low tide periode for a particular tide as specified by tideID</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_filter_covariates.html">atl_filter_covariates</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">data</span>,</span>
-<span>    filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"tideID == 2022472"</span>,</span>
-<span>    <span class="st">"between(time2lowtide, -2.5 * 60, 2.5 * 60)"</span><span class="op">)</span></span>
+<span>    <span class="st">"between(time2lowtide, -2.5 * 60, 2.5 * 60)"</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -275,14 +282,16 @@ always plot the intermediate steps. Initially, the data is a
 a spatial object, i.e. a <em>SpatialPointsDataFrame</em>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#&gt; UTM 31N is the the default coordinate reference system.</span></span>
-<span><span class="va">data_spatial_utm</span><span class="op">&lt;-</span><span class="fu">atlas_make_spatialdataframe</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="va">data_spatial_utm</span> <span class="op">&lt;-</span> <span class="fu">atlas_make_spatialdataframe</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#&gt; plot locations only</span></span>
-<span><span class="fu">sp</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">data_spatial_utm</span><span class="op">)</span> </span>
+<span><span class="fu">sp</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">data_spatial_utm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#&gt; Plot the tracking data with a simple background </span></span>
-<span><span class="fu"><a href="../reference/atl_plot_tag.html">atl_plot_tag</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">data_spatial_utm</span>, tag<span class="op">=</span><span class="cn">NULL</span>, fullname<span class="op">=</span><span class="cn">NULL</span>, buffer<span class="op">=</span><span class="fl">1</span>, </span>
-<span>                color_by<span class="op">=</span><span class="st">"time"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; Plot the tracking data with a simple background</span></span>
+<span><span class="fu"><a href="../reference/atl_plot_tag.html">atl_plot_tag</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">data_spatial_utm</span>, tag <span class="op">=</span> <span class="cn">NULL</span>, fullname <span class="op">=</span> <span class="cn">NULL</span>, buffer <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  color_by <span class="op">=</span> <span class="st">"time"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The plotting region can be extended by specifiying <em>buffer</em>
 (in meters), and the scale of the scalebar (in kilometers) can be
 adjusted. To inspect the localizations, <em>color_by</em> can be
@@ -298,21 +307,25 @@ the track on a satellite image with the library
 <em>OpenStreetMap</em>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#&gt; Obtain the extent of tracking data for retrieving the satellite imagery</span></span>
-<span><span class="va">bbox_utm</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/atl_get_spatial_bounds.html">atl_get_spatial_bounds</a></span><span class="op">(</span><span class="va">data_spatial_utm</span><span class="op">)</span></span>
+<span><span class="va">bbox_utm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_get_spatial_bounds.html">atl_get_spatial_bounds</a></span><span class="op">(</span><span class="va">data_spatial_utm</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#&gt; Transform the bounding box to the osm coordinate reference system</span></span>
-<span><span class="va">Bbox_osm</span><span class="op">&lt;-</span><span class="fu">atlas_make_boundingbox_for_osm</span><span class="op">(</span><span class="va">bbox_utm</span>, buffer<span class="op">=</span><span class="fl">300</span>, </span>
-<span>                    from_crs<span class="op">=</span> <span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://edzer.github.io/sp/reference/CRS-class.html" class="external-link">CRS</a></span><span class="op">(</span><span class="st">"+init=epsg:32631"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">Bbox_osm</span> <span class="op">&lt;-</span> <span class="fu">atlas_make_boundingbox_for_osm</span><span class="op">(</span><span class="va">bbox_utm</span>,</span>
+<span>  buffer <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>  from_crs <span class="op">=</span> <span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://edzer.github.io/sp/reference/CRS-class.html" class="external-link">CRS</a></span><span class="op">(</span><span class="st">"+init=epsg:32631"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#&gt; Download the map from OpenStreetMap using the bounding box</span></span>
-<span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu">OpenStreetMap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/openmap.html" class="external-link">openmap</a></span><span class="op">(</span><span class="va">Bbox_osm</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,<span class="va">Bbox_osm</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span>,type<span class="op">=</span><span class="st">'bing'</span><span class="op">)</span></span>
+<span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu">OpenStreetMap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/openmap.html" class="external-link">openmap</a></span><span class="op">(</span><span class="va">Bbox_osm</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>, <span class="va">Bbox_osm</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>, type <span class="op">=</span> <span class="st">"bing"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#&gt; Transform tracking data to the osm() coordinate reference system</span></span>
-<span><span class="va">data_spatial_osm</span><span class="op">&lt;-</span><span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://edzer.github.io/sp/reference/spTransform.html" class="external-link">spTransform</a></span><span class="op">(</span><span class="va">data_spatial_utm</span>, <span class="fu">OpenStreetMap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/osm.html" class="external-link">osm</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># to osm()</span></span>
+<span><span class="va">data_spatial_osm</span> <span class="op">&lt;-</span> <span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://edzer.github.io/sp/reference/spTransform.html" class="external-link">spTransform</a></span><span class="op">(</span><span class="va">data_spatial_utm</span>, <span class="fu">OpenStreetMap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/osm.html" class="external-link">osm</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># to osm()</span></span>
 <span></span>
 <span><span class="co">#&gt; plot the tracking data on the satellite image</span></span>
-<span><span class="fu"><a href="../reference/atl_plot_tag_osm.html">atl_plot_tag_osm</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">data_spatial_osm</span>, tag<span class="op">=</span><span class="cn">NULL</span>, mapID<span class="op">=</span><span class="va">map</span>, color_by<span class="op">=</span><span class="st">"time"</span>, </span>
-<span>            fullname<span class="op">=</span><span class="cn">NULL</span>, Scalebar<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/atl_plot_tag_osm.html">atl_plot_tag_osm</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">data_spatial_osm</span>, tag <span class="op">=</span> <span class="cn">NULL</span>, mapID <span class="op">=</span> <span class="va">map</span>, color_by <span class="op">=</span> <span class="st">"time"</span>,</span>
+<span>  fullname <span class="op">=</span> <span class="cn">NULL</span>, Scalebar <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The region of the the satellite image can be extended by specifiying
 <em>buffer</em> (in meters) in the function
 <em>atlas_make_boundingbox_for_osm</em>. The other options are similar
@@ -335,53 +348,57 @@ animation.</p>
 </h4>
 <p>Set the tags and time period manually.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#&gt; select time period </span></span>
-<span>    <span class="va">from</span><span class="op">=</span><span class="st">"2022-09-02 12:00:00"</span>; <span class="va">to</span><span class="op">=</span><span class="st">"2022-09-02 12:30:00"</span></span>
-<span>    </span>
-<span><span class="co">#&gt; set tag numbers and species </span></span>
-<span>    <span class="va">tags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2007</span>,<span class="fl">2008</span><span class="op">)</span></span>
-<span>    <span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Red Knot"</span>, <span class="st">"Red Knot"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#&gt; select time period</span></span>
+<span><span class="va">from</span> <span class="op">&lt;-</span> <span class="st">"2022-09-02 12:00:00"</span></span>
+<span><span class="va">to</span> <span class="op">&lt;-</span> <span class="st">"2022-09-02 12:30:00"</span></span>
+<span></span>
+<span><span class="co">#&gt; set tag numbers and species</span></span>
+<span><span class="va">tags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2007</span>, <span class="fl">2008</span><span class="op">)</span></span>
+<span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Red Knot"</span>, <span class="st">"Red Knot"</span><span class="op">)</span></span></code></pre></div>
 <p>Alternatively, we can also get the most recent days of data from the
 server and obtain the tag metadata from an Excel-file.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#&gt; select number of days to get data for</span></span>
-<span>    <span class="va">days</span><span class="op">&lt;-</span><span class="fl">2</span>     <span class="co"># number of days </span></span>
-<span>    <span class="va">from</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">86400</span><span class="op">*</span><span class="va">days</span>; <span class="va">to</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fl">3600</span>    <span class="co"># add a buffer at the end</span></span>
-<span>    <span class="co">#&gt; using Sys.time() makes vector a "POSIXct" that we need to </span></span>
-<span>    <span class="co">#&gt; revert back to a character (for now) for using *atl_get_data()*  later </span></span>
-<span>    <span class="va">from</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">from</span><span class="op">)</span>; <span class="va">to</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">to</span><span class="op">)</span></span>
-<span>    </span>
-<span><span class="co">#&gt; load Excel file </span></span>
-<span>    <span class="co"># provide the correct path and file name, and sheet of the excel file. </span></span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org" class="external-link">readxl</a></span><span class="op">)</span></span>
-<span>    <span class="va">alltags</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span></span>
-<span>                    <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span></span>
-<span>                            <span class="st">"C:\\path\\tags_watlas.xlsx"</span>, </span>
-<span>                            sheet<span class="op">=</span><span class="st">"tags_watlas"</span></span>
-<span>                            <span class="op">)</span></span>
-<span>                        <span class="op">)</span></span>
+<span><span class="va">days</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># number of days</span></span>
+<span><span class="va">from</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">86400</span> <span class="op">*</span> <span class="va">days</span></span>
+<span><span class="va">to</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fl">3600</span> <span class="co"># add a buffer at the end</span></span>
+<span><span class="co">#&gt; using Sys.time() makes vector a "POSIXct" that we need to</span></span>
+<span><span class="co">#&gt; revert back to a character (for now) for using *atl_get_data()*  later</span></span>
+<span><span class="va">from</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">from</span><span class="op">)</span></span>
+<span><span class="va">to</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">to</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#&gt; select tags </span></span>
-<span>    <span class="co"># select tags of particular species </span></span>
-<span>    <span class="va">tags</span><span class="op">&lt;-</span><span class="va">alltags</span><span class="op">$</span><span class="va">tag</span><span class="op">[</span><span class="va">alltags</span><span class="op">$</span><span class="va">species</span><span class="op">==</span><span class="st">"islandica"</span><span class="op">]</span> <span class="co"># select islandica red knots</span></span>
-<span>    <span class="co"># or provide tag range</span></span>
-<span>    <span class="va">tags</span> <span class="op">&lt;-</span> <span class="fl">2007</span><span class="op">:</span><span class="fl">2008</span> </span>
-<span>    </span>
+<span><span class="co">#&gt; load Excel file</span></span>
+<span><span class="co"># provide the correct path and file name, and sheet of the excel file.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org" class="external-link">readxl</a></span><span class="op">)</span></span>
+<span><span class="va">alltags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span></span>
+<span>  <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span></span>
+<span>    <span class="st">"C:\\path\\tags_watlas.xlsx"</span>,</span>
+<span>    sheet <span class="op">=</span> <span class="st">"tags_watlas"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; select tags</span></span>
+<span><span class="co"># select tags of particular species</span></span>
+<span><span class="va">tags</span> <span class="op">&lt;-</span> <span class="va">alltags</span><span class="op">$</span><span class="va">tag</span><span class="op">[</span><span class="va">alltags</span><span class="op">$</span><span class="va">species</span> <span class="op">==</span> <span class="st">"islandica"</span><span class="op">]</span> <span class="co"># select islandica red knots</span></span>
+<span><span class="co"># or provide tag range</span></span>
+<span><span class="va">tags</span> <span class="op">&lt;-</span> <span class="fl">2007</span><span class="op">:</span><span class="fl">2008</span></span>
+<span></span>
 <span><span class="co">#&gt; depending on the tag selection, the species need to be taken from the metadata</span></span>
-<span>    <span class="va">row_id</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">tags</span>, <span class="va">alltags</span><span class="op">$</span><span class="va">tag</span><span class="op">)</span>    </span>
-<span>    <span class="va">species</span><span class="op">&lt;-</span><span class="va">alltags</span><span class="op">$</span><span class="va">species</span><span class="op">[</span><span class="va">row_id</span><span class="op">]</span>    </span></code></pre></div>
+<span><span class="va">row_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">tags</span>, <span class="va">alltags</span><span class="op">$</span><span class="va">tag</span><span class="op">)</span></span>
+<span><span class="va">species</span> <span class="op">&lt;-</span> <span class="va">alltags</span><span class="op">$</span><span class="va">species</span><span class="op">[</span><span class="va">row_id</span><span class="op">]</span></span></code></pre></div>
 <p>Lastly, the vector with tags need to be in the right format.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#&gt; specify format of tag numbers </span></span>
-<span>    <span class="va">tags</span><span class="op">&lt;-</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_pad.html" class="external-link">str_pad</a></span><span class="op">(</span></span>
-<span>                    <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">tags</span><span class="op">)</span>, </span>
-<span>                    <span class="fl">4</span>, <span class="co">#&gt; WATLAS tag string is four characters </span></span>
-<span>                    pad <span class="op">=</span> <span class="st">"0"</span></span>
-<span>                    <span class="op">)</span>   </span>
-<span>    <span class="co"># for collecting data from server, long tag format is used</span></span>
-<span>    <span class="va">tags_long</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
-<span>                <span class="st">"3100100"</span>, </span>
-<span>                <span class="va">tags</span><span class="op">)</span>   </span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#&gt; specify format of tag numbers</span></span>
+<span><span class="va">tags</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_pad.html" class="external-link">str_pad</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">tags</span><span class="op">)</span>,</span>
+<span>  <span class="fl">4</span>, <span class="co">#&gt; WATLAS tag string is four characters</span></span>
+<span>  pad <span class="op">=</span> <span class="st">"0"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># for collecting data from server, long tag format is used</span></span>
+<span><span class="va">tags_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="st">"3100100"</span>,</span>
+<span>  <span class="va">tags</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="load-tracking-data">Load tracking data<a class="anchor" aria-label="anchor" href="#load-tracking-data"></a>
@@ -398,38 +415,39 @@ SQL-database.</p>
 <h5 id="local-sql-database">Local SQL-database<a class="anchor" aria-label="anchor" href="#local-sql-database"></a>
 </h5>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#&gt; First, the path and filename of the local SQLite database need to be provided. </span></span>
-<span><span class="va">SQLiteDB</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"path"</span>, <span class="st">"SQLite_db_name"</span>, <span class="st">".sqlite"</span><span class="op">)</span></span>
-<span><span class="va">MyDBconnection</span> <span class="op">&lt;-</span> <span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html" class="external-link">SQLite</a></span><span class="op">(</span><span class="op">)</span>,<span class="va">SQLiteDB</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co">#&gt; First, the path and filename of the local SQLite database need to be provided.</span></span>
+<span><span class="va">SQLiteDB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"path"</span>, <span class="st">"SQLite_db_name"</span>, <span class="st">".sqlite"</span><span class="op">)</span></span>
+<span><span class="va">MyDBconnection</span> <span class="op">&lt;-</span> <span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html" class="external-link">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">SQLiteDB</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#&gt; Second, with the established connection, the database can be queried </span></span>
-<span><span class="co">#&gt; for a particular tag and period and written in a list with lapply. </span></span>
-<span><span class="co">#&gt; Each entry of the list will contain the tracking data for the </span></span>
-<span><span class="co">#&gt; specified tag and period. </span></span>
+<span><span class="co">#&gt; Second, with the established connection, the database can be queried</span></span>
+<span><span class="co">#&gt; for a particular tag and period and written in a list with lapply.</span></span>
+<span><span class="co">#&gt; Each entry of the list will contain the tracking data for the</span></span>
+<span><span class="co">#&gt; specified tag and period.</span></span>
 <span><span class="va">ldf_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
-<span>            <span class="va">tags_long</span>, </span>
-<span>            <span class="va">atl_get_data</span>, </span>
-<span>            tracking_time_start <span class="op">=</span> <span class="va">from</span>, </span>
-<span>            tracking_time_end <span class="op">=</span> <span class="va">to</span>, </span>
-<span>            timezone <span class="op">=</span> <span class="st">"CET"</span>, </span>
-<span>            SQLiteDB <span class="op">=</span> <span class="va">mydb</span>, </span>
-<span>            use_connection <span class="op">=</span> <span class="va">MyDBconnection</span></span>
-<span>            <span class="op">)</span>   </span></code></pre></div>
+<span>  <span class="va">tags_long</span>,</span>
+<span>  <span class="va">atl_get_data</span>,</span>
+<span>  tracking_time_start <span class="op">=</span> <span class="va">from</span>,</span>
+<span>  tracking_time_end <span class="op">=</span> <span class="va">to</span>,</span>
+<span>  timezone <span class="op">=</span> <span class="st">"CET"</span>,</span>
+<span>  SQLiteDB <span class="op">=</span> <span class="va">mydb</span>,</span>
+<span>  use_connection <span class="op">=</span> <span class="va">MyDBconnection</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="remote-sql-database-1">Remote SQL-database<a class="anchor" aria-label="anchor" href="#remote-sql-database-1"></a>
 </h5>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ldf_raw</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
-<span>                <span class="va">tags_long</span>, </span>
-<span>                <span class="va">atl_get_data</span>,</span>
-<span>                tracking_time_start <span class="op">=</span> <span class="va">from</span>,</span>
-<span>                tracking_time_end <span class="op">=</span> <span class="va">to</span>,</span>
-<span>                timezone <span class="op">=</span> <span class="st">"CET"</span>,</span>
-<span>                host<span class="op">=</span> <span class="st">"host"</span>, </span>
-<span>                database <span class="op">=</span> <span class="st">"db"</span>,</span>
-<span>                username <span class="op">=</span> <span class="st">"username"</span>,</span>
-<span>                password <span class="op">=</span> <span class="st">"password"</span><span class="op">)</span>            </span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ldf_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
+<span>  <span class="va">tags_long</span>,</span>
+<span>  <span class="va">atl_get_data</span>,</span>
+<span>  tracking_time_start <span class="op">=</span> <span class="va">from</span>,</span>
+<span>  tracking_time_end <span class="op">=</span> <span class="va">to</span>,</span>
+<span>  timezone <span class="op">=</span> <span class="st">"CET"</span>,</span>
+<span>  host <span class="op">=</span> <span class="st">"host"</span>,</span>
+<span>  database <span class="op">=</span> <span class="st">"db"</span>,</span>
+<span>  username <span class="op">=</span> <span class="st">"username"</span>,</span>
+<span>  password <span class="op">=</span> <span class="st">"password"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level4">
@@ -444,34 +462,34 @@ this for a single tag, see the above section “Basic workflow” and the
 subsection “Basic processing”. We will also filter individuals for a
 minimum number of localizations.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#&gt; First, filter potentially erroneous localizations </span></span>
-<span><span class="va">VARmax</span>  <span class="op">&lt;-</span> <span class="fl">5000</span> <span class="co"># variance limit in meters squared</span></span>
+<code class="sourceCode R"><span><span class="co">#&gt; First, filter potentially erroneous localizations</span></span>
+<span><span class="va">VARmax</span> <span class="op">&lt;-</span> <span class="fl">5000</span> <span class="co"># variance limit in meters squared</span></span>
 <span><span class="va">ldf_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
-<span>                <span class="va">ldf_raw</span>, </span>
-<span>                <span class="va">atl_filter_covariates</span>,</span>
-<span>                filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>                        <span class="st">"VARX &lt; VARmax"</span>, </span>
-<span>                        <span class="st">"VARY &lt; VARmax"</span></span>
-<span>                            <span class="op">)</span></span>
-<span>                <span class="op">)</span></span>
-<span>                        </span>
-<span><span class="co">#&gt; Second, apply a median smoother </span></span>
+<span>  <span class="va">ldf_raw</span>,</span>
+<span>  <span class="va">atl_filter_covariates</span>,</span>
+<span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"VARX &lt; VARmax"</span>,</span>
+<span>    <span class="st">"VARY &lt; VARmax"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; Second, apply a median smoother</span></span>
 <span><span class="va">med_filter</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="co"># number of localizations within window for smoothing</span></span>
 <span><span class="va">ldf_smoothed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
-<span>                <span class="va">ldf_clean</span>,</span>
-<span>                <span class="va">atl_median_smooth</span>,</span>
-<span>                time <span class="op">=</span> <span class="st">"TIME"</span>, </span>
-<span>                moving_window <span class="op">=</span> <span class="va">med_filter</span></span>
-<span>                <span class="op">)</span></span>
-<span>                </span>
-<span><span class="co">#&gt; Third, filter list for minimum number of localizations per bird </span></span>
-<span>    <span class="va">min_locs</span> <span class="op">&lt;-</span> <span class="fl">2</span>                   <span class="co"># specify minimum </span></span>
-<span>    <span class="va">ldf_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ldf_smoothed</span>, <span class="va">nrow</span><span class="op">)</span> <span class="co"># count localizations per bird </span></span>
-<span>    <span class="va">ldf_n</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lengths.html" class="external-link">lengths</a></span><span class="op">(</span><span class="va">ldf_n</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co"># replace NULL counts for 0</span></span>
-<span>    <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">ldf_n</span><span class="op">)</span>              <span class="co"># create vector of counts</span></span>
-<span>    <span class="va">ldf</span> <span class="op">&lt;-</span> <span class="va">ldf_smoothed</span><span class="op">[</span><span class="va">n</span><span class="op">&gt;=</span><span class="va">min_locs</span><span class="op">]</span><span class="co"># filter number of localizations</span></span>
-<span>    <span class="va">tags</span> <span class="op">&lt;-</span> <span class="va">tags</span><span class="op">[</span><span class="va">n</span><span class="op">&gt;=</span><span class="va">min_locs</span><span class="op">]</span>       <span class="co"># clean tag vector </span></span>
-<span>    <span class="va">species</span><span class="op">&lt;-</span><span class="va">species</span><span class="op">[</span><span class="va">n</span><span class="op">&gt;=</span><span class="va">min_locs</span><span class="op">]</span>   <span class="co"># clean species vector </span></span></code></pre></div>
+<span>  <span class="va">ldf_clean</span>,</span>
+<span>  <span class="va">atl_median_smooth</span>,</span>
+<span>  time <span class="op">=</span> <span class="st">"TIME"</span>,</span>
+<span>  moving_window <span class="op">=</span> <span class="va">med_filter</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; Third, filter list for minimum number of localizations per bird</span></span>
+<span><span class="va">min_locs</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># specify minimum</span></span>
+<span><span class="va">ldf_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ldf_smoothed</span>, <span class="va">nrow</span><span class="op">)</span> <span class="co"># count localizations per bird</span></span>
+<span><span class="va">ldf_n</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lengths.html" class="external-link">lengths</a></span><span class="op">(</span><span class="va">ldf_n</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co"># replace NULL counts for 0</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">ldf_n</span><span class="op">)</span> <span class="co"># create vector of counts</span></span>
+<span><span class="va">ldf</span> <span class="op">&lt;-</span> <span class="va">ldf_smoothed</span><span class="op">[</span><span class="va">n</span> <span class="op">&gt;=</span> <span class="va">min_locs</span><span class="op">]</span> <span class="co"># filter number of localizations</span></span>
+<span><span class="va">tags</span> <span class="op">&lt;-</span> <span class="va">tags</span><span class="op">[</span><span class="va">n</span> <span class="op">&gt;=</span> <span class="va">min_locs</span><span class="op">]</span> <span class="co"># clean tag vector</span></span>
+<span><span class="va">species</span> <span class="op">&lt;-</span> <span class="va">species</span><span class="op">[</span><span class="va">n</span> <span class="op">&gt;=</span> <span class="va">min_locs</span><span class="op">]</span> <span class="co"># clean species vector</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="make-data-spatial-and-load-map">Make data spatial and load map<a class="anchor" aria-label="anchor" href="#make-data-spatial-and-load-map"></a>
@@ -481,133 +499,136 @@ objects, select the plotting area based on the tracking data, and load
 the OSM-map for plotting.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#&gt; convert to spatial data frames</span></span>
-<span>    <span class="co">#&gt; to utm for easy analyses </span></span>
-<span>    <span class="va">ldf_utm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ldf</span>, <span class="va">atlas_make_spatialdataframe</span><span class="op">)</span> </span>
-<span>    <span class="co">#&gt; to osm for easy plotting</span></span>
-<span>    <span class="va">ldf_osm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ldf_utm</span>, <span class="fu">sp</span><span class="fu">::</span><span class="va"><a href="https://edzer.github.io/sp/reference/spTransform.html" class="external-link">spTransform</a></span>, <span class="fu">OpenStreetMap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/osm.html" class="external-link">osm</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span>
-<span>        </span>
+<span><span class="co">#&gt; to utm for easy analyses</span></span>
+<span><span class="va">ldf_utm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ldf</span>, <span class="va">atlas_make_spatialdataframe</span><span class="op">)</span></span>
+<span><span class="co">#&gt; to osm for easy plotting</span></span>
+<span><span class="va">ldf_osm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ldf_utm</span>, <span class="fu">sp</span><span class="fu">::</span><span class="va"><a href="https://edzer.github.io/sp/reference/spTransform.html" class="external-link">spTransform</a></span>, <span class="fu">OpenStreetMap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/osm.html" class="external-link">osm</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co">#&gt; get bounding box from utm tracking data</span></span>
-<span>    <span class="co">#&gt; for each track</span></span>
-<span>    <span class="va">bbox_utm</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ldf_utm</span>, <span class="va">atl_get_spatial_bounds</span><span class="op">)</span> </span>
-<span>    <span class="co">#&gt; get extent of bounding box between tracks</span></span>
-<span>    <span class="va">xrange</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">bbox_utm</span>, <span class="va">`[`</span>,,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">yrange</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">bbox_utm</span>, <span class="va">`[`</span>,,<span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">bbox_utm</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">xrange</span>, <span class="va">yrange</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">FALSE</span>, </span>
-<span>        dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"max"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span>        </span>
-<span><span class="co">#&gt; Transform the bounding box to the osm coordinate reference system </span></span>
+<span><span class="co">#&gt; for each track</span></span>
+<span><span class="va">bbox_utm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ldf_utm</span>, <span class="va">atl_get_spatial_bounds</span><span class="op">)</span></span>
+<span><span class="co">#&gt; get extent of bounding box between tracks</span></span>
+<span><span class="va">xrange</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">bbox_utm</span>, <span class="va">`[`</span>, , <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">yrange</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">bbox_utm</span>, <span class="va">`[`</span>, , <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">bbox_utm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">xrange</span>, <span class="va">yrange</span><span class="op">)</span>,</span>
+<span>  nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"max"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; Transform the bounding box to the osm coordinate reference system</span></span>
 <span><span class="co">#&gt; for plotting with OpenStreetMap</span></span>
-<span>    <span class="va">bbox_osm</span> <span class="op">&lt;-</span> <span class="fu">atlas_make_boundingbox_for_osm</span><span class="op">(</span></span>
-<span>                            <span class="va">bbox_utm</span>,</span>
-<span>                            buffer<span class="op">=</span><span class="fl">1000</span>,</span>
-<span>                            from_crs<span class="op">=</span> <span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://edzer.github.io/sp/reference/CRS-class.html" class="external-link">CRS</a></span><span class="op">(</span><span class="st">"+init=epsg:32631"</span><span class="op">)</span></span>
-<span>                            <span class="op">)</span></span>
+<span><span class="va">bbox_osm</span> <span class="op">&lt;-</span> <span class="fu">atlas_make_boundingbox_for_osm</span><span class="op">(</span></span>
+<span>  <span class="va">bbox_utm</span>,</span>
+<span>  buffer <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  from_crs <span class="op">=</span> <span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://edzer.github.io/sp/reference/CRS-class.html" class="external-link">CRS</a></span><span class="op">(</span><span class="st">"+init=epsg:32631"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#&gt; Download the map from OpenStreetMap using the bounding box</span></span>
-<span>    <span class="va">map</span> <span class="op">&lt;-</span> <span class="fu">OpenStreetMap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/openmap.html" class="external-link">openmap</a></span><span class="op">(</span></span>
-<span>            upperLeft <span class="op">=</span> <span class="va">bbox_osm</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
-<span>            lowerRight <span class="op">=</span> <span class="va">bbox_osm</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span>,</span>
-<span>            type<span class="op">=</span><span class="st">'bing'</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu">OpenStreetMap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/openmap.html" class="external-link">openmap</a></span><span class="op">(</span></span>
+<span>  upperLeft <span class="op">=</span> <span class="va">bbox_osm</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>,</span>
+<span>  lowerRight <span class="op">=</span> <span class="va">bbox_osm</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"bing"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="plot-multiple-individuals-simultaneously">Plot multiple individuals simultaneously<a class="anchor" aria-label="anchor" href="#plot-multiple-individuals-simultaneously"></a>
 </h4>
 <p>First, get the plotting colours for invidiuals or species.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#&gt; create colours for different individuals     </span></span>
-<span>    <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span><span class="op">{</span> <span class="co">#&gt; colour by individual </span></span>
-<span>        <span class="va">COL</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ldf_osm</span><span class="op">)</span><span class="op">)</span></span>
-<span>        <span class="va">spec</span><span class="op">=</span><span class="cn">NULL</span></span>
-<span>    <span class="op">}</span><span class="kw">else</span><span class="op">{</span>  <span class="co">#&gt; or colour by species </span></span>
-<span>        <span class="va">spec</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">spec</span><span class="op">)</span><span class="op">&lt;-</span><span class="st">"species"</span></span>
-<span>        <span class="co">#&gt; create colours for the different species </span></span>
-<span>        <span class="va">spec</span><span class="op">$</span><span class="va">COL</span><span class="op">&lt;-</span><span class="fu">brewer.pal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">spec</span><span class="op">)</span>, <span class="st">"Accent"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">spec</span><span class="op">)</span><span class="op">]</span></span>
-<span>        <span class="va">COL</span><span class="op">&lt;-</span><span class="va">spec</span><span class="op">$</span><span class="va">COL</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">spec</span><span class="op">$</span><span class="va">species</span><span class="op">)</span><span class="op">]</span></span>
-<span>    <span class="op">}</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#&gt; create colours for different individuals</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span> <span class="co">#&gt; colour by individual</span></span>
+<span>  <span class="va">COL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ldf_osm</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">spec</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span> <span class="co">#&gt; or colour by species</span></span>
+<span>  <span class="va">spec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">spec</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"species"</span></span>
+<span>  <span class="co">#&gt; create colours for the different species</span></span>
+<span>  <span class="va">spec</span><span class="op">$</span><span class="va">COL</span> <span class="op">&lt;-</span> <span class="fu">brewer.pal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">spec</span><span class="op">)</span>, <span class="st">"Accent"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">spec</span><span class="op">)</span><span class="op">]</span></span>
+<span>  <span class="va">COL</span> <span class="op">&lt;-</span> <span class="va">spec</span><span class="op">$</span><span class="va">COL</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">spec</span><span class="op">$</span><span class="va">species</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>Second, obtain additional information to be added to the plot. In
 this case, the time range between individuals will be added to the
 map.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>    <span class="co">#&gt; get time range between birds </span></span>
-<span>    <span class="va">timerange</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/combine.html" class="external-link">combine</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ldf_osm</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">ts</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#&gt; get time range between birds</span></span>
+<span><span class="va">timerange</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/combine.html" class="external-link">combine</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ldf_osm</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">ts</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Third, make the plot and add the tracks of all individuals as well as
 additional information like the time range, legend and scale bar.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#&gt; make plot</span></span>
-<span>    <span class="fu"><a href="../reference/plot_map_osm.html">plot_map_osm</a></span><span class="op">(</span><span class="va">map</span><span class="op">)</span> </span>
-<span>    </span>
-<span><span class="co">#&gt; add the timeframe of the underlying tracks </span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span></span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">timerange</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">" to "</span>, <span class="va">timerange</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,<span class="st">" UTC"</span>,  sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>, </span>
-<span>        col<span class="op">=</span><span class="st">"white"</span>, </span>
-<span>        line<span class="op">=</span><span class="fl">3</span>, </span>
-<span>        font<span class="op">=</span><span class="fl">2</span></span>
-<span>    <span class="op">)</span></span>
-<span>    </span>
-<span><span class="co">#&gt; Add all tracks to map from list </span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span></span>
-<span>        <span class="va">atl_plot_add_track</span>, </span>
-<span>        d <span class="op">=</span> <span class="va">ldf_osm</span>, </span>
-<span>        Pch<span class="op">=</span><span class="fl">19</span>, </span>
-<span>        Cex<span class="op">=</span><span class="fl">0.4</span>, </span>
-<span>        Lwd<span class="op">=</span><span class="fl">1</span>, </span>
-<span>        col <span class="op">=</span> <span class="va">COL</span>, </span>
-<span>        Type<span class="op">=</span><span class="st">"o"</span>, </span>
-<span>        endpoint<span class="op">=</span><span class="cn">TRUE</span></span>
-<span>    <span class="op">)</span> </span>
+<span><span class="fu">plot_map_osm</span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#&gt; Provide NAMES of the tagged individuals for the legend </span></span>
-<span>    <span class="va">NAMES</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>   <span class="co"># NULL if there are no names for individuals  </span></span>
-<span>    </span>
+<span><span class="co">#&gt; add the timeframe of the underlying tracks</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html" class="external-link">mtext</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">timerange</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">" to "</span>, <span class="va">timerange</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="st">" UTC"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  line <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  font <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; Add all tracks to map from list</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span></span>
+<span>  <span class="va">atl_plot_add_track</span>,</span>
+<span>  d <span class="op">=</span> <span class="va">ldf_osm</span>,</span>
+<span>  Pch <span class="op">=</span> <span class="fl">19</span>,</span>
+<span>  Cex <span class="op">=</span> <span class="fl">0.4</span>,</span>
+<span>  Lwd <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  col <span class="op">=</span> <span class="va">COL</span>,</span>
+<span>  Type <span class="op">=</span> <span class="st">"o"</span>,</span>
+<span>  endpoint <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; Provide NAMES of the tagged individuals for the legend</span></span>
+<span><span class="va">NAMES</span> <span class="op">&lt;-</span> <span class="cn">NULL</span> <span class="co"># NULL if there are no names for individuals</span></span>
+<span></span>
 <span><span class="co">#&gt; optionally collect metadata like the Colour Ring Combination (CRC) or</span></span>
 <span><span class="co">#&gt; NAMES from the Excel-file with metadata</span></span>
-<span>    <span class="va">CRC</span> <span class="op">&lt;-</span> <span class="va">alltags</span><span class="op">$</span><span class="va">crc</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">tags</span>, <span class="va">alltags</span><span class="op">$</span><span class="va">tag</span><span class="op">)</span><span class="op">]</span>              </span>
-<span>    <span class="va">NAMES</span> <span class="op">&lt;-</span> <span class="va">alltags</span><span class="op">$</span><span class="va">bird_name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">tags</span>, <span class="va">alltags</span><span class="op">$</span><span class="va">tag</span><span class="op">)</span><span class="op">]</span>     </span>
-<span>    <span class="va">NAMES</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">NAMES</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">CRC</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">NAMES</span><span class="op">)</span><span class="op">]</span> <span class="co"># present CRC if NAMES is empty    </span></span>
+<span><span class="va">CRC</span> <span class="op">&lt;-</span> <span class="va">alltags</span><span class="op">$</span><span class="va">crc</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">tags</span>, <span class="va">alltags</span><span class="op">$</span><span class="va">tag</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">NAMES</span> <span class="op">&lt;-</span> <span class="va">alltags</span><span class="op">$</span><span class="va">bird_name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">tags</span>, <span class="va">alltags</span><span class="op">$</span><span class="va">tag</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">NAMES</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">NAMES</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">CRC</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">NAMES</span><span class="op">)</span><span class="op">]</span> <span class="co"># present CRC if NAMES is empty</span></span>
 <span></span>
-<span><span class="co">#&gt; add legend   </span></span>
-<span>    <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span><span class="op">{</span> <span class="co">#&gt; legend coloured by individual tags</span></span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, </span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">tags</span>, <span class="va">NAMES</span>, sep<span class="op">=</span><span class="st">" "</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>            col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">COL</span><span class="op">)</span>, </span>
-<span>            pt.bg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">COL</span><span class="op">)</span>,</span>
-<span>            pch<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">21</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">COL</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>            text.col<span class="op">=</span><span class="st">"white"</span>,</span>
-<span>            cex<span class="op">=</span><span class="fl">0.75</span>,</span>
-<span>            pt.cex<span class="op">=</span><span class="fl">1.5</span>,</span>
-<span>            bty <span class="op">=</span> <span class="st">"n"</span>,</span>
-<span>            title<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">species</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,<span class="st">" ("</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">tags</span><span class="op">)</span>,<span class="st">")"</span><span class="op">)</span>, </span>
-<span>            title.cex<span class="op">=</span><span class="fl">1.5</span></span>
-<span>            <span class="op">)</span>           </span>
-<span>    <span class="op">}</span><span class="kw">else</span><span class="op">{</span> <span class="co">#&gt; or else legend coloured by species</span></span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span></span>
-<span>            <span class="st">"topleft"</span>, </span>
-<span>            <span class="va">spec</span><span class="op">$</span><span class="va">species</span>,</span>
-<span>            col<span class="op">=</span><span class="va">spec</span><span class="op">$</span><span class="va">COL</span>, </span>
-<span>            pt.bg<span class="op">=</span><span class="va">spec</span><span class="op">$</span><span class="va">COL</span>,</span>
-<span>            pch<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">21</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">spec</span><span class="op">$</span><span class="va">COL</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>            text.col<span class="op">=</span><span class="st">"white"</span>, </span>
-<span>            cex<span class="op">=</span><span class="fl">0.75</span>,</span>
-<span>            pt.cex<span class="op">=</span><span class="fl">1.5</span>,</span>
-<span>            bty <span class="op">=</span> <span class="st">"n"</span></span>
-<span>            <span class="op">)</span></span>
-<span>        <span class="op">}</span></span>
-<span>            </span>
+<span><span class="co">#&gt; add legend</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span> <span class="co">#&gt; legend coloured by individual tags</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">tags</span>, <span class="va">NAMES</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">COL</span><span class="op">)</span>,</span>
+<span>    pt.bg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">COL</span><span class="op">)</span>,</span>
+<span>    pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">21</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">COL</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    text.col <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>    cex <span class="op">=</span> <span class="fl">0.75</span>,</span>
+<span>    pt.cex <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>    bty <span class="op">=</span> <span class="st">"n"</span>,</span>
+<span>    title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">species</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">" ("</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">tags</span><span class="op">)</span>, <span class="st">")"</span><span class="op">)</span>,</span>
+<span>    title.cex <span class="op">=</span> <span class="fl">1.5</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span> <span class="co">#&gt; or else legend coloured by species</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span></span>
+<span>    <span class="st">"topleft"</span>,</span>
+<span>    <span class="va">spec</span><span class="op">$</span><span class="va">species</span>,</span>
+<span>    col <span class="op">=</span> <span class="va">spec</span><span class="op">$</span><span class="va">COL</span>,</span>
+<span>    pt.bg <span class="op">=</span> <span class="va">spec</span><span class="op">$</span><span class="va">COL</span>,</span>
+<span>    pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">21</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">spec</span><span class="op">$</span><span class="va">COL</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    text.col <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>    cex <span class="op">=</span> <span class="fl">0.75</span>,</span>
+<span>    pt.cex <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>    bty <span class="op">=</span> <span class="st">"n"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
 <span><span class="co">#&gt; add scalebar</span></span>
-<span>    <span class="va">fr</span><span class="op">=</span><span class="fl">0.02</span> <span class="co">#&gt; custum position of scalebar (in fraction of plot width) </span></span>
-<span>    <span class="va">ydiff</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">'usr'</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
-<span>    <span class="va">xdiff</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">'usr'</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
-<span>    <span class="va">xy_scale</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">'usr'</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="va">xdiff</span><span class="op">*</span><span class="va">fr</span>, <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">'usr'</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">+</span> <span class="va">ydiff</span><span class="op">*</span><span class="va">fr</span><span class="op">)</span></span>
-<span>    <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/scalebar.html" class="external-link">scalebar</a></span><span class="op">(</span></span>
-<span>        <span class="fl">5000</span>, <span class="co">#&gt; length of scale bar in meters</span></span>
-<span>        <span class="va">xy_scale</span>,</span>
-<span>        type<span class="op">=</span><span class="st">'line'</span>, </span>
-<span>        divs<span class="op">=</span><span class="fl">4</span>, </span>
-<span>        lwd<span class="op">=</span><span class="fl">3</span>, </span>
-<span>        col<span class="op">=</span><span class="st">"white"</span>, </span>
-<span>        label<span class="op">=</span><span class="st">"5 km"</span>    <span class="co">#&gt; label that goes with the length of scale bar</span></span>
-<span>        <span class="op">)</span></span></code></pre></div>
+<span><span class="va">fr</span> <span class="op">&lt;-</span> <span class="fl">0.02</span> <span class="co">#&gt; custum position of scalebar (in fraction of plot width)</span></span>
+<span><span class="va">ydiff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">"usr"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">xdiff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">"usr"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">xy_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">"usr"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">xdiff</span> <span class="op">*</span> <span class="va">fr</span>, <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">"usr"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">+</span> <span class="va">ydiff</span> <span class="op">*</span> <span class="va">fr</span><span class="op">)</span></span>
+<span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/scalebar.html" class="external-link">scalebar</a></span><span class="op">(</span></span>
+<span>  <span class="fl">5000</span>, <span class="co">#&gt; length of scale bar in meters</span></span>
+<span>  <span class="va">xy_scale</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"line"</span>,</span>
+<span>  divs <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  lwd <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  label <span class="op">=</span> <span class="st">"5 km"</span> <span class="co">#&gt; label that goes with the length of scale bar</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

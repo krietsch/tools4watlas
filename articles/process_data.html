@@ -89,32 +89,34 @@ Lastly, we merge our data with local water level data.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load meta data</span></span>
-<span><span class="va">all_tags_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"tags_watlas_subset.xlsx"</span>, </span>
-<span>                            package <span class="op">=</span> <span class="st">"tools4watlas"</span><span class="op">)</span></span>
-<span><span class="va">all_tags</span>  <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span><span class="va">all_tags_path</span>, sheet <span class="op">=</span> <span class="st">"tags_watlas_all"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="va">all_tags_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"tags_watlas_subset.xlsx"</span>,</span>
+<span>  package <span class="op">=</span> <span class="st">"tools4watlas"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">all_tags</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span><span class="va">all_tags_path</span>, sheet <span class="op">=</span> <span class="st">"tags_watlas_all"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Subset desired tags using data.table </span></span>
+<span><span class="co"># Subset desired tags using data.table</span></span>
 <span><span class="va">tags</span> <span class="op">&lt;-</span> <span class="va">all_tags</span><span class="op">[</span><span class="va">season</span> <span class="op">==</span> <span class="fl">2023</span><span class="op">]</span><span class="op">$</span><span class="va">tag</span></span>
 <span></span>
 <span><span class="co"># Time period for which data should be extracted form the database (in CET)</span></span>
 <span><span class="va">from</span> <span class="op">&lt;-</span> <span class="st">"2023-10-01 12:00:00"</span></span>
-<span><span class="va">to</span>   <span class="op">&lt;-</span> <span class="st">"2023-10-02 12:00:00"</span></span>
+<span><span class="va">to</span> <span class="op">&lt;-</span> <span class="st">"2023-10-02 12:00:00"</span></span>
 <span></span>
 <span><span class="co"># Database connection</span></span>
 <span><span class="va">sqlite_db</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"watlas_example.SQLite"</span>,</span>
-<span>                        package <span class="op">=</span> <span class="st">"tools4watlas"</span><span class="op">)</span></span>
+<span>  package <span class="op">=</span> <span class="st">"tools4watlas"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html" class="external-link">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">sqlite_db</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load data from database</span></span>
 <span><span class="va">data_split</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
-<span>  <span class="va">tags</span>, </span>
-<span>  <span class="va">atl_get_data</span>, </span>
-<span>  tracking_time_start <span class="op">=</span> <span class="va">from</span>, </span>
-<span>  tracking_time_end <span class="op">=</span> <span class="va">to</span>, </span>
+<span>  <span class="va">tags</span>,</span>
+<span>  <span class="va">atl_get_data</span>,</span>
+<span>  tracking_time_start <span class="op">=</span> <span class="va">from</span>,</span>
+<span>  tracking_time_end <span class="op">=</span> <span class="va">to</span>,</span>
 <span>  timezone <span class="op">=</span> <span class="st">"CET"</span>,</span>
 <span>  use_connection <span class="op">=</span> <span class="va">con</span></span>
-<span><span class="op">)</span> </span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Close connection</span></span>
 <span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></code></pre></div>
@@ -128,12 +130,12 @@ localizations. Speed can then be used for filtering potentially
 erroneous localizations.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Transform the lists to data.tables</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">data_split</span>, <span class="va">setDT</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">data_split</span>, <span class="va">setDT</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Calculate SD</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">data_split</span>, <span class="kw">function</span><span class="op">(</span><span class="va">dt</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">dt</span><span class="op">[</span>, <span class="va">sd</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">varx</span> <span class="op">+</span> <span class="va">vary</span> <span class="op">+</span> <span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">covxy</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="op">}</span><span class="op">)</span> </span>
+<span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Calculate speed</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">data_split</span>, <span class="kw">function</span><span class="op">(</span><span class="va">dt</span><span class="op">)</span> <span class="op">{</span></span>
@@ -141,7 +143,7 @@ erroneous localizations.</p>
 <span>    speed_in <span class="op">=</span> <span class="fu"><a href="../reference/atl_get_speed.html">atl_get_speed</a></span><span class="op">(</span><span class="va">dt</span>, type <span class="op">=</span> <span class="st">"in"</span><span class="op">)</span>,</span>
 <span>    speed_out <span class="op">=</span> <span class="fu"><a href="../reference/atl_get_speed.html">atl_get_speed</a></span><span class="op">(</span><span class="va">dt</span>, type <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span><span class="op">]</span></span>
-<span><span class="op">}</span><span class="op">)</span> </span></code></pre></div>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Look at the distribution of the data:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -178,9 +180,9 @@ m/s.</p>
 <span>    data <span class="op">=</span> <span class="va">dt</span>,</span>
 <span>    filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>      <span class="st">"varx &lt; var_max"</span>,</span>
-<span>        <span class="st">"vary &lt; var_max"</span>,</span>
-<span>        <span class="st">"speed_in &lt; speed_max | is.na(speed_in)"</span>,</span>
-<span>        <span class="st">"speed_out &lt; speed_max | is.na(speed_out)"</span></span>
+<span>      <span class="st">"vary &lt; var_max"</span>,</span>
+<span>      <span class="st">"speed_in &lt; speed_max | is.na(speed_in)"</span>,</span>
+<span>      <span class="st">"speed_out &lt; speed_max | is.na(speed_out)"</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
@@ -227,13 +229,13 @@ positions can be 0 and therefore will produce NAs and a warning</p>
 <span><span class="va">from</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">d1_raw</span><span class="op">[</span>, <span class="va">datetime</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">3600</span></span>
 <span><span class="va">to</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">d1_raw</span><span class="op">[</span>, <span class="va">datetime</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="fl">24</span> <span class="op">*</span> <span class="fl">3600</span></span>
 <span></span>
-<span><span class="va">d1_raw</span> <span class="op">&lt;-</span> <span class="va">d1_raw</span><span class="op">[</span><span class="va">datetime</span> <span class="op"><a href="https://rdrr.io/pkg/data.table/man/between.html" class="external-link">%between%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span><span class="op">]</span>   </span>
+<span><span class="va">d1_raw</span> <span class="op">&lt;-</span> <span class="va">d1_raw</span><span class="op">[</span><span class="va">datetime</span> <span class="op"><a href="https://rdrr.io/pkg/data.table/man/between.html" class="external-link">%between%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">d1_smooth</span> <span class="op">&lt;-</span> <span class="va">d1_smooth</span><span class="op">[</span><span class="va">datetime</span> <span class="op"><a href="https://rdrr.io/pkg/data.table/man/between.html" class="external-link">%between%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># Create basemap</span></span>
-<span><span class="va">bm</span> <span class="op">=</span> <span class="fu"><a href="../reference/atl_create_bm.html">atl_create_bm</a></span><span class="op">(</span><span class="va">d1_smooth</span><span class="op">)</span></span>
+<span><span class="va">bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_create_bm.html">atl_create_bm</a></span><span class="op">(</span><span class="va">d1_smooth</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Plot </span></span>
+<span><span class="co"># Plot</span></span>
 <span><span class="va">bm</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d1_raw</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"firebrick3"</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d1_smooth</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"black"</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
@@ -252,16 +254,18 @@ Smoothed track (black) on top of raw track (red)
 adding environmental data, such as water levels.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># unlist to data.table</span></span>
-<span><span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="va">data_smooth</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="va">data_smooth</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">tag</span>, <span class="va">time</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># path to tide data</span></span>
 <span><span class="va">tides_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
 <span>  <span class="st">"extdata"</span>, <span class="st">"example_2023_tide_data_UTC.csv"</span>,</span>
-<span>  package <span class="op">=</span> <span class="st">"tools4watlas"</span><span class="op">)</span></span>
+<span>  package <span class="op">=</span> <span class="st">"tools4watlas"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">tide_data_highres_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
-<span>  <span class="st">"extdata"</span>, <span class="st">"example_2023_tide_data_highres_UTC.csv"</span>, </span>
-<span>  package <span class="op">=</span> <span class="st">"tools4watlas"</span><span class="op">)</span></span>
+<span>  <span class="st">"extdata"</span>, <span class="st">"example_2023_tide_data_highres_UTC.csv"</span>,</span>
+<span>  package <span class="op">=</span> <span class="st">"tools4watlas"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># load tide data</span></span>
 <span><span class="va">tides</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">tides_path</span><span class="op">)</span></span>
@@ -270,13 +274,15 @@ adding environmental data, such as water levels.</p>
 <span><span class="co"># add tide data to movement data</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_add_tidaldata.html">atl_add_tidaldata</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">data</span>,</span>
-<span>  tide_data <span class="op">=</span> <span class="va">tides</span>, </span>
-<span>  tide_data_highres <span class="op">=</span> <span class="va">tide_data_highres</span>, </span>
+<span>  tide_data <span class="op">=</span> <span class="va">tides</span>,</span>
+<span>  tide_data_highres <span class="op">=</span> <span class="va">tide_data_highres</span>,</span>
 <span>  waterdata_resolution <span class="op">=</span> <span class="st">"10 minute"</span>,</span>
-<span>  offset <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
+<span>  offset <span class="op">=</span> <span class="fl">30</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Show first 5 rows (subset of columns to show additional ones)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">posID</span>, <span class="va">tag</span>, <span class="va">datetime</span>, <span class="va">tideID</span>, <span class="va">tidaltime</span>, <span class="va">time2lowtide</span>, <span class="va">waterlevel</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">posID</span>, <span class="va">tag</span>, <span class="va">datetime</span>, <span class="va">tideID</span>, <span class="va">tidaltime</span>, <span class="va">time2lowtide</span>, </span>
+<span>              <span class="va">waterlevel</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
@@ -368,12 +374,13 @@ et al. 2016)</a>:</p>
 <span><span class="va">data</span><span class="op">[</span>, <span class="va">tideID</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 2023529 2023530</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Select the low tide period for a particular tide as specified by tideID   </span></span>
+<code class="sourceCode R"><span><span class="co"># Select the low tide period for a particular tide as specified by tideID</span></span>
 <span><span class="va">data_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_filter_covariates.html">atl_filter_covariates</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">data</span>,</span>
-<span>    filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"tideID == 2023530"</span>,</span>
-<span>    <span class="st">"between(time2lowtide, -2.5 * 60, 2.5 * 60)"</span><span class="op">)</span></span>
+<span>    <span class="st">"between(time2lowtide, -2.5 * 60, 2.5 * 60)"</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Save as example data for <code>tools4watlas</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">

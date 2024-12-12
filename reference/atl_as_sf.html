@@ -101,8 +101,8 @@ columns included).</p></dd>
 
 
 <dt id="arg-option">option<a class="anchor" aria-label="anchor" href="#arg-option"></a></dt>
-<dd><p>A character string with "points" (default) for returning sf points,
-"lines" to return sf lines and "table" to return a table with a sf
+<dd><p>A character string with "points" (default) for returning sf
+points, "lines" to return sf lines and "table" to return a table with a sf
 coordinates column.</p></dd>
 
 </dl></div>
@@ -129,15 +129,17 @@ any included attributes.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Convert to sf points with custom CRS and retain the "value" column</span></span></span>
-<span class="r-in"><span><span class="va">sf_points</span> <span class="op">&lt;-</span> <span class="fu">atl_as_sf</span><span class="op">(</span><span class="va">data</span>, x <span class="op">=</span> <span class="st">"x"</span>, y <span class="op">=</span> <span class="st">"y"</span>, tag <span class="op">=</span> <span class="st">"tag"</span>, </span></span>
-<span class="r-in"><span>                       projection <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>                       additional_cols <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sf_points</span> <span class="op">&lt;-</span> <span class="fu">atl_as_sf</span><span class="op">(</span><span class="va">data</span>,</span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="st">"x"</span>, y <span class="op">=</span> <span class="st">"y"</span>, tag <span class="op">=</span> <span class="st">"tag"</span>,</span></span>
+<span class="r-in"><span>  projection <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  additional_cols <span class="op">=</span> <span class="st">"value"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sf_points</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="atl_as_sf-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Convert to sf lines</span></span></span>
 <span class="r-in"><span><span class="va">sf_lines</span> <span class="op">&lt;-</span> <span class="fu">atl_as_sf</span><span class="op">(</span><span class="va">data</span>, x <span class="op">=</span> <span class="st">"x"</span>, y <span class="op">=</span> <span class="st">"y"</span>, tag <span class="op">=</span> <span class="st">"tag"</span>, option <span class="op">=</span> <span class="st">"lines"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sf_lines</span><span class="op">)</span>  </span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sf_lines</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="atl_as_sf-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Convert to a data.table with coordinates column</span></span></span>

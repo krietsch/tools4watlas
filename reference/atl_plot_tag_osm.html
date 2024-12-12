@@ -34,7 +34,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Plot track for one individual on a OpenStreetMap satellite map.</h1>
-      <small class="dont-index">Source: <a href="https://github.com/allertbijleveld/tools4watlas/blob/master/R/fun_plot_tag_osm.r" class="external-link"><code>R/fun_plot_tag_osm.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/allertbijleveld/tools4watlas/blob/master/R/fun_plot_tag_osm.R" class="external-link"><code>R/fun_plot_tag_osm.R</code></a></small>
       <div class="d-none name"><code>atl_plot_tag_osm.Rd</code></div>
     </div>
 
@@ -47,7 +47,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">atl_plot_tag_osm</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  tag <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  mapID <span class="op">=</span> <span class="va">map</span>,</span>
+<span>  <span class="va">mapID</span>,</span>
 <span>  color_by <span class="op">=</span> <span class="st">"time"</span>,</span>
 <span>  fullname <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ppi <span class="op">=</span> <span class="fl">96</span>,</span>
@@ -133,21 +133,24 @@ the legend in the plot.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># make data spatial and transform projection to WGS 84 (used in osm)</span></span></span>
 <span class="r-in"><span><span class="va">d_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="atl_as_sf.html">atl_as_sf</a></span><span class="op">(</span><span class="va">data</span>, additional_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">d_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="va">d_sf</span>, crs <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="va">d_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="va">d_sf</span>, crs <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># get bounding box</span></span></span>
 <span class="r-in"><span><span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="atl_bbox.html">atl_bbox</a></span><span class="op">(</span><span class="va">d_sf</span>, buffer <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># extract openstreetmap </span></span></span>
+<span class="r-in"><span><span class="co"># extract openstreetmap</span></span></span>
 <span class="r-in"><span><span class="co"># other 'type' options are "osm", "maptoolkit-topo", "bing", "stamen-toner",</span></span></span>
 <span class="r-in"><span><span class="co"># "stamen-watercolor", "esri", "esri-topo", "nps", "apple-iphoto", "skobbler";</span></span></span>
-<span class="r-in"><span><span class="va">osm_map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/openmap.html" class="external-link">openmap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">[</span><span class="st">"ymax"</span><span class="op">]</span>, <span class="va">bbox</span><span class="op">[</span><span class="st">"xmin"</span><span class="op">]</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">[</span><span class="st">"ymin"</span><span class="op">]</span>, <span class="va">bbox</span><span class="op">[</span><span class="st">"xmax"</span><span class="op">]</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                   type <span class="op">=</span> <span class="st">"bing"</span>, mergeTiles <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/OpenStreetMap/man/openmap.html" class="external-link">openmap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">[</span><span class="st">"ymax"</span><span class="op">]</span>, <span class="va">bbox</span><span class="op">[</span><span class="st">"xmin"</span><span class="op">]</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">[</span><span class="st">"ymin"</span><span class="op">]</span>, <span class="va">bbox</span><span class="op">[</span><span class="st">"xmax"</span><span class="op">]</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"bing"</span>, mergeTiles <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plot the tracking data on the satellite image</span></span></span>
-<span class="r-in"><span><span class="fu">atl_plot_tag_osm</span><span class="op">(</span>data <span class="op">=</span> <span class="va">d_sf</span>, tag <span class="op">=</span> <span class="cn">NULL</span>, mapID <span class="op">=</span> <span class="va">osm_map</span>, </span></span>
-<span class="r-in"><span>                 color_by <span class="op">=</span> <span class="st">"time"</span>, fullname <span class="op">=</span> <span class="cn">NULL</span>, scalebar <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">atl_plot_tag_osm</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">d_sf</span>, tag <span class="op">=</span> <span class="cn">NULL</span>, mapID <span class="op">=</span> <span class="va">map</span>,</span></span>
+<span class="r-in"><span>  color_by <span class="op">=</span> <span class="st">"time"</span>, fullname <span class="op">=</span> <span class="cn">NULL</span>, scalebar <span class="op">=</span> <span class="fl">3</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -72,8 +72,9 @@ custom bounding boxes, aspect ratios, and scale bar adjustments.</p>
 
 
 <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>A <code>data.table</code> or an object convertible to <code>data.table</code> containing
-spatial points. Defaults to a single point around Griend if <code>NULL</code>.</p></dd>
+<dd><p>A <code>data.table</code> or an object convertible to <code>data.table</code>
+containing spatial points. Defaults to a single point around Griend if
+<code>NULL</code>.</p></dd>
 
 
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
@@ -110,7 +111,8 @@ format. Default is <code>"16:9"</code>.</p></dd>
 
 
 <dt id="arg-rivers-data">rivers_data<a class="anchor" aria-label="anchor" href="#arg-rivers-data"></a></dt>
-<dd><p>An <code>sf</code> object for river polygons. Defaults to <code>rivers_sf</code>.</p></dd>
+<dd><p>An <code>sf</code> object for river polygons. Defaults to
+<code>rivers_sf</code>.</p></dd>
 
 
 <dt id="arg-sc-dist">sc_dist<a class="anchor" aria-label="anchor" href="#arg-sc-dist"></a></dt>
@@ -128,13 +130,13 @@ bar. Default is <code>"br"</code> (bottom right).</p></dd>
 
 
 <dt id="arg-sc-height">sc_height<a class="anchor" aria-label="anchor" href="#arg-sc-height"></a></dt>
-<dd><p>A unit object specifying the height of the scale bar. Default
-is <code>unit(0.25, "cm")</code>.</p></dd>
+<dd><p>A unit object specifying the height of the scale bar.
+Default is <code>unit(0.25, "cm")</code>.</p></dd>
 
 
 <dt id="arg-sc-pad-x">sc_pad_x<a class="anchor" aria-label="anchor" href="#arg-sc-pad-x"></a></dt>
-<dd><p>A unit object specifying horizontal padding for the scale bar.
-Default is <code>unit(0.25, "cm")</code>.</p></dd>
+<dd><p>A unit object specifying horizontal padding for the scale
+bar. Default is <code>unit(0.25, "cm")</code>.</p></dd>
 
 
 <dt id="arg-sc-pad-y">sc_pad_y<a class="anchor" aria-label="anchor" href="#arg-sc-pad-y"></a></dt>
@@ -160,7 +162,7 @@ settings.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example with default settings (map around Griend)</span></span></span>
-<span class="r-in"><span><span class="va">bm</span> <span class="op">=</span> <span class="fu">atl_create_bm</span><span class="op">(</span>buffer <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">bm</span> <span class="op">&lt;-</span> <span class="fu">atl_create_bm</span><span class="op">(</span>buffer <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">bm</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="atl_create_bm-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
