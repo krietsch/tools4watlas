@@ -1,6 +1,5 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/404.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/articles/basic_workflows.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/articles/index.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/articles/load_and_check_data.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/articles/plot_data.html</loc></url>
@@ -17,11 +16,7 @@
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_filter_covariates.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_full_tag_id.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_get_data.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_get_data_csv.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_get_spatial_bounds.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_get_speed.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_make_boundingbox_for_osm.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_make_spatialdataframe.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_median_smooth.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_patch_dist.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_patch_summary.html</loc></url>
@@ -39,9 +34,7 @@
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/data_example.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/index.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/lakes_sf.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/land.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/land_sf.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/mudflats.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/mudflats_sf.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/pipe.html</loc></url>
 <url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/rivers_sf.html</loc></url>
