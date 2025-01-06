@@ -86,8 +86,11 @@ prevent this (whenever it is not desired) use the function
 <code><a href="https://rdrr.io/r/base/split.html" class="external-link">split()</a></code> by individual (tag ID) to keep the data separated
 and allow for easy parallel computing (if necessary).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://allertbijleveld.github.io/tools4watlas/" class="external-link">tools4watlas</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://allertbijleveld.github.io/tools4watlas/" class="external-link">tools4watlas</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
+<span><span class="co">##   object 'type_sum.accel' not found</span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="getting-data">Getting data<a class="anchor" aria-label="anchor" href="#getting-data"></a>
@@ -140,7 +143,7 @@ with the following columns:</p>
 <div class="section level4">
 <h4 id="select-the-desired-tags-and-time-period">Select the desired tags and time period<a class="anchor" aria-label="anchor" href="#select-the-desired-tags-and-time-period"></a>
 </h4>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load meta data</span></span>
 <span><span class="va">all_tags_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
 <span>  <span class="st">"extdata"</span>, <span class="st">"tags_watlas_subset.xlsx"</span>, package <span class="op">=</span> <span class="st">"tools4watlas"</span></span>
@@ -164,7 +167,7 @@ provided. Then, with the established connection, the database can be
 queried for the selected tags and period. Here we will load the tagging
 data in a list where each entry is a data.frame with data of one
 tag.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Database connection</span></span>
 <span><span class="va">sqlite_db</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
 <span>  <span class="st">"extdata"</span>, <span class="st">"watlas_example.SQLite"</span>, package <span class="op">=</span> <span class="st">"tools4watlas"</span></span>
@@ -191,7 +194,7 @@ tag.</p>
 example (chunk not run and only shown) we load the last three days of
 data from all tags of season 2024. Host, database, username and password
 have to be specified.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load meta data</span></span>
 <span><span class="va">all_tags_path</span> <span class="op">&lt;-</span> <span class="st">"C:\\path\\tags_watlas_all.xlsx"</span></span>
 <span><span class="va">all_tags</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span><span class="va">all_tags_path</span>, sheet <span class="op">=</span> <span class="st">"tags_watlas_all"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -224,7 +227,7 @@ have to be specified.</p>
 </h2>
 <p>The resulting loaded WATLAS data will be a collection of lists split
 by tag.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Show first 5 rows of the first list</span></span>
 <span><span class="va">data_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
@@ -379,14 +382,14 @@ number</td>
 </h4>
 <p>Here we simply check for how many individuals we have data and how
 many positions by tag and date we have.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Bind data into one data.table</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="va">data_list</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># N individuals with tagging data</span></span>
 <span><span class="va">data</span><span class="op">[</span>, <span class="va">.N</span>, <span class="va">tag</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 3</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># N positions, first and last data by tag ID</span></span>
 <span><span class="va">data</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span></span>
 <span>  N_positions <span class="op">=</span> <span class="va">.N</span>,</span>
@@ -398,7 +401,7 @@ many positions by tag and date we have.</p>
 <span><span class="co">## 1:   3040        5779 2023-10-01 10:08:39 2023-10-02 09:59:59</span></span>
 <span><span class="co">## 2:   3085        3453 2023-10-01 10:00:01 2023-10-02 09:41:16</span></span>
 <span><span class="co">## 3:   3086        3548 2023-10-01 10:00:01 2023-10-02 09:59:42</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># add data</span></span>
 <span><span class="va">data</span><span class="op">[</span>, <span class="va">date</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">datetime</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
