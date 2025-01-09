@@ -1,43 +1,43 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/404.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/articles/index.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/articles/literature/literature.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/articles/load_and_check_data.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/articles/plot_data.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/articles/process_data.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/authors.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/index.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_add_raster_data.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_add_tidal_data.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_as_sf.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_bbox.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_check_data.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_create_bm.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_filter_bounds.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_filter_covariates.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_full_tag_id.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_get_data.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_get_speed.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_median_smooth.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_patch_dist.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_patch_summary.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_plot_add_track.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_plot_map_osm.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_plot_rpatches.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_plot_tag.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_plot_tag_osm.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_res_patch_speed.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_simple_dist.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_t_col.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_thin_data.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_turning_angle.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/atl_within_polygon.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/data_example.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/index.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/lakes_sf.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/land_sf.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/mudflats_sf.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/pipe.html</loc></url>
-<url><loc>https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference/rivers_sf.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/404.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/articles/index.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/articles/literature/literature.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/articles/load_and_check_data.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/articles/plot_data.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/articles/process_data.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/authors.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/index.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_add_raster_data.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_add_tidal_data.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_as_sf.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_bbox.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_check_data.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_create_bm.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_filter_bounds.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_filter_covariates.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_full_tag_id.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_get_data.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_get_speed.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_median_smooth.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_patch_dist.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_patch_summary.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_plot_add_track.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_plot_map_osm.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_plot_rpatches.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_plot_tag.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_plot_tag_osm.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_res_patch_speed.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_simple_dist.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_t_col.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_thin_data.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_turning_angle.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/atl_within_polygon.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/data_example.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/index.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/lakes_sf.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/land_sf.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/mudflats_sf.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/pipe.html</loc></url>
+<url><loc>https://allertbijleveld.github.io/tools4watlas/reference/rivers_sf.html</loc></url>
 </urlset>
 

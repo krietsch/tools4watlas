@@ -6,7 +6,7 @@ articles:
   load_and_check_data: load_and_check_data.html
   plot_data: plot_data.html
   process_data: process_data.html
-last_built: 2025-01-09T07:17Z
+last_built: 2025-01-09T07:54Z
 urls:
-  reference: https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/reference
-  article: https://allertbijleveld.github.io/tools4watlas/, https://krietsch.github.io/tools4watlas/articles
+  reference: https://allertbijleveld.github.io/tools4watlas/reference
+  article: https://allertbijleveld.github.io/tools4watlas/articles
