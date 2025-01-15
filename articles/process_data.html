@@ -146,13 +146,16 @@ m/s.</p>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Note: 0% of the dataset was filtered out, corresponding to 0 positions.</span></span></code></pre>
+<pre><code><span><span class="co">## Note: 0.29% of the dataset was filtered out, corresponding to 10 positions.</span></span></code></pre>
+<pre><code><span><span class="co">## Note: 0.28% of the dataset was filtered out, corresponding to 10 positions.</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="smoothing">Smoothing<a class="anchor" aria-label="anchor" href="#smoothing"></a>
 </h2>
 <p>To further reduce error in the localization data, a basic smoother
 such as a median filter can be applied.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Smooth the data</span></span>
 <span><span class="va">med_filter</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="co"># number of localizations within window for smoothing</span></span>
 <span></span>
@@ -167,7 +170,7 @@ such as a median filter can be applied.</p>
 <p>After smoothing the data, the speeds need to be recalculated. We now
 also calculate turning angles. Note: the distance between smoothed
 positions can be 0 and therefore will produce NAs and a warning</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculate speed</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">data_list</span>, <span class="kw">function</span><span class="op">(</span><span class="va">dt</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">dt</span><span class="op">[</span>, <span class="fu">`:=`</span><span class="op">(</span></span>
@@ -176,7 +179,7 @@ positions can be 0 and therefore will produce NAs and a warning</p>
 <span>  <span class="op">)</span><span class="op">]</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Look at the data.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select data from first list</span></span>
 <span><span class="va">d1_raw</span> <span class="op">&lt;-</span> <span class="va">data_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="va">d1_smooth</span> <span class="op">&lt;-</span> <span class="va">data_smooth</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
@@ -208,7 +211,7 @@ Smoothed track (black) on top of raw track (red)
 </h2>
 <p>After following the above basic steps, the data will be ready for
 adding environmental data, such as water levels.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># unlist to data.table</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="va">data_smooth</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">tag</span>, <span class="va">time</span><span class="op">)</span></span>
@@ -325,11 +328,11 @@ localizations when mudlfats are available for foraging, we can for
 example select a low tide period from -2.5 hours to +2.5 hours around
 low tide <a href="https://royalsocietypublishing.org/doi/10.1098/rspb.2015.1557" class="external-link">(Bijleveld
 et al. 2016)</a>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check tide ID</span></span>
 <span><span class="va">data</span><span class="op">[</span>, <span class="va">tideID</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 2023529 2023530</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select the low tide period for a particular tide as specified by tideID</span></span>
 <span><span class="va">data_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/atl_filter_covariates.html">atl_filter_covariates</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">data</span>,</span>
@@ -338,8 +341,9 @@ et al. 2016)</a>:</p>
 <span>    <span class="st">"between(time2lowtide, -2.5 * 60, 2.5 * 60)"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Note: 96.69% of the dataset was filtered out, corresponding to 12332 positions.</span></span></code></pre>
 <p>Save as example data for <code>tools4watlas</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># reassign so data is data</span></span>
 <span><span class="va">data_example</span> <span class="op">&lt;-</span> <span class="va">data_subset</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">data_example</span>, file <span class="op">=</span> <span class="st">"./data/watlas_data_example.rda"</span><span class="op">)</span></span></code></pre></div>
