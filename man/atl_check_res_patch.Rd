@@ -10,6 +10,9 @@ atl_check_res_patch(
   tide_data_highres,
   tide,
   offset = 0,
+  waterlevel_min = -150,
+  waterlevel_max = 150,
+  waterlevel_line = 60,
   buffer_res_patches,
   buffer_bm = 250,
   buffer_overview = 10000,
@@ -49,11 +52,21 @@ small intervals (e.g. every 10 min) as provided from Rijkwaterstaat.}
 and the tracking area. This value will be added to the timing of the
 water data.}
 
+\item{waterlevel_min}{Numeric in cmNAP. Minimum water level to fix the axis,
+if NA (default) it uses the minimum of the provided water level data.
+water level to the duration range (default: NA, which uses the minimum of
+the provided water level data).}
+
+\item{waterlevel_max}{Numeric in cmNAP. Maximum water level to fix the axis,
+if NA (default) it uses the minimum of the provided water level data.}
+
+\item{waterlevel_line}{Numeric in cmNAP. The water level to add as a dotted
+line to the plot (default: 60 cmNAP).}
+
 \item{buffer_res_patches}{A numeric value (in meters) specifying the buffer
-around the polygon of each residence patch, which should be
-half of \code{lim_spat_indep} of the residence patch calculation. If not
-the function can create MULTIPOLGONS for single residence patches. That will
-give a warning message, but works if desired.}
+around the polygon of each residence patch. If set to half of
+\code{lim_spat_indep} of the residence patch calculation it reflects the
+distance used to determine spatial independence of patches.}
 
 \item{buffer_bm}{Map buffer size (default: 250).}
 
@@ -112,12 +125,17 @@ library(tools4watlas)
 # load example data
 data <- data_example
 
-# load example tide pattern data
-data_path <- system.file(
+# load example tide pattern and waterlevel data
+tidal_pattern_fp <- system.file(
   "extdata", "example-tidalPattern-west_terschelling-UTC.csv",
   package = "tools4watlas"
 )
-tidal_pattern <- fread(data_path, yaml = TRUE)
+measured_water_height_fp <- system.file(
+  "extdata", "example-gemeten_waterhoogte-west_terschelling-clean-UTC.csv",
+  package = "tools4watlas"
+)
+tidal_pattern <- fread(tidal_pattern_fp, yaml = TRUE)
+measured_water_height <- fread(measured_water_height_fp)
 
 # calculate residence patches for one red knot
 data <- atl_res_patch(
@@ -128,7 +146,8 @@ data <- atl_res_patch(
 
 # plot example
 atl_check_res_patch(
-  data[tag == "3038"], tide_data = tidal_pattern,
+  data[tag == "3038"],
+  tide_data = tidal_pattern, tide_data_highres = measured_water_height,
   tide = "2023513", offset = 30,
   buffer_res_patches = 75 / 2
 )

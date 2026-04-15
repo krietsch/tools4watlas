@@ -14,11 +14,18 @@
 #' @param offset The offset in minutes between the location of the tidal gauge
 #' and the tracking area. This value will be added to the timing of the
 #' water data.
+#' @param waterlevel_min Numeric in cmNAP. Minimum water level to fix the axis,
+#' if NA (default) it uses the minimum of the provided water level data.
+#' water level to the duration range (default: NA, which uses the minimum of
+#' the provided water level data).
+#' @param waterlevel_max Numeric in cmNAP. Maximum water level to fix the axis,
+#' if NA (default) it uses the minimum of the provided water level data.
+#' @param waterlevel_line Numeric in cmNAP. The water level to add as a dotted
+#' line to the plot (default: 60 cmNAP).
 #' @param buffer_res_patches A numeric value (in meters) specifying the buffer
-#' around the polygon of each residence patch, which should be
-#' half of \code{lim_spat_indep} of the residence patch calculation. If not
-#' the function can create MULTIPOLGONS for single residence patches. That will
-#' give a warning message, but works if desired.
+#' around the polygon of each residence patch. If set to half of
+#' \code{lim_spat_indep} of the residence patch calculation it reflects the
+#' distance used to determine spatial independence of patches.
 #' @param buffer_bm Map buffer size (default: 250).
 #' @param buffer_overview Overview map buffer size (default: 10000).
 #' @param point_size Size of plotted points (default: 1).
@@ -56,12 +63,17 @@
 #' # load example data
 #' data <- data_example
 #'
-#' # load example tide pattern data
-#' data_path <- system.file(
+#' # load example tide pattern and waterlevel data
+#' tidal_pattern_fp <- system.file(
 #'   "extdata", "example-tidalPattern-west_terschelling-UTC.csv",
 #'   package = "tools4watlas"
 #' )
-#' tidal_pattern <- fread(data_path, yaml = TRUE)
+#' measured_water_height_fp <- system.file(
+#'   "extdata", "example-gemeten_waterhoogte-west_terschelling-clean-UTC.csv",
+#'   package = "tools4watlas"
+#' )
+#' tidal_pattern <- fread(tidal_pattern_fp, yaml = TRUE)
+#' measured_water_height <- fread(measured_water_height_fp)
 #'
 #' # calculate residence patches for one red knot
 #' data <- atl_res_patch(
@@ -72,7 +84,8 @@
 #'
 #' # plot example
 #' atl_check_res_patch(
-#'   data[tag == "3038"], tide_data = tidal_pattern,
+#'   data[tag == "3038"],
+#'   tide_data = tidal_pattern, tide_data_highres = measured_water_height,
 #'   tide = "2023513", offset = 30,
 #'   buffer_res_patches = 75 / 2
 #' )
@@ -82,6 +95,9 @@ atl_check_res_patch <- function(data,
                                 tide_data_highres,
                                 tide,
                                 offset = 0,
+                                waterlevel_min = -150,
+                                waterlevel_max = 150,
+                                waterlevel_line = 60,
                                 buffer_res_patches,
                                 buffer_bm = 250,
                                 buffer_overview = 10000,
@@ -106,7 +122,8 @@ atl_check_res_patch <- function(data,
   # global variables
   patch <- duration <- . <- time_median <- time <- NULL
   x <- y <- datetime <- x_median <- y_median <- tideID <- NULL # nolint
-  i.duration <- tag <- NULL # nolint
+  i.duration <- tag <- dateTime <- inv_rescale_wl <- NULL # nolint
+  duration_scaled <- waterlevel <- time_num <- NULL
 
   # check data structure
   atl_check_data(data, names_expected = c(
@@ -114,6 +131,9 @@ atl_check_res_patch <- function(data,
   ))
   atl_check_data(tide_data, names_expected = c(
     "tideID", "low_time", "high_start_level", "low_level", "high_end_level"
+  ))
+  atl_check_data(tide_data_highres, names_expected = c(
+    "date", "time", "waterlevel", "dateTime"
   ))
   if (missing(buffer_res_patches) || is.null(buffer_res_patches)) {
     stop(paste0(
@@ -128,6 +148,9 @@ atl_check_res_patch <- function(data,
   }
   if (data.table::is.data.table(tide_data) != TRUE) {
     data.table::setDT(tide_data)
+  }
+  if (data.table::is.data.table(tide_data_highres) != TRUE) {
+    data.table::setDT(tide_data_highres)
   }
 
   # subset first if more than one tag
@@ -153,6 +176,11 @@ atl_check_res_patch <- function(data,
 
   # subset tide pattern data
   dtp <- tide_data[tideID == tideID_id]
+
+  # subset waterlevel data
+  dtf <- tide_data_highres[
+    dateTime >= dtp$high_start_time & dateTime <= dtp$high_end_time
+  ]
 
   # patch as factor
   ds[, patch := as.factor(patch)]
@@ -181,6 +209,26 @@ atl_check_res_patch <- function(data,
     origin = "1970-01-01", tz = "UTC"
   )]
 
+  # rescale waterlevel data
+  wl_min <- ifelse(!is.na(waterlevel_min), waterlevel_min, min(dtf$waterlevel))
+  wl_max <- ifelse(!is.na(waterlevel_max), waterlevel_max, max(dtf$waterlevel))
+  dur_min <- min(ds$duration)
+  dur_max <- max(ds$duration)
+
+  # function to rescale waterlevel to duration range
+  rescale_wl <- function(wl) {
+    (wl - wl_min) / (wl_max - wl_min) * (dur_max - dur_min) + dur_min
+  }
+
+  # inverse: duration range to waterlevel (for sec_axis labels)
+  inv_rescale_wl <- function(x) {
+    (x - dur_min) / (dur_max - dur_min) * (wl_max - wl_min) + wl_min
+  }
+
+  # add rescaled waterlevel and numeric time to tide data
+  dtf[, duration_scaled := rescale_wl(waterlevel)]
+  dtf[, time_num := as.numeric(dateTime) + offset * 60]
+
   # collect relevant data for plot
   tag_species <- ds[1]$species
   year <- min(ds$datetime, na.rm = TRUE) |> year()
@@ -207,62 +255,68 @@ atl_check_res_patch <- function(data,
 
   # if roosts = TRUE add roost polygon
   if (roosts == TRUE) {
-    bm <- bm +
-      geom_sf(data = tools4watlas::roosts_griend, fill = NA, color = "black")
+    bm <- suppressMessages(
+      bm +
+        geom_sf(data = tools4watlas::roosts_griend, fill = NA, color = "black")
+    )
   }
 
   # plot on map
-  p1 <- bm +
-    # add patch polygons
-    geom_sf(data = dp_sf, aes(fill = duration), alpha = 0.6) +
-    viridis::scale_fill_viridis(
-      option = "A", direction = -1, begin = 0.1,
-      name = "Duration in\npatch (min)"
-    ) +
-    # add track and points
-    geom_path(
-      data = ds, aes(x, y),
-      linewidth = path_linewidth, alpha = path_alpha
-    ) +
-    geom_point(
-      data = ds[is.na(patch)], aes(x, y), size = point_size, color = "grey20",
-      alpha = point_alpha, show.legend = FALSE
-    ) +
-    geom_point(
-      data = ds[!is.na(patch)], aes(x, y, color = patch),
-      size = point_size, show.legend = FALSE
-    ) +
-    # add labels for patches
-    ggrepel::geom_text_repel(
-      data = dp, aes(x_median, y_median, label = patch, colour = patch),
-      size = patch_label_size, box.padding = patch_label_padding,
-      fontface = "bold", show.legend = FALSE
-    ) +
-    # set extend again (overwritten by geom_sf)
-    coord_sf(
-      xlim = c(bbox["xmin"], bbox["xmax"]),
-      ylim = c(bbox["ymin"], bbox["ymax"]), expand = FALSE
-    ) +
-    # adjust legend position
-    theme(
-      legend.position = "inside",
-      legend.position.inside = c(.08, .18),
-      legend.background = element_rect(fill = "transparent"),
-      legend.title = element_text(face = "bold"),
-      legend.text = element_text(size = element_text_size)
-    )
+  p1 <- suppressMessages(
+    bm +
+      # add patch polygons
+      geom_sf(data = dp_sf, aes(fill = duration), alpha = 0.6) +
+      viridis::scale_fill_viridis(
+        option = "A", direction = -1, begin = 0.1,
+        name = "Duration in\npatch (min)"
+      ) +
+      # add track and points
+      geom_path(
+        data = ds, aes(x, y),
+        linewidth = path_linewidth, alpha = path_alpha
+      ) +
+      geom_point(
+        data = ds[is.na(patch)], aes(x, y), size = point_size, color = "grey20",
+        alpha = point_alpha, show.legend = FALSE
+      ) +
+      geom_point(
+        data = ds[!is.na(patch)], aes(x, y, color = patch),
+        size = point_size, show.legend = FALSE
+      ) +
+      # add labels for patches
+      ggrepel::geom_text_repel(
+        data = dp, aes(x_median, y_median, label = patch, colour = patch),
+        size = patch_label_size, box.padding = patch_label_padding,
+        fontface = "bold", show.legend = FALSE
+      ) +
+      # set extend again (overwritten by geom_sf)
+      coord_sf(
+        xlim = c(bbox["xmin"], bbox["xmax"]),
+        ylim = c(bbox["ymin"], bbox["ymax"]), expand = FALSE
+      ) +
+      # adjust legend position
+      theme(
+        legend.position = "inside",
+        legend.position.inside = c(.08, .18),
+        legend.background = element_rect(fill = "transparent"),
+        legend.title = element_text(face = "bold"),
+        legend.text = element_text(size = element_text_size)
+      )
+  )
 
   # add overview map
   bbox_sf <- bbox |> sf::st_as_sfc() |> sf::st_set_crs(32631)
   bbox2 <- atl_bbox(ds, buffer = buffer_overview, asp = "1:1")
 
   bm2 <- atl_create_bm(ds, buffer = buffer_overview, asp = "1:1") +
-    # add small area
-    geom_sf(data = bbox_sf, color = "firebrick3", fill = NA, lwd = 1) +
-    # set extend again (overwritten by geom_sf)
-    coord_sf(
-      xlim = c(bbox2["xmin"], bbox2["xmax"]),
-      ylim = c(bbox2["ymin"], bbox2["ymax"]), expand = FALSE
+    suppressMessages(
+      # add small area
+      geom_sf(data = bbox_sf, color = "firebrick3", fill = NA, lwd = 1) +
+        # set extend again (overwritten by geom_sf)
+        coord_sf(
+          xlim = c(bbox2["xmin"], bbox2["xmax"]),
+          ylim = c(bbox2["ymin"], bbox2["ymax"]), expand = FALSE
+        )
     )
 
   # add to map
@@ -270,56 +324,90 @@ atl_check_res_patch <- function(data,
     patchwork::inset_element(bm2, left = 0.8, bottom = 0.8, right = 1, top = 1)
 
   # add plot by time and duration
-  p2 <- ggplot() +
-    # add low tide line
-    geom_hline(
-      yintercept = as.numeric(dtp$low_time)  + offset * 60,
-      color = "dodgerblue3", linetype = "dashed"
-    ) +
-    # add high tide lines
-    geom_hline(
-      yintercept = as.numeric(dtp$high_start_time) + offset * 60,
-      color = "dodgerblue3"
-    ) +
-    geom_hline(
-      yintercept = as.numeric(dtp$high_end_time) + offset * 60,
-      color = "dodgerblue3"
-    ) +
-    # add line and points
-    geom_path(
-      data = ds, aes(duration, time), color = "grey",
-      show.legend = FALSE
-    ) +
-    geom_point(
-      data = ds, aes(duration, time, color = as.character(patch)),
-      size = point_size, alpha = 0.5, show.legend = FALSE
-    ) +
-    # add labels for patches
-    geom_text(
-      data = dp,
-      aes(duration + 5, as.numeric(time_median), label = patch, colour = patch),
-      size = 4, fontface = "bold", show.legend = FALSE
-    ) +
-    # flip y axis
-    scale_y_reverse(
-      breaks = seq(
-        from = floor(min(as.numeric(dtp$high_start_time)) / 3600) * 3600,
-        to = ceiling(max(as.numeric(dtp$high_end_time)) / 3600) * 3600,
-        by = 3600 * 1
-      ),
-      labels = function(x) {
-        format(as.POSIXct(x, origin = "1970-01-01"), "%H", tz = "UTC")
-      }
-    ) +
-    labs(
-      x = "Duration in patch (min)",
-      y = "Hour (UTC)"
-    ) +
-    theme_bw() +
-    theme(
-      axis.text.x = element_text(size = element_text_size),
-      axis.text.y = element_text(size = element_text_size)
-    )
+  p2 <- suppressMessages(
+    ggplot() +
+      # add low tide line
+      geom_hline(
+        yintercept = as.numeric(dtp$low_time) + offset * 60,
+        color = "dodgerblue3", linetype = "dashed"
+      ) +
+      # add high tide lines
+      geom_hline(
+        yintercept = as.numeric(dtp$high_start_time) + offset * 60,
+        color = "dodgerblue3"
+      ) +
+      geom_hline(
+        yintercept = as.numeric(dtp$high_end_time) + offset * 60,
+        color = "dodgerblue3"
+      ) +
+      # add 60 cm lines (before and after low tide)
+      geom_hline(
+        yintercept = as.numeric(
+          dtf[dateTime <= dtp$low_time][which.min(
+            abs(waterlevel - waterlevel_line)
+          ), dateTime]
+        ) + offset * 60,
+        color = "steelblue", linetype = "dotted"
+      ) +
+      geom_hline(
+        yintercept = as.numeric(
+          dtf[dateTime >= dtp$low_time][which.min(
+            abs(waterlevel - waterlevel_line)
+          ), dateTime]
+        ) + offset * 60,
+        color = "steelblue", linetype = "dotted"
+      ) +
+      # add line and points
+      geom_path(
+        data = ds, aes(duration, time), color = "grey",
+        show.legend = FALSE
+      ) +
+      geom_point(
+        data = ds, aes(duration, time, color = as.character(patch)),
+        size = point_size, alpha = 0.5, show.legend = FALSE
+      ) +
+      # add labels for patches
+      geom_text(
+        data = dp,
+        aes(
+          duration + 5, as.numeric(time_median), label = patch, colour = patch
+        ),
+        size = 4, fontface = "bold", show.legend = FALSE
+      ) +
+      # flip y axis
+      scale_y_reverse(
+        breaks = seq(
+          from = floor(min(as.numeric(dtp$high_start_time)) / 3600) * 3600,
+          to = ceiling(max(as.numeric(dtp$high_end_time)) / 3600) * 3600,
+          by = 3600 * 1
+        ),
+        labels = function(x) {
+          format(as.POSIXct(x, origin = "1970-01-01"), "%H", tz = "UTC")
+        }
+      ) +
+      # add tide line using rescaled x
+      geom_path(
+        data = dtf,
+        aes(x = duration_scaled, y = time_num),
+        color = "steelblue", linewidth = 0.8, alpha = 0.7
+      ) +
+      # add second x axis and theme
+      scale_x_continuous(
+        name = "Duration in patch (min)",
+        sec.axis = sec_axis(
+          transform = ~ inv_rescale_wl(.),
+          name = "Water level (cmNAP)"
+        )
+      ) +
+      labs(y = "Hour (UTC)") +
+      theme_bw() +
+      theme(
+        axis.text.x = element_text(size = element_text_size),
+        axis.text.y = element_text(size = element_text_size),
+        axis.title.x.top = element_text(color = "steelblue"),
+        axis.text.x.top  = element_text(color = "steelblue")
+      )
+  )
 
   # combine plots
   p <- p1 + p2 + patchwork::plot_layout(widths = c(3, 1.15)) +

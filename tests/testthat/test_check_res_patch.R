@@ -45,6 +45,8 @@ test_that("atl_check_res_patch() works with example data files", {
     tide_data = tide_data,
     tide_data_highres = tide_data_highres,
     tide = tide_id,
+    waterlevel_min = -200,
+    waterlevel_max = 200,
     buffer_res_patches = 30,
     filename = NULL,
     roosts = TRUE
@@ -301,3 +303,4 @@ test_that("atl_check_res_patch() subsets to first tag when multiple tags present
   
   expect_s3_class(result, "ggplot")
 })
+
