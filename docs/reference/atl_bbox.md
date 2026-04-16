@@ -51,20 +51,39 @@ Johannes Krietsch
 ## Examples
 
 ``` r
+# packages
+library(tools4watlas)
+library(ggplot2)
 library(sf)
 #> Warning: package 'sf' was built under R version 4.5.3
 #> Linking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE
 
-# Create a simple geometry
-geom <- st_as_sfc("POLYGON((0 0, 1 0, 1 2, 0 2, 0 0))")
+# load example data
+data <- data_example
 
-# Create a bounding box with a 16:9 aspect ratio
-atl_bbox(geom, asp = "16:9")
-#>      xmin      ymin      xmax      ymax 
-#> -1.277778  0.000000  2.277778  2.000000 
+# bounding box based on data
+bbox <- atl_bbox(data, buffer = 1000)
 
-# Create a bounding box with a 1:1 aspect ratio and a buffer of 0.5 units
-atl_bbox(geom, asp = "1:1", buffer = 0.5)
-#> xmin ymin xmax ymax 
-#> -1.0 -0.5  2.0  2.5 
+# bounding box based on specified coordinates in EPSG:4326
+bbox <- data.table(x = c(5.107, 5.330), y = c(53.303, 53.230)) |>
+  st_as_sf(coords = c("x", "y"), crs = 4326) |>
+  st_transform(crs = 32631) |>
+  atl_bbox(buffer = 1000)
+
+# bounding box based on polygon
+bbox <- atl_bbox(grienderwaard, buffer = 1000)
+
+# create basemap with bounding box
+bm <- atl_create_bm(bbox)
+
+# plot bm with bounding box when bm coordinates are overridden by geom_sf
+bm +
+  geom_sf(data = grienderwaard, fill = "transparent", color = "firebrick") +
+  # set extend again (overwritten by geom_sf)
+  coord_sf(
+    xlim = c(bbox["xmin"], bbox["xmax"]),
+    ylim = c(bbox["ymin"], bbox["ymax"]), expand = FALSE
+  )
+#> Coordinate system already present.
+#> ℹ Adding new coordinate system, which will replace the existing one.
 ```

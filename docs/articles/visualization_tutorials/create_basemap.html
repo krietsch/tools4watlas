@@ -189,6 +189,66 @@ of Richel and the second point south-east of Griend.</p>
 <span><span class="co"># plot</span></span>
 <span><span class="va">bm</span></span></code></pre></div>
 <p><img src="create_basemap_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="Basemap around Griend" width="100%"></p>
+<p><code>bm</code> is a standard <code>ggplot2</code> object and can be
+manipulated as one. For example, we can overwrite the default theme to
+add axis labels and ticks.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create basemap</span></span>
+<span><span class="va">bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/atl_create_bm.html">atl_create_bm</a></span><span class="op">(</span>buffer <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># add axis labels and ticks</span></span>
+<span><span class="va">bm</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Longitude"</span>, y <span class="op">=</span> <span class="st">"Latitude"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    axis.title   <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    axis.text.x  <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    axis.text.y  <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    axis.ticks.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="create_basemap_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="Basemap with axis labels" width="100%"></p>
+<p>When adding <code>sf</code> object to the basemap, the coordinate
+system will be overwritten and we need to set the bounding box again.
+For points or lines, it is best to use <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point()</a></code> and
+<code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path()</a></code>, which is also faster than plotting the same
+data with <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf()</a></code> (just make sure the data are in the
+correct coordinate system - EPSG:32631 (WGS 84 / UTM zone 31N)).
+Plotting polygons only works with <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf()</a></code> and afterwards
+the bounding box needs to be set again with <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">coord_sf()</a></code> and
+the buffer in <code><a href="../../reference/atl_create_bm.html">atl_create_bm()</a></code> is ignored.</p>
+<p>Show are different ways on how to set the bounding box.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># additional packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: package 'sf' was built under R version 4.5.3</span></span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># load example data</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data_example</span></span>
+<span></span>
+<span><span class="co"># bounding box based on data</span></span>
+<span><span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/atl_bbox.html">atl_bbox</a></span><span class="op">(</span><span class="va">data</span>, buffer <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># bounding box based on specified coordinates in EPSG:4326</span></span>
+<span><span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.107</span>, <span class="fl">5.330</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">53.303</span>, <span class="fl">53.230</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span>coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span>crs <span class="op">=</span> <span class="fl">32631</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../../reference/atl_bbox.html">atl_bbox</a></span><span class="op">(</span>buffer <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># bounding box based on polygon</span></span>
+<span><span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/atl_bbox.html">atl_bbox</a></span><span class="op">(</span><span class="va">grienderwaard</span>, buffer <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create basemap with bounding box</span></span>
+<span><span class="va">bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/atl_create_bm.html">atl_create_bm</a></span><span class="op">(</span><span class="va">bbox</span>, buffer <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># plot bm with bounding box</span></span>
+<span><span class="va">bm</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">grienderwaard</span>, fill <span class="op">=</span> <span class="st">"transparent"</span>, color <span class="op">=</span> <span class="st">"firebrick"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># set extend again (overwritten by geom_sf)</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">coord_sf</a></span><span class="op">(</span></span>
+<span>    xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">[</span><span class="st">"xmin"</span><span class="op">]</span>, <span class="va">bbox</span><span class="op">[</span><span class="st">"xmax"</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>    ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">[</span><span class="st">"ymin"</span><span class="op">]</span>, <span class="va">bbox</span><span class="op">[</span><span class="st">"ymax"</span><span class="op">]</span><span class="op">)</span>, expand <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="create_basemap_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="Basemap with polygons" width="100%"></p>
 </div>
 </div>
 <div class="section level2">
@@ -199,7 +259,7 @@ Bathymetry data can be found in the “Birds, fish ’n chips” SharePoint
 folder: <code>Documents/data/GIS/rasters/</code>. To run the script set
 the file path (<code>fp</code>) to the local copy of the folder on your
 computer. The data can also be downloaded from the <a href="https://datahuiswadden.openearth.nl/geonetwork/srv/eng/catalog.search#/metadata/JkrvJXasRSGAWU1mJLHUzg" class="external-link">Waddenregister</a>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># additional packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
 <span></span>
@@ -216,12 +276,12 @@ computer. The data can also be downloaded from the <a href="https://datahuiswadd
 <span></span>
 <span><span class="co"># plot</span></span>
 <span><span class="va">bm</span></span></code></pre></div>
-<p><img src="create_basemap_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="Bathymetry map" width="100%"></p>
+<p><img src="create_basemap_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="Bathymetry map" width="100%"></p>
 <p>We can also add some shading (<code>shade = TRUE</code>) to the
 bathymetry data to highlight the geomorphological structures better.
 Note that calculating shading can take a while, especially for large
 maps. We remommend using this option only for polished maps.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># additional packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
 <span></span>
@@ -238,7 +298,7 @@ maps. We remommend using this option only for polished maps.</p>
 <span></span>
 <span><span class="co"># plot</span></span>
 <span><span class="va">bm</span></span></code></pre></div>
-<p><img src="create_basemap_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="Bathymetry map with shade" width="100%"></p>
+<p><img src="create_basemap_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="Bathymetry map with shade" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="using-maptiles">Using <code>maptiles</code><a class="anchor" aria-label="anchor" href="#using-maptiles"></a>
@@ -259,7 +319,7 @@ to the data table.</p>
 <div class="section level3">
 <h3 id="use-satellite-map">Use satellite map<a class="anchor" aria-label="anchor" href="#use-satellite-map"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># satellite map and buffer around Griend</span></span>
 <span><span class="va">bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/atl_create_bm_tiles.html">atl_create_bm_tiles</a></span><span class="op">(</span></span>
 <span>  buffer <span class="op">=</span> <span class="fl">15000</span>, option <span class="op">=</span> <span class="st">"Esri.WorldImagery"</span>, zoom <span class="op">=</span> <span class="fl">12</span></span>
@@ -267,8 +327,8 @@ to the data table.</p>
 <span></span>
 <span><span class="co"># plot</span></span>
 <span><span class="va">bm</span></span></code></pre></div>
-<p><img src="create_basemap_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="Static map with satellite image using maptiles" width="100%"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p><img src="create_basemap_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="Static map with satellite image using maptiles" width="100%"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># example with bbox and adding movement data</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data_example</span></span>
 <span></span>
@@ -287,7 +347,7 @@ to the data table.</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html" class="external-link">scale_color_discrete</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"N = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">tag</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="create_basemap_files/figure-html/unnamed-chunk-8-2.png" class="r-plt" alt="Static map with satellite image using maptiles" width="100%"></p>
+<p><img src="create_basemap_files/figure-html/unnamed-chunk-10-2.png" class="r-plt" alt="Static map with satellite image using maptiles" width="100%"></p>
 </div>
 </div>
 <div class="section level2">
@@ -299,13 +359,12 @@ to the data table.</p>
 data to a Mercator projection to plot the data on top of the map.</p>
 <p>Unfortunately, the <code>type = "bing"</code> (satellite image) is
 unstable and does not always work.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># additional packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ifellows/ROSM" class="external-link">OpenStreetMap</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: package 'sf' was built under R version 4.5.3</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># load example data</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># load example data</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data_example</span></span>
 <span></span>
 <span><span class="co"># make data spatial and transform projection to WGS 84 (used in osm)</span></span>
@@ -344,7 +403,7 @@ unstable and does not always work.</p>
 <span>    panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="create_basemap_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="Static map with satellite image" width="100%"></p>
+<p><img src="create_basemap_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="Static map with satellite image" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="adding-features-to-a-map">Adding features to a map<a class="anchor" aria-label="anchor" href="#adding-features-to-a-map"></a>
@@ -354,7 +413,7 @@ receivers, to a map.</p>
 <div class="section level3">
 <h3 id="add-watlas-logo">Add WATLAS logo<a class="anchor" aria-label="anchor" href="#add-watlas-logo"></a>
 </h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># additional packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/ggimage" class="external-link">ggimage</a></span><span class="op">)</span></span>
 <span></span>
@@ -381,7 +440,7 @@ receivers, to a map.</p>
 <span><span class="co"># plot basemap with logo</span></span>
 <span><span class="va">bm</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggimage/man/geom_image.html" class="external-link">geom_image</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">di</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, image <span class="op">=</span> <span class="va">image</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="create_basemap_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="basemap with logo" width="100%"></p>
+<p><img src="create_basemap_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="basemap with logo" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="add-watlas-receivers">Add WATLAS receivers<a class="anchor" aria-label="anchor" href="#add-watlas-receivers"></a>
@@ -390,7 +449,7 @@ receivers, to a map.</p>
 SharePoint folder: <code>Documents/data/</code>. Either specify the path
 to your local copy of this folder or add the path for your user in the
 <code><a href="../../reference/atl_file_path.html">atl_file_path()</a></code> function.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load example data</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data_example</span></span>
 <span></span>
@@ -421,9 +480,9 @@ to your local copy of this folder or add the path for your user in the
 <span><span class="co"># plot basemap with receivers active during tracking period</span></span>
 <span><span class="va">bm</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dr</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">17</span><span class="op">)</span></span></code></pre></div>
-<p><img src="create_basemap_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="basemap with receivers" width="100%"></p>
+<p><img src="create_basemap_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="basemap with receivers" width="100%"></p>
 <p>One can also add the name of the receiver.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># additional packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggrepel.slowkow.com/" class="external-link">ggrepel</a></span><span class="op">)</span></span>
 <span></span>
@@ -437,7 +496,7 @@ to your local copy of this folder or add the path for your user in the
 <span>    point.padding <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>    segment.color <span class="op">=</span> <span class="st">"grey50"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="create_basemap_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="basemap with receivers and label" width="100%"></p>
+<p><img src="create_basemap_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="basemap with receivers and label" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

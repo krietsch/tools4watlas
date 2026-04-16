@@ -73,6 +73,9 @@ movement paths, patch durations, and an inset overview map.</p>
 <span>  <span class="va">tide_data_highres</span>,</span>
 <span>  <span class="va">tide</span>,</span>
 <span>  offset <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  waterlevel_min <span class="op">=</span> <span class="op">-</span><span class="fl">150</span>,</span>
+<span>  waterlevel_max <span class="op">=</span> <span class="fl">150</span>,</span>
+<span>  waterlevel_line <span class="op">=</span> <span class="fl">60</span>,</span>
 <span>  <span class="va">buffer_res_patches</span>,</span>
 <span>  buffer_bm <span class="op">=</span> <span class="fl">250</span>,</span>
 <span>  buffer_overview <span class="op">=</span> <span class="fl">10000</span>,</span>
@@ -126,12 +129,28 @@ and the tracking area. This value will be added to the timing of the
 water data.</p></dd>
 
 
+<dt id="arg-waterlevel-min">waterlevel_min<a class="anchor" aria-label="anchor" href="#arg-waterlevel-min"></a></dt>
+<dd><p>Numeric in cmNAP. Minimum water level to fix the axis,
+if NA (default) it uses the minimum of the provided water level data.
+water level to the duration range (default: NA, which uses the minimum of
+the provided water level data).</p></dd>
+
+
+<dt id="arg-waterlevel-max">waterlevel_max<a class="anchor" aria-label="anchor" href="#arg-waterlevel-max"></a></dt>
+<dd><p>Numeric in cmNAP. Maximum water level to fix the axis,
+if NA (default) it uses the minimum of the provided water level data.</p></dd>
+
+
+<dt id="arg-waterlevel-line">waterlevel_line<a class="anchor" aria-label="anchor" href="#arg-waterlevel-line"></a></dt>
+<dd><p>Numeric in cmNAP. The water level to add as a dotted
+line to the plot (default: 60 cmNAP).</p></dd>
+
+
 <dt id="arg-buffer-res-patches">buffer_res_patches<a class="anchor" aria-label="anchor" href="#arg-buffer-res-patches"></a></dt>
 <dd><p>A numeric value (in meters) specifying the buffer
-around the polygon of each residence patch, which should be
-half of <code>lim_spat_indep</code> of the residence patch calculation. If not
-the function can create MULTIPOLGONS for single residence patches. That will
-give a warning message, but works if desired.</p></dd>
+around the polygon of each residence patch. If set to half of
+<code>lim_spat_indep</code> of the residence patch calculation it reflects the
+distance used to determine spatial independence of patches.</p></dd>
 
 
 <dt id="arg-buffer-bm">buffer_bm<a class="anchor" aria-label="anchor" href="#arg-buffer-bm"></a></dt>
@@ -234,12 +253,17 @@ returns the plot.</p></dd>
 <span class="r-in"><span><span class="co"># load example data</span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data_example</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># load example tide pattern data</span></span></span>
-<span class="r-in"><span><span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="co"># load example tide pattern and waterlevel data</span></span></span>
+<span class="r-in"><span><span class="va">tidal_pattern_fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"extdata"</span>, <span class="st">"example-tidalPattern-west_terschelling-UTC.csv"</span>,</span></span>
 <span class="r-in"><span>  package <span class="op">=</span> <span class="st">"tools4watlas"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">tidal_pattern</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">data_path</span>, yaml <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">measured_water_height_fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"extdata"</span>, <span class="st">"example-gemeten_waterhoogte-west_terschelling-clean-UTC.csv"</span>,</span></span>
+<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"tools4watlas"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tidal_pattern</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">tidal_pattern_fp</span>, yaml <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">measured_water_height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">measured_water_height_fp</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># calculate residence patches for one red knot</span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="atl_res_patch.html">atl_res_patch</a></span><span class="op">(</span></span></span>
@@ -250,14 +274,11 @@ returns the plot.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># plot example</span></span></span>
 <span class="r-in"><span><span class="fu">atl_check_res_patch</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">data</span><span class="op">[</span><span class="va">tag</span> <span class="op">==</span> <span class="st">"3038"</span><span class="op">]</span>, tide_data <span class="op">=</span> <span class="va">tidal_pattern</span>,</span></span>
+<span class="r-in"><span>  <span class="va">data</span><span class="op">[</span><span class="va">tag</span> <span class="op">==</span> <span class="st">"3038"</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>  tide_data <span class="op">=</span> <span class="va">tidal_pattern</span>, tide_data_highres <span class="op">=</span> <span class="va">measured_water_height</span>,</span></span>
 <span class="r-in"><span>  tide <span class="op">=</span> <span class="st">"2023513"</span>, offset <span class="op">=</span> <span class="fl">30</span>,</span></span>
 <span class="r-in"><span>  buffer_res_patches <span class="op">=</span> <span class="fl">75</span> <span class="op">/</span> <span class="fl">2</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Coordinate system already present.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Adding new coordinate system, which will replace the existing one.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Coordinate system already present.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Adding new coordinate system, which will replace the existing one.</span>
 <span class="r-plt img"><img src="atl_check_res_patch-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

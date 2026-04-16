@@ -228,10 +228,17 @@ as possible while maintaining most biological relevance. A value of
 <span><span class="co"># file path to WATLAS teams data folder</span></span>
 <span><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/atl_file_path.html">atl_file_path</a></span><span class="op">(</span><span class="st">"watlas_teams"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># load tide pattern data</span></span>
-<span><span class="va">tidal_pattern</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span><span class="co"># sub path to tide data</span></span>
+<span><span class="va">tidal_pattern_fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
 <span>  <span class="va">fp</span>, <span class="st">"waterdata/allYears-tidalPattern-west_terschelling-UTC.csv"</span></span>
-<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="va">measured_water_height_fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="va">fp</span>, <span class="st">"waterdata/allYears-gemeten_waterhoogte-west_terschelling-clean-UTC.csv"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># load tide data</span></span>
+<span><span class="va">tidal_pattern</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">tidal_pattern_fp</span><span class="op">)</span></span>
+<span><span class="va">measured_water_height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">measured_water_height_fp</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="calculate-residence-patches-by-tag">Calculate residence patches by tag<a class="anchor" aria-label="anchor" href="#calculate-residence-patches-by-tag"></a>
@@ -377,14 +384,19 @@ corresponding tide.</p>
 <p>We can select one tag and tide to plot. Additionally, we need to
 specify the offset for the tidal data we use (e.g. 30 min for
 West-Terschelling) and a buffer (in m) around the residence patch data
-to create the polygon. This buffer should be set to half of
-<code>lim_spat_indep</code> (maximum distance between subsequent
-residence patches at which they will be considered independent),
-ensuring that the polygons around residence patches correspond to the
-spatial distance threshold used to merge residence patches.</p>
+to create the polygon. For data inspection it makes sense to set the
+buffer to half of <code>lim_spat_indep</code> (maximum distance between
+subsequent residence patches at which they will be considered
+independent), ensuring that the polygons around residence patches
+correspond to the spatial distance threshold used to merge residence
+patches. However, for analysis using the residence patch polygons in a
+biological context, it is better to set the buffer to appropiate scale.
+For example 15 m, will capture some error in positions and potential
+movements in between fixes.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../../reference/atl_check_res_patch.html">atl_check_res_patch</a></span><span class="op">(</span></span>
-<span>  <span class="va">data</span><span class="op">[</span><span class="va">tag</span> <span class="op">==</span> <span class="st">"3038"</span><span class="op">]</span>, tide_data <span class="op">=</span> <span class="va">tidal_pattern</span>,</span>
+<span>  <span class="va">data</span><span class="op">[</span><span class="va">tag</span> <span class="op">==</span> <span class="st">"3038"</span><span class="op">]</span>,</span>
+<span>  tide_data <span class="op">=</span> <span class="va">tidal_pattern</span>, tide_data_highres <span class="op">=</span> <span class="va">measured_water_height</span>,</span>
 <span>  tide <span class="op">=</span> <span class="st">"2023513"</span>, offset <span class="op">=</span> <span class="fl">30</span>,</span>
 <span>  buffer_res_patches <span class="op">=</span> <span class="fl">75</span> <span class="op">/</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>

@@ -124,10 +124,17 @@ data <- data_example
 # file path to WATLAS teams data folder
 fp <- atl_file_path("watlas_teams")
 
-# load tide pattern data
-tidal_pattern <- fread(paste0(
+# sub path to tide data
+tidal_pattern_fp <- paste0(
   fp, "waterdata/allYears-tidalPattern-west_terschelling-UTC.csv"
-))
+)
+measured_water_height_fp <- paste0(
+  fp, "waterdata/allYears-gemeten_waterhoogte-west_terschelling-clean-UTC.csv"
+)
+
+# load tide data
+tidal_pattern <- fread(tidal_pattern_fp)
+measured_water_height <- fread(measured_water_height_fp)
 ```
 
 ## Calculate residence patches by tag
@@ -193,15 +200,19 @@ corresponding tide.
 We can select one tag and tide to plot. Additionally, we need to specify
 the offset for the tidal data we use (e.g. 30 min for West-Terschelling)
 and a buffer (in m) around the residence patch data to create the
-polygon. This buffer should be set to half of `lim_spat_indep` (maximum
-distance between subsequent residence patches at which they will be
-considered independent), ensuring that the polygons around residence
-patches correspond to the spatial distance threshold used to merge
-residence patches.
+polygon. For data inspection it makes sense to set the buffer to half of
+`lim_spat_indep` (maximum distance between subsequent residence patches
+at which they will be considered independent), ensuring that the
+polygons around residence patches correspond to the spatial distance
+threshold used to merge residence patches. However, for analysis using
+the residence patch polygons in a biological context, it is better to
+set the buffer to appropiate scale. For example 15 m, will capture some
+error in positions and potential movements in between fixes.
 
 ``` r
 atl_check_res_patch(
-  data[tag == "3038"], tide_data = tidal_pattern,
+  data[tag == "3038"],
+  tide_data = tidal_pattern, tide_data_highres = measured_water_height,
   tide = "2023513", offset = 30,
   buffer_res_patches = 75 / 2
 )

@@ -115,6 +115,87 @@ bm
 ![Basemap around
 Griend](create_basemap_files/figure-html/unnamed-chunk-5-1.png)
 
+`bm` is a standard `ggplot2` object and can be manipulated as one. For
+example, we can overwrite the default theme to add axis labels and
+ticks.
+
+``` r
+# create basemap
+bm <- atl_create_bm(buffer = 10000)
+
+# add axis labels and ticks
+bm +
+  labs(x = "Longitude", y = "Latitude") +
+  theme(
+    axis.title   = element_text(),
+    axis.text.x  = element_text(),
+    axis.text.y  = element_text(),
+    axis.ticks.x = element_line(),
+    axis.ticks.y = element_line()
+  )
+```
+
+![Basemap with axis
+labels](create_basemap_files/figure-html/unnamed-chunk-6-1.png)
+
+When adding `sf` object to the basemap, the coordinate system will be
+overwritten and we need to set the bounding box again. For points or
+lines, it is best to use
+[`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html)
+and
+[`geom_path()`](https://ggplot2.tidyverse.org/reference/geom_path.html),
+which is also faster than plotting the same data with
+[`geom_sf()`](https://ggplot2.tidyverse.org/reference/ggsf.html) (just
+make sure the data are in the correct coordinate system - EPSG:32631
+(WGS 84 / UTM zone 31N)). Plotting polygons only works with
+[`geom_sf()`](https://ggplot2.tidyverse.org/reference/ggsf.html) and
+afterwards the bounding box needs to be set again with
+[`coord_sf()`](https://ggplot2.tidyverse.org/reference/ggsf.html) and
+the buffer in
+[`atl_create_bm()`](https://allertbijleveld.github.io/tools4watlas/reference/atl_create_bm.md)
+is ignored.
+
+Show are different ways on how to set the bounding box.
+
+``` r
+# additional packages
+library(sf)
+```
+
+    ## Warning: package 'sf' was built under R version 4.5.3
+
+``` r
+# load example data
+data <- data_example
+
+# bounding box based on data
+bbox <- atl_bbox(data, buffer = 1000)
+
+# bounding box based on specified coordinates in EPSG:4326
+bbox <- data.table(x = c(5.107, 5.330), y = c(53.303, 53.230)) |>
+  st_as_sf(coords = c("x", "y"), crs = 4326) |>
+  st_transform(crs = 32631) |>
+  atl_bbox(buffer = 1000)
+
+# bounding box based on polygon
+bbox <- atl_bbox(grienderwaard, buffer = 1000)
+
+# create basemap with bounding box
+bm <- atl_create_bm(bbox, buffer = 0)
+
+# plot bm with bounding box
+bm +
+  geom_sf(data = grienderwaard, fill = "transparent", color = "firebrick") +
+  # set extend again (overwritten by geom_sf)
+  coord_sf(
+    xlim = c(bbox["xmin"], bbox["xmax"]),
+    ylim = c(bbox["ymin"], bbox["ymax"]), expand = FALSE
+  )
+```
+
+![Basemap with
+polygons](create_basemap_files/figure-html/unnamed-chunk-7-1.png)
+
 ## Using bathymetry data
 
 Here, we use a raster file with bathymetry to construct a basemap.
@@ -144,7 +225,7 @@ bm
 ```
 
 ![Bathymetry
-map](create_basemap_files/figure-html/unnamed-chunk-6-1.png)
+map](create_basemap_files/figure-html/unnamed-chunk-8-1.png)
 
 We can also add some shading (`shade = TRUE`) to the bathymetry data to
 highlight the geomorphological structures better. Note that calculating
@@ -171,7 +252,7 @@ bm
 ```
 
 ![Bathymetry map with
-shade](create_basemap_files/figure-html/unnamed-chunk-7-1.png)
+shade](create_basemap_files/figure-html/unnamed-chunk-9-1.png)
 
 ## Using `maptiles`
 
@@ -203,7 +284,7 @@ bm
 ```
 
 ![Static map with satellite image using
-maptiles](create_basemap_files/figure-html/unnamed-chunk-8-1.png)
+maptiles](create_basemap_files/figure-html/unnamed-chunk-10-1.png)
 
 ``` r
 # example with bbox and adding movement data
@@ -227,7 +308,7 @@ bm +
 ```
 
 ![Static map with satellite image using
-maptiles](create_basemap_files/figure-html/unnamed-chunk-8-2.png)
+maptiles](create_basemap_files/figure-html/unnamed-chunk-10-2.png)
 
 ## Using `OpenStreetMap`
 
@@ -243,11 +324,7 @@ does not always work.
 # additional packages
 library(OpenStreetMap)
 library(sf)
-```
 
-    ## Warning: package 'sf' was built under R version 4.5.3
-
-``` r
 # load example data
 data <- data_example
 
@@ -290,7 +367,7 @@ bm +
 ```
 
 ![Static map with satellite
-image](create_basemap_files/figure-html/unnamed-chunk-9-1.png)
+image](create_basemap_files/figure-html/unnamed-chunk-11-1.png)
 
 ## Adding features to a map
 
@@ -329,7 +406,7 @@ bm +
 ```
 
 ![basemap with
-logo](create_basemap_files/figure-html/unnamed-chunk-10-1.png)
+logo](create_basemap_files/figure-html/unnamed-chunk-12-1.png)
 
 ### Add WATLAS receivers
 
@@ -373,7 +450,7 @@ bm +
 ```
 
 ![basemap with
-receivers](create_basemap_files/figure-html/unnamed-chunk-11-1.png)
+receivers](create_basemap_files/figure-html/unnamed-chunk-13-1.png)
 
 One can also add the name of the receiver.
 
@@ -394,4 +471,4 @@ bm +
 ```
 
 ![basemap with receivers and
-label](create_basemap_files/figure-html/unnamed-chunk-12-1.png)
+label](create_basemap_files/figure-html/unnamed-chunk-14-1.png)
