@@ -87,6 +87,60 @@ bm <- atl_create_bm(
 bm
 ```
 
+`bm` is a standard `ggplot2` object and can be manipulated as one. For example, we can overwrite the default theme to add axis labels and ticks.
+
+```{r, fig.alt = "Basemap with axis labels"}
+# create basemap
+bm <- atl_create_bm(buffer = 10000)
+
+# add axis labels and ticks
+bm +
+  labs(x = "Longitude", y = "Latitude") +
+  theme(
+    axis.title   = element_text(),
+    axis.text.x  = element_text(),
+    axis.text.y  = element_text(),
+    axis.ticks.x = element_line(),
+    axis.ticks.y = element_line()
+  )
+```
+
+When adding `sf` object to the basemap, the coordinate system will be overwritten and we need to set the bounding box again. For points or lines, it is best to use `geom_point()` and `geom_path()`, which is also faster than plotting the same data with `geom_sf()` (just make sure the data are in the correct coordinate system -  EPSG:32631 (WGS 84 / UTM zone 31N)). Plotting polygons only works with `geom_sf()` and afterwards the bounding box needs to be set again with `coord_sf()` and the buffer in `atl_create_bm()` is ignored.
+
+Show are different ways on how to set the bounding box.
+
+```{r, fig.alt = "Basemap with polygons"}
+# additional packages
+library(sf)
+
+# load example data
+data <- data_example
+
+# bounding box based on data
+bbox <- atl_bbox(data, buffer = 1000)
+
+# bounding box based on specified coordinates in EPSG:4326
+bbox <- data.table(x = c(5.107, 5.330), y = c(53.303, 53.230)) |>
+  st_as_sf(coords = c("x", "y"), crs = 4326) |>
+  st_transform(crs = 32631) |>
+  atl_bbox(buffer = 1000)
+
+# bounding box based on polygon
+bbox <- atl_bbox(grienderwaard, buffer = 1000)
+
+# create basemap with bounding box
+bm <- atl_create_bm(bbox, buffer = 0)
+
+# plot bm with bounding box
+bm +
+  geom_sf(data = grienderwaard, fill = "transparent", color = "firebrick") +
+  # set extend again (overwritten by geom_sf)
+  coord_sf(
+    xlim = c(bbox["xmin"], bbox["xmax"]),
+    ylim = c(bbox["ymin"], bbox["ymax"]), expand = FALSE
+  )
+```
+
 ## Using bathymetry data
 
 Here, we use a raster file with bathymetry to construct a basemap. Bathymetry data can be found in the "Birds, fish 'n chips" SharePoint folder: `Documents/data/GIS/rasters/`. To run the script set the file path (`fp`) to the local copy of the folder on your computer. The data can also be downloaded from the [Waddenregister](https://datahuiswadden.openearth.nl/geonetwork/srv/eng/catalog.search#/metadata/JkrvJXasRSGAWU1mJLHUzg).
