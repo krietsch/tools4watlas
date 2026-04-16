@@ -16,12 +16,14 @@ atl_check_res_patch(
   buffer_res_patches,
   buffer_bm = 250,
   buffer_overview = 10000,
+  speed_threshold = 3,
   point_size = 1,
   point_alpha = 0.5,
   path_linewidth = 0.5,
   path_alpha = 0.2,
   patch_label_size = 4,
   patch_label_padding = 1,
+  patch_alpha = 0.7,
   element_text_size = 11,
   water_fill = "#D7E7FF",
   water_colour = "grey80",
@@ -72,6 +74,9 @@ distance used to determine spatial independence of patches.}
 
 \item{buffer_overview}{Overview map buffer size (default: 10000).}
 
+\item{speed_threshold}{Speed threshold in m/s for colour scale of movement
+speed (default: 3 m/s).}
+
 \item{point_size}{Size of plotted points (default: 1).}
 
 \item{point_alpha}{Transparency of points (default: 0.5).}
@@ -83,6 +88,8 @@ distance used to determine spatial independence of patches.}
 \item{patch_label_size}{Font size for patch labels (default: 4).}
 
 \item{patch_label_padding}{Padding for patch labels (default: 1).}
+
+\item{patch_alpha}{Alpha for patch polygons (default: 0.7).}
 
 \item{element_text_size}{Font size for axis and legend text (default: 11).}
 

@@ -401,6 +401,31 @@ movements in between fixes.</p>
 <span>  buffer_res_patches <span class="op">=</span> <span class="fl">75</span> <span class="op">/</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="add_residence_patches_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="Overview plot res patches one tide" width="100%" style="display: block; margin: auto;"></p>
+<p>Zoom in on specifc range of residence patches to inspect them in more
+detail.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># set parameters for subsetting data</span></span>
+<span><span class="va">tag_id</span> <span class="op">&lt;-</span> <span class="st">"3038"</span></span>
+<span><span class="va">tide_id</span> <span class="op">&lt;-</span> <span class="st">"2023513"</span></span>
+<span><span class="va">from_patch</span> <span class="op">&lt;-</span> <span class="fl">6</span></span>
+<span><span class="va">to_patch</span> <span class="op">&lt;-</span> <span class="fl">11</span></span>
+<span></span>
+<span><span class="fu"><a href="../../reference/atl_check_res_patch.html">atl_check_res_patch</a></span><span class="op">(</span></span>
+<span>  <span class="va">data</span><span class="op">[</span></span>
+<span>    <span class="va">tag</span> <span class="op">==</span> <span class="va">tag_id</span> <span class="op">&amp;</span></span>
+<span>      <span class="va">datetime</span> <span class="op">&gt;=</span> <span class="va">data</span><span class="op">[</span></span>
+<span>        <span class="va">tag</span> <span class="op">==</span> <span class="va">tag_id</span> <span class="op">&amp;</span> <span class="va">tideID</span> <span class="op">==</span> <span class="va">tide_id</span> <span class="op">&amp;</span> <span class="va">patch</span> <span class="op">==</span> <span class="va">from_patch</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">datetime</span><span class="op">)</span></span>
+<span>      <span class="op">]</span> <span class="op">&amp;</span></span>
+<span>      <span class="va">datetime</span> <span class="op">&lt;=</span> <span class="va">data</span><span class="op">[</span></span>
+<span>        <span class="va">tag</span> <span class="op">==</span> <span class="va">tag_id</span> <span class="op">&amp;</span> <span class="va">tideID</span> <span class="op">==</span> <span class="va">tide_id</span> <span class="op">&amp;</span> <span class="va">patch</span> <span class="op">==</span> <span class="va">to_patch</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">datetime</span><span class="op">)</span></span>
+<span>      <span class="op">]</span></span>
+<span>  <span class="op">]</span>,</span>
+<span>  tide_data <span class="op">=</span> <span class="va">tidal_pattern</span>, tide_data_highres <span class="op">=</span> <span class="va">measured_water_height</span>,</span>
+<span>  tide <span class="op">=</span> <span class="va">tide_id</span>, offset <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  buffer_res_patches <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  patch_label_padding <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="add_residence_patches_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="Overview plot res patches one tide" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="inspect-many-tags-and-tides">Inspect many tags and tides<a class="anchor" aria-label="anchor" href="#inspect-many-tags-and-tides"></a>
@@ -410,7 +435,7 @@ by tag and tide, or for example a random sample of 100 tags and tides.
 The plots are saved in any directory
 (e.g. <code>./outputs/res_patch_check/</code>), which has to be created
 before running the code.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create table with data combinations to plot</span></span>
 <span><span class="va">idc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"tag"</span>, <span class="st">"tideID"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
@@ -429,6 +454,7 @@ before running the code.</p>
 <span>  <span class="fu"><a href="../../reference/atl_check_res_patch.html">atl_check_res_patch</a></span><span class="op">(</span></span>
 <span>    <span class="va">data</span><span class="op">[</span><span class="va">tag</span> <span class="op">==</span> <span class="va">idc</span><span class="op">$</span><span class="va">tag</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>    tide_data <span class="op">=</span> <span class="va">tidal_pattern</span>,</span>
+<span>    tide_data_highres <span class="op">=</span> <span class="va">measured_water_height</span>,</span>
 <span>    tide <span class="op">=</span> <span class="va">idc</span><span class="op">$</span><span class="va">tideID</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, offset <span class="op">=</span> <span class="fl">30</span>,</span>
 <span>    buffer_res_patches <span class="op">=</span> <span class="fl">75</span> <span class="op">/</span> <span class="fl">2</span>,</span>
 <span>    filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
@@ -451,7 +477,7 @@ can be adjusted to improve the classification of residence patches.</p>
 <p>Once satisfied with the residence patch classification, we can
 summarize the residence patches by tag and patch ID and merge the
 desired columns back to our full data table.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># summary of residence patches</span></span>
 <span><span class="va">data_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/atl_res_patch_summary.html">atl_res_patch_summary</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span></span>
@@ -769,7 +795,7 @@ patch</td>
 (tag 3038). In the frist example, the residence patches are coloured by
 patch ID. To show the full track, the transient (unassigned) positions
 are plotted in grey.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># subset red knot</span></span>
 <span><span class="va">data_subset</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">tag</span> <span class="op">==</span> <span class="fl">3038</span><span class="op">]</span></span>
 <span><span class="va">data_summary_subset</span> <span class="op">&lt;-</span> <span class="va">data_summary</span><span class="op">[</span><span class="va">tag</span> <span class="op">==</span> <span class="fl">3038</span><span class="op">]</span></span>
@@ -788,11 +814,11 @@ are plotted in grey.</p>
 <span>    data <span class="op">=</span> <span class="va">data_subset</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">patch</span><span class="op">)</span><span class="op">]</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">patch</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    size <span class="op">=</span> <span class="fl">1.5</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="add_residence_patches_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="residence patches within track colored by ID" width="100%"></p>
+<p><img src="add_residence_patches_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="residence patches within track colored by ID" width="100%"></p>
 <p>In the second example, the residence patches are plotted at their
 median positions with the size and colour scaled to their duration (in
 minutes).</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot residence patches itself by duration</span></span>
 <span><span class="va">bm</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
@@ -801,10 +827,10 @@ minutes).</p>
 <span>    show.legend <span class="op">=</span> <span class="cn">TRUE</span>, alpha <span class="op">=</span> <span class="fl">0.5</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://sjmgarnier.github.io/viridis/reference/scale_viridis.html" class="external-link">scale_color_viridis</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="add_residence_patches_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="residence patches by duration in patch" width="100%"></p>
+<p><img src="add_residence_patches_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="residence patches by duration in patch" width="100%"></p>
 <p>In the third example, we will calculate polygons around the residence
 patches and plot them</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make patch character for plotting</span></span>
 <span><span class="va">data_subset</span><span class="op">[</span>, <span class="va">patch</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">patch</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
@@ -841,7 +867,7 @@ patches and plot them</p>
 <span>    xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">[</span><span class="st">"xmin"</span><span class="op">]</span>, <span class="va">bbox</span><span class="op">[</span><span class="st">"xmax"</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>    ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">[</span><span class="st">"ymin"</span><span class="op">]</span>, <span class="va">bbox</span><span class="op">[</span><span class="st">"ymax"</span><span class="op">]</span><span class="op">)</span>, expand <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="add_residence_patches_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="residence patches by duration in patch" width="100%"></p>
+<p><img src="add_residence_patches_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="residence patches by duration in patch" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="plot-by-species">Plot by species<a class="anchor" aria-label="anchor" href="#plot-by-species"></a>
@@ -850,7 +876,7 @@ patches and plot them</p>
 need to merge the species information back to the summary table for
 residence patches. The residence patches are coloured by species and
 scaled by duration (in minutes).</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create basemap</span></span>
 <span><span class="va">bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/atl_create_bm.html">atl_create_bm</a></span><span class="op">(</span><span class="va">data</span>, buffer <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span></span>
@@ -870,7 +896,7 @@ scaled by duration (in minutes).</p>
 <span>    labels <span class="op">=</span> <span class="fu"><a href="../../reference/atl_spec_labs.html">atl_spec_labs</a></span><span class="op">(</span><span class="st">"multiline"</span><span class="op">)</span>,</span>
 <span>    name <span class="op">=</span> <span class="st">""</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="add_residence_patches_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="residence patches colored by species" width="100%"></p>
+<p><img src="add_residence_patches_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="residence patches colored by species" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

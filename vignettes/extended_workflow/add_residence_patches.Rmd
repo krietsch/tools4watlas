@@ -128,6 +128,7 @@ atl_check_res_patch(
 Zoom in on specifc range of residence patches to inspect them in more detail.
 
 ```{r, fig.align = "center", fig.alt = "Overview plot res patches one tide", fig.width = 10, fig.height = 6}
+# set parameters for subsetting data
 tag_id <- "3038"
 tide_id <- "2023513"
 from_patch <- 6
@@ -173,6 +174,7 @@ foreach(i = seq_len(nrow(idc))) %dofuture% {
   atl_check_res_patch(
     data[tag == idc$tag[i]],
     tide_data = tidal_pattern,
+    tide_data_highres = measured_water_height,
     tide = idc$tideID[i], offset = 30,
     buffer_res_patches = 75 / 2,
     filename = paste0(

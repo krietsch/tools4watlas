@@ -221,6 +221,36 @@ atl_check_res_patch(
 ![Overview plot res patches one
 tide](add_residence_patches_files/figure-html/unnamed-chunk-3-1.png)
 
+Zoom in on specifc range of residence patches to inspect them in more
+detail.
+
+``` r
+# set parameters for subsetting data
+tag_id <- "3038"
+tide_id <- "2023513"
+from_patch <- 6
+to_patch <- 11
+
+atl_check_res_patch(
+  data[
+    tag == tag_id &
+      datetime >= data[
+        tag == tag_id & tideID == tide_id & patch == from_patch, min(datetime)
+      ] &
+      datetime <= data[
+        tag == tag_id & tideID == tide_id & patch == to_patch, max(datetime)
+      ]
+  ],
+  tide_data = tidal_pattern, tide_data_highres = measured_water_height,
+  tide = tide_id, offset = 30,
+  buffer_res_patches = 15,
+  patch_label_padding = 2
+)
+```
+
+![Overview plot res patches one
+tide](add_residence_patches_files/figure-html/unnamed-chunk-4-1.png)
+
 ### Inspect many tags and tides
 
 To get a general overview, we can also loop through and plot all data by
@@ -247,6 +277,7 @@ foreach(i = seq_len(nrow(idc))) %dofuture% {
   atl_check_res_patch(
     data[tag == idc$tag[i]],
     tide_data = tidal_pattern,
+    tide_data_highres = measured_water_height,
     tide = idc$tideID[i], offset = 30,
     buffer_res_patches = 75 / 2,
     filename = paste0(
@@ -353,7 +384,7 @@ bm +
 ```
 
 ![residence patches within track colored by
-ID](add_residence_patches_files/figure-html/unnamed-chunk-6-1.png)
+ID](add_residence_patches_files/figure-html/unnamed-chunk-7-1.png)
 
 In the second example, the residence patches are plotted at their median
 positions with the size and colour scaled to their duration (in
@@ -371,7 +402,7 @@ bm +
 ```
 
 ![residence patches by duration in
-patch](add_residence_patches_files/figure-html/unnamed-chunk-7-1.png)
+patch](add_residence_patches_files/figure-html/unnamed-chunk-8-1.png)
 
 In the third example, we will calculate polygons around the residence
 patches and plot them
@@ -416,7 +447,7 @@ bm +
 ```
 
 ![residence patches by duration in
-patch](add_residence_patches_files/figure-html/unnamed-chunk-8-1.png)
+patch](add_residence_patches_files/figure-html/unnamed-chunk-9-1.png)
 
 ### Plot by species
 
@@ -448,4 +479,4 @@ bm +
 ```
 
 ![residence patches colored by
-species](add_residence_patches_files/figure-html/unnamed-chunk-9-1.png)
+species](add_residence_patches_files/figure-html/unnamed-chunk-10-1.png)
