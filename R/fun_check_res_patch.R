@@ -28,12 +28,15 @@
 #' distance used to determine spatial independence of patches.
 #' @param buffer_bm Map buffer size (default: 250).
 #' @param buffer_overview Overview map buffer size (default: 10000).
+#' @param speed_threshold Speed threshold in m/s for colour scale of movement
+#' speed (default: 3 m/s).
 #' @param point_size Size of plotted points (default: 1).
 #' @param point_alpha Transparency of points (default: 0.5).
 #' @param path_linewidth Line width of movement paths (default: 0.5).
 #' @param path_alpha Transparency of movement paths (default: 0.2).
 #' @param patch_label_size Font size for patch labels (default: 4).
 #' @param patch_label_padding Padding for patch labels (default: 1).
+#' @param patch_alpha Alpha for patch polygons (default: 0.7).
 #' @param element_text_size Font size for axis and legend text (default: 11).
 #' @param water_fill Water fill (default "#D7E7FF")
 #' @param water_colour Water coulour (default "grey80")
@@ -101,12 +104,14 @@ atl_check_res_patch <- function(data,
                                 buffer_res_patches,
                                 buffer_bm = 250,
                                 buffer_overview = 10000,
+                                speed_threshold = 3,
                                 point_size = 1,
                                 point_alpha = 0.5,
                                 path_linewidth = 0.5,
                                 path_alpha = 0.2,
                                 patch_label_size = 4,
                                 patch_label_padding = 1,
+                                patch_alpha = 0.7,
                                 element_text_size = 11,
                                 water_fill = "#D7E7FF",
                                 water_colour = "grey80",
@@ -123,7 +128,7 @@ atl_check_res_patch <- function(data,
   patch <- duration <- . <- time_median <- time <- NULL
   x <- y <- datetime <- x_median <- y_median <- tideID <- NULL # nolint
   i.duration <- tag <- dateTime <- inv_rescale_wl <- NULL # nolint
-  duration_scaled <- waterlevel <- time_num <- NULL
+  duration_scaled <- waterlevel <- time_num <- speed_in <- NULL
 
   # check data structure
   atl_check_data(data, names_expected = c(
@@ -186,6 +191,9 @@ atl_check_res_patch <- function(data,
   ds[, patch := as.factor(patch)]
   dp[, patch := as.factor(patch)]
 
+  # speed in
+  ds <- atl_get_speed(ds, type = c("in"))
+
   # join duration to ds
   ds[dp, on = .(tag, patch), `:=`(duration = i.duration)]
 
@@ -238,6 +246,11 @@ atl_check_res_patch <- function(data,
   n_patches <- length(unique(dp$patch))
   time_in_patches <- atl_format_time(sum(dp$duration) * 60)
 
+  # generate shuffled colour palette
+  set.seed(1)
+  patch_colours <- sample(scales::hue_pal()(n_patches))
+  names(patch_colours) <- unique(dp$patch)
+
   # create basemap and bounding box
   bm <- atl_create_bm(
     ds,
@@ -265,30 +278,45 @@ atl_check_res_patch <- function(data,
   p1 <- suppressMessages(
     bm +
       # add patch polygons
-      geom_sf(data = dp_sf, aes(fill = duration), alpha = 0.6) +
-      viridis::scale_fill_viridis(
-        option = "A", direction = -1, begin = 0.1,
-        name = "Duration in\npatch (min)"
+      geom_sf(
+        data = dp_sf, aes(fill = patch), alpha = patch_alpha,
       ) +
+      scale_fill_manual(values = patch_colours, guide = "none") +
       # add track and points
       geom_path(
-        data = ds, aes(x, y),
-        linewidth = path_linewidth, alpha = path_alpha
+        data = ds, aes(x, y, group = tag, colour = speed_in),
+        linewidth = path_linewidth, alpha = path_alpha, show.legend = TRUE
       ) +
+      # points below threshold plotted first (behind)
       geom_point(
-        data = ds[is.na(patch)], aes(x, y), size = point_size, color = "grey20",
-        alpha = point_alpha, show.legend = FALSE
+        data = ds[speed_in <= speed_threshold],
+        aes(x, y, group = tag, colour = speed_in),
+        size = point_size, alpha = point_alpha, show.legend = TRUE
       ) +
+      # points above threshold plotted on top
       geom_point(
-        data = ds[!is.na(patch)], aes(x, y, color = patch),
-        size = point_size, show.legend = FALSE
+        data = ds[speed_in > speed_threshold],
+        aes(x, y, group = tag, colour = speed_in),
+        size = point_size, alpha = point_alpha, show.legend = TRUE
+      ) +
+      scale_colour_gradientn(
+        colours = c("#08519c", "#6baed6", "#cb181d", "#fcae91"),
+        values  = scales::rescale(c(
+          0,
+          speed_threshold - 1e-9,
+          speed_threshold,
+          max(ds$speed_in, na.rm = TRUE)
+        )),
+        name = "Speed (m/s)"
       ) +
       # add labels for patches
+      ggnewscale::new_scale_colour() +
       ggrepel::geom_text_repel(
         data = dp, aes(x_median, y_median, label = patch, colour = patch),
         size = patch_label_size, box.padding = patch_label_padding,
         fontface = "bold", show.legend = FALSE
       ) +
+      scale_colour_manual(values = patch_colours, guide = "none") +
       # set extend again (overwritten by geom_sf)
       coord_sf(
         xlim = c(bbox["xmin"], bbox["xmax"]),
@@ -363,9 +391,10 @@ atl_check_res_patch <- function(data,
         show.legend = FALSE
       ) +
       geom_point(
-        data = ds, aes(duration, time, color = as.character(patch)),
+        data = ds, aes(duration, time, color = patch),
         size = point_size, alpha = 0.5, show.legend = FALSE
       ) +
+      scale_color_manual(values = patch_colours) +
       # add labels for patches
       geom_text(
         data = dp,

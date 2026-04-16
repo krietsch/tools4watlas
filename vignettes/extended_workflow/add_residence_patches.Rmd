@@ -125,6 +125,31 @@ atl_check_res_patch(
 )
 ```
 
+Zoom in on specifc range of residence patches to inspect them in more detail.
+
+```{r, fig.align = "center", fig.alt = "Overview plot res patches one tide", fig.width = 10, fig.height = 6}
+tag_id <- "3038"
+tide_id <- "2023513"
+from_patch <- 6
+to_patch <- 11
+
+atl_check_res_patch(
+  data[
+    tag == tag_id &
+      datetime >= data[
+        tag == tag_id & tideID == tide_id & patch == from_patch, min(datetime)
+      ] &
+      datetime <= data[
+        tag == tag_id & tideID == tide_id & patch == to_patch, max(datetime)
+      ]
+  ],
+  tide_data = tidal_pattern, tide_data_highres = measured_water_height,
+  tide = tide_id, offset = 30,
+  buffer_res_patches = 15,
+  patch_label_padding = 2
+)
+```
+
 ### Inspect many tags and tides
 
 To get a general overview, we can also loop through and plot all data by tag and tide, or for example a random sample of 100 tags and tides. The plots are saved in any directory (e.g. `./outputs/res_patch_check/`), which has to be created before running the code.
