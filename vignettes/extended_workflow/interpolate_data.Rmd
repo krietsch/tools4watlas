@@ -18,9 +18,11 @@ knitr::opts_chunk$set(
 
 This article shows how to interpolate between positions thus filling gaps in the WATLAS data. Under some circumstances this can be useful, but one should be cautious and mindful of the data and research question. 
 
-For some analyses, gaps in positioning data can bias the results and interpolating positions across small gaps can be necesarry. For example, if birds move some distance within residence patches, the median position in the patch does not properly reflect space use. Moreover, within residence patches, especially when birds are on the ground roosting, it is likely that birds do not move much and interpolation between positions can be done safely. 
+For some analyses, gaps in positioning data can bias the results and interpolating positions across small gaps can be necessary. For example, if birds move some distance within residence patches, the median position in the patch does not properly reflect space use. Moreover, within residence patches, especially when birds are on the ground roosting, it is likely that birds do not move much and interpolation between positions can be done safely. 
 
-Here, we show how to interpolate and fill small data gaps within residence patches. 
+Here, we show how to interpolate and fill small data gaps within residence patches.
+
+**Before you start:** this article assumes you have completed the basic WATLAS data processing, i.e. you have [loaded and checked your data](https://allertbijleveld.github.io/tools4watlas/articles/load_and_check_data.html), [filtered it](https://allertbijleveld.github.io/tools4watlas/articles/filter_data.html), and [smoothed and thinned it](https://allertbijleveld.github.io/tools4watlas/articles/smooth_and_thin_data.html). 
 
 ## Load packages and data
 

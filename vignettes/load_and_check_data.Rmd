@@ -331,3 +331,5 @@ bm +
     direction = -1
   )
 ```
+
+The extracted and checked data is now ready for the next step: [**Filter data**](https://allertbijleveld.github.io/tools4watlas/articles/filter_data.html).

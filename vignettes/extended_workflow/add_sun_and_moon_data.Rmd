@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 
 This article shows how to add sun and moon data using the `suncalc` package. We show how to add sunrise and sunset times to split the data between day and night, and how to add the moon phase to assign days around full and new moon. This can be useful for example to investigate whether birds behave differently during day and night or during different moon phases, which are closely linked to the strength of the tides.
 
+**Before you start:** this article assumes you have completed the basic WATLAS data processing, i.e. you have [loaded and checked your data](https://allertbijleveld.github.io/tools4watlas/articles/load_and_check_data.html), [filtered it](https://allertbijleveld.github.io/tools4watlas/articles/filter_data.html), and [smoothed and thinned it](https://allertbijleveld.github.io/tools4watlas/articles/smooth_and_thin_data.html).
+
 ## Load packages and data
 
 ```{r, message = FALSE, warning=FALSE}

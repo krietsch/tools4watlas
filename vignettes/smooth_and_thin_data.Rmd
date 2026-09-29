@@ -16,7 +16,10 @@ knitr::opts_chunk$set(
 )
 ```
 
- This vignette shows how to smooth and thin WATLAS data. 
+ This vignette shows how to smooth and thin WATLAS data.
+ 
+ **Before you start:** load and check your data as described in [Load and check data](https://allertbijleveld.github.io/tools4watlas/articles/load_and_check_data.html) and filter them them as described in [**Filter data**](https://allertbijleveld.github.io/tools4watlas/articles/filter_data.html).
+
 
 ```{r, message = FALSE}
 # Packages
@@ -141,3 +144,5 @@ thinned_subsampled <- atl_thin_data(
 head(thinned_subsampled[, .(tag, time, datetime, x, y, n_subsampled)]) |>
   knitr::kable(digits = 2)
 ```
+
+This finishes the basic processing of WATLAS data and further analysis depend on the specific research questions. For further described workflows look at the extended workflows articles.
