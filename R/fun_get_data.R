@@ -174,7 +174,7 @@ atl_get_data <- function(tag,
                      as.character(substr(tag, 8, 11)), 4,
                      pad = "0"
                    ),
-                   " in this time period.\n"))
+                   " in this time period.\n"), call. = FALSE)
 
     # return empty data.table with same columns
     tmp_data <- data.table(

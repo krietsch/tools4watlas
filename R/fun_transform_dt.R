@@ -56,7 +56,7 @@ atl_transform_dt <- function(data,
 
     # extract EPSG code for automatic naming
     epsg_to <- to$epsg
-    if (is.na(epsg_to)) stop("Target CRS has no EPSG code.")
+    if (is.na(epsg_to)) stop("Target CRS has no EPSG code.", call. = FALSE)
 
     # construct new column names
     x_trans <- paste0(x, "_", epsg_to)

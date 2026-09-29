@@ -271,7 +271,7 @@ atl_interpolate_track <- function(data,
     message(glue::glue(
       "Note: Interpolation added {nrows_added} positions ",
       "({percentage_increase}% increase)."
-    ))
+    ), call. = FALSE)
   }
 
   # return interpolated data

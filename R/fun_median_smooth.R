@@ -132,7 +132,7 @@ atl_median_smooth <- function(data,
   if (nrow(data) > 0) {
     data
   } else {
-    warning("median_smooth: no data remaining")
+    warning("median_smooth: no data remaining", call. = FALSE)
     NULL
   }
 }

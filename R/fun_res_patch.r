@@ -103,7 +103,7 @@ atl_res_patch <- function(data,
 
   # Delete existing 'patch' column if it exists to avoid conflicts
   if ("patch" %in% names(data)) {
-    warning("Column 'patch' already existed and is overwritten.")
+    warning("Column 'patch' already existed and is overwritten.", call. = FALSE)
     data[, patch := NULL]
   }
 

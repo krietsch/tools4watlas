@@ -144,7 +144,7 @@ atl_check_res_patch <- function(data,
     stop(paste0(
       "Function requiers to specify 'buffer_res_patches' value",
       " (see description)."
-    ))
+    ), call. = FALSE)
   }
 
   # convert to DT if not
@@ -182,9 +182,7 @@ atl_check_res_patch <- function(data,
 
   # check if data for this period and tide
   if (nrow(ds) == 0) {
-    stop(paste0(
-      "No data for this tag and tide."
-    ))
+    stop("No data for this tag and tide.", call. = FALSE)
   }
 
   # subset tide pattern data

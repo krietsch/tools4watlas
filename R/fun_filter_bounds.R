@@ -217,7 +217,7 @@ atl_filter_bounds <- function(data,
 
   # print warning if all rows are removed
   if (nrow(data_) == 0) {
-    warning("filter_bbox: cleaned data has no rows remaining!")
+    warning("filter_bbox: cleaned data has no rows remaining!", call. = FALSE)
   }
 
   data_

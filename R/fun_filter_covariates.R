@@ -103,7 +103,9 @@ atl_filter_covariates <- function(data,
 
   # print warning if all rows are removed
   if (nrow(data) == 0) {
-    warning("filter_covariates: cleaned data has no rows remaining!")
+    warning("filter_covariates: cleaned data has no rows remaining!",
+      call. = FALSE
+    )
   }
 
   # how much was filtered?

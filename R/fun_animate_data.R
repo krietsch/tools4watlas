@@ -130,7 +130,7 @@ atl_progress_bar <- function(file_path,
       stop(paste0(
         "Error: 'total' not provided and 'total_frames.txt'",
         " not found in the specified path."
-      ))
+      ), call. = FALSE)
     }
 
     total <- scan(total_file, quiet = TRUE)

@@ -36,17 +36,19 @@ atl_add_raster_data <- function(data = NULL,
 
   # Check if columns exist in the data
   if (!(x %in% names(data)) || !(y %in% names(data))) {
-    stop("Specified x or y columns do not exist in the data.")
+    stop("Specified x or y columns do not exist in the data.", call. = FALSE)
   }
 
   # Check if any NA
   if (anyNA(data[[x]]) || anyNA(data[[y]])) {
-    stop("Specified x or y columns contain NA, but should not.")
+    stop("Specified x or y columns contain NA, but should not.", call. = FALSE)
   }
 
   # Check that raster data are SpatRaster
   if (!inherits(raster_data, "SpatRaster")) {
-    stop("Specified raster_data are not terra SpatRaster, but should be.")
+    stop("Specified raster_data are not terra SpatRaster, but should be.",
+      call. = FALSE
+    )
   }
 
   # Convert data to sf object

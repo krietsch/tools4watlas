@@ -156,19 +156,23 @@ atl_as_sf <- function(data,
 
   # Check if columns exist in the data
   if (!(x_col %in% names(data)) || !(y_col %in% names(data))) {
-    stop("Specified x or y columns do not exist in the data.")
+    stop("Specified x or y columns do not exist in the data.", call. = FALSE)
   }
   if (!(tag_col %in% names(data)) || is.null(tag)) {
-    stop("Specified tag column do not exist in the data.")
+    stop("Specified tag column do not exist in the data.", call. = FALSE)
   }
 
   # Additional check for 'res_patches' option
   if (option == "res_patches") {
     if (!"patch" %in% names(data)) {
-      stop("Option 'res_patches' requires a 'patch' column in the data.")
+      stop("Option 'res_patches' requires a 'patch' column in the data.",
+        call. = FALSE
+      )
     }
     if (missing(buffer) || is.null(buffer)) {
-      stop("Option 'res_patches' requires a specified 'buffer' value.")
+      stop("Option 'res_patches' requires a specified 'buffer' value.",
+        call. = FALSE
+      )
     }
   }
 
@@ -180,7 +184,7 @@ atl_as_sf <- function(data,
       stop(paste(
         "The following additional columns are missing in the data:",
         paste(missing_cols, collapse = ", ")
-      ))
+      ), call. = FALSE)
     }
     # Select x, y, and additional columns
     cols_to_keep <- unique(c(tag_col, x_col, y_col, additional_cols))
@@ -268,7 +272,7 @@ atl_as_sf <- function(data,
 
       d_patches
     },
-    stop("Invalid option")
+    stop("Invalid option", call. = FALSE)
   )
 
   # Delete dummy tag column again

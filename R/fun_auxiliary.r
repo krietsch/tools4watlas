@@ -316,7 +316,9 @@ atl_format_time <- function(time) {
 atl_t_col <- function(color, percent = 50, name = NULL) {
   # Validate color input
   if (!is.character(color) || length(color) != 1) {
-    stop("The 'color' parameter should be a single character string.")
+    stop("The 'color' parameter should be a single character string.",
+      call. = FALSE
+    )
   }
 
   # Convert the color to RGB
@@ -324,7 +326,9 @@ atl_t_col <- function(color, percent = 50, name = NULL) {
 
   # Validate percent input
   if (!is.numeric(percent) || percent < 0 || percent > 100) {
-    stop("The 'percent' parameter should be a numeric value between 0 and 100.")
+    stop("The 'percent' parameter should be a numeric value between 0 and 100.",
+      call. = FALSE
+    )
   }
 
   # Calculate the alpha transparency
