@@ -1,5 +1,3 @@
-# library(testthat)
-# library(tools4watlas)
 
 test_that("atl_res_patch returns a data.table with patch column", {
   data <- data_example[

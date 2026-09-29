@@ -1,5 +1,3 @@
-library(testthat)
-library(tools4watlas)
 
 test_that("atl_within_polygon adds logical column to data", {
   data <- data_example

@@ -1,10 +1,8 @@
-library(testthat)
-library(mockery) # for mocking database connections
 
 test_that("atl_get_data handles input validation correctly", {
   # Check for valid tag input
   expect_error(
-    tools4watlas::atl_get_data(
+    atl_get_data(
       tag = list(123),
       tracking_time_start = "2023-01-01 00:00:00",
       tracking_time_end = "2023-01-02 00:00:00"
@@ -14,7 +12,7 @@ test_that("atl_get_data handles input validation correctly", {
 
   # Check for tag length
   expect_error(
-    tools4watlas::atl_get_data(
+    atl_get_data(
       tag = "12345678",
       tracking_time_start = "2023-01-01 00:00:00",
       tracking_time_end = "2023-01-02 00:00:00"
@@ -24,7 +22,7 @@ test_that("atl_get_data handles input validation correctly", {
 
   # Check for valid start and end times
   expect_error(
-    tools4watlas::atl_get_data(
+    atl_get_data(
       tag = "1234",
       tracking_time_start = 20230101,
       tracking_time_end = "2023-01-02 00:00:00"
@@ -33,7 +31,7 @@ test_that("atl_get_data handles input validation correctly", {
   )
 
   expect_error(
-    tools4watlas::atl_get_data(
+    atl_get_data(
       tag = "1234",
       tracking_time_start = "2023-01-01 00:00:00",
       tracking_time_end = 20230102
@@ -43,7 +41,7 @@ test_that("atl_get_data handles input validation correctly", {
 
   # Check for timezone input
   expect_error(
-    tools4watlas::atl_get_data(
+    atl_get_data(
       tag = "1234",
       tracking_time_start = "2023-01-01 00:00:00",
       tracking_time_end = "2023-01-02 00:00:00",
@@ -55,15 +53,15 @@ test_that("atl_get_data handles input validation correctly", {
 
 test_that("atl_get_data handles database connections", {
   # Mock RSQLite and RMySQL connections
-  mock_sqlite <- mock(data.frame(
+  mock_sqlite <- mockery::mock(data.frame(
     TAG = c("31001001234"), TIME = c(1672444800000),
     X = c(100), Y = c(200), NBS = c(4),
     VARX = c(1), VARY = c(1), COVXY = c(0)
   ))
-  stub(tools4watlas::atl_get_data, "RSQLite::dbGetQuery", mock_sqlite)
+  mockery::stub(atl_get_data, "RSQLite::dbGetQuery", mock_sqlite)
 
   # Test with local SQLiteDB
-  result <- tools4watlas::atl_get_data(
+  result <- atl_get_data(
     tag = "1234",
     tracking_time_start = "2023-01-01 00:00:00",
     tracking_time_end = "2023-01-02 00:00:00",
@@ -74,13 +72,13 @@ test_that("atl_get_data handles database connections", {
   expect_equal(result$tag[1], "1234")
 
   # Test with existing connection
-  mock_connection <- mock(data.frame(
+  mock_connection <- mockery::mock(data.frame(
     TAG = c("31001001234"), TIME = c(1672444800000),
     X = c(100), Y = c(200), NBS = c(4),
     VARX = c(1), VARY = c(1), COVXY = c(0)
   ))
-  stub(tools4watlas::atl_get_data, "DBI::dbGetQuery", mock_connection)
-  result <- tools4watlas::atl_get_data(
+  mockery::stub(atl_get_data, "DBI::dbGetQuery", mock_connection)
+  result <- atl_get_data(
     tag = "1234",
     tracking_time_start = "2023-01-01 00:00:00",
     tracking_time_end = "2023-01-02 00:00:00",
@@ -92,15 +90,15 @@ test_that("atl_get_data handles database connections", {
 
 test_that("atl_get_data retrieves and processes data correctly", {
   # Mock RSQLite and RMySQL connections
-  mock_sqlite <- mock(data.frame(
+  mock_sqlite <- mockery::mock(data.frame(
     TAG = c("31001001234"), TIME = c(1672444800000),
     X = c(100), Y = c(200), NBS = c(4),
     VARX = c(1), VARY = c(1), COVXY = c(0)
   ))
-  stub(tools4watlas::atl_get_data, "RSQLite::dbGetQuery", mock_sqlite)
+  mockery::stub(atl_get_data, "RSQLite::dbGetQuery", mock_sqlite)
 
   # Test with local SQLiteDB
-  result <- tools4watlas::atl_get_data(
+  result <- atl_get_data(
     tag = "1234",
     tracking_time_start = "2023-01-01 00:00:00",
     tracking_time_end = "2023-01-02 00:00:00",
@@ -121,7 +119,7 @@ test_that("atl_get_data retrieves and processes data correctly", {
   expect_equal(result$tag[1], "1234") # Short format
 })
 
-testthat::test_that("atl_get_data gives correct warning", {
+test_that("atl_get_data gives correct warning", {
   sqlite_db <- system.file(
     "extdata", "watlas_example.SQLite", package = "tools4watlas"
   )

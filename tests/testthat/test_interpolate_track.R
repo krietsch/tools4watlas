@@ -1,5 +1,3 @@
-# library(tools4watlas)
-# library(testthat)
 
 test_that("atl_interpolate_track works correctly", {
   # prepare example data

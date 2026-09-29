@@ -1,8 +1,3 @@
-# library(testthat)
-# library(tools4watlas)
-# library(terra)
-# library(sf)
-
 # Create sample data
 data <- data.table::data.table(x = c(1, 2, 3), y = c(4, 5, 6))
 raster_matrix <- matrix(1:9, nrow = 3, ncol = 3)

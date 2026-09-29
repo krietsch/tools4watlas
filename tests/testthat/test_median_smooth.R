@@ -1,4 +1,5 @@
-testthat::test_that("cleaning raw data works", {
+
+test_that("cleaning raw data works", {
   # make test_data
   starttime <- Sys.time()
   attr(starttime, "tzone") <- "CET"
@@ -30,7 +31,7 @@ testthat::test_that("cleaning raw data works", {
   # make copy
   test_output <- data.table::copy(test_data)
   # run function
-  tools4watlas::atl_median_smooth(
+  atl_median_smooth(
     data = test_output,
     moving_window = 3
   )
@@ -43,7 +44,7 @@ testthat::test_that("cleaning raw data works", {
                        c("tag", "x", "y", "time"))
   
   
-  test_output_real <- tools4watlas::atl_median_smooth(
+  test_output_real <- atl_median_smooth(
     data = real_data,
     tag = "tag",
     x = "x",
@@ -54,20 +55,20 @@ testthat::test_that("cleaning raw data works", {
 
   # do tests
   # test that the vector class is data.table and data.frame
-  testthat::expect_s3_class(
+  expect_s3_class(
     object = test_output,
     class = c("data.table", "data.frame")
   )
-  testthat::expect_s3_class(
+  expect_s3_class(
     object = test_output_real,
     class = c("data.table", "data.frame")
   )
 
   # check that no rows are removed
-  testthat::expect_equal(nrow(test_data), nrow(test_output))
+  expect_equal(nrow(test_data), nrow(test_output))
 })
 
-testthat::test_that("atl_median_smooth() warns and returns NULL when data has no rows", {
+test_that("atl_median_smooth() warns and returns NULL when data has no rows", {
   skip_if_not_installed("tools4watlas")
   
   # create empty data.table with correct columns
@@ -79,7 +80,7 @@ testthat::test_that("atl_median_smooth() warns and returns NULL when data has no
   )
   
   expect_warning(
-    result <- tools4watlas::atl_median_smooth(
+    result <- atl_median_smooth(
       data = empty_data,
       moving_window = 3
     ),

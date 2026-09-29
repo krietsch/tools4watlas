@@ -1,6 +1,3 @@
-library(tools4watlas)
-library(testthat)
-
 # Test atl_time_steps
 # Define temporary output path
 temp_path <- tempdir()

@@ -1,5 +1,3 @@
-# library(testthat)
-# library(tools4watlas)
 
 test_that("atl_add_tidal_data adds tidal information correctly", {
   # Mock tracking data
@@ -40,7 +38,7 @@ test_that("atl_add_tidal_data adds tidal information correctly", {
   )
 
   # Run the function
-  result <- tools4watlas::atl_add_tidal_data(
+  result <- atl_add_tidal_data(
     data = tracking_data,
     tide_data = tide_data,
     tide_data_highres = tide_data_highres,
@@ -92,7 +90,7 @@ test_that("atl_add_tidal_data handles empty input gracefully", {
   )
 
   # Run the function
-  expect_error(tools4watlas::atl_add_tidal_data(
+  expect_error(atl_add_tidal_data(
     data = tracking_data,
     tide_data = tide_data,
     tide_data_highres = tide_data_highres,
@@ -104,7 +102,7 @@ test_that("atl_add_tidal_data handles empty input gracefully", {
 test_that("atl_add_tidal_data errors on incorrect inputs", {
   # Incorrect data type for `data`
   expect_error(
-    tools4watlas::atl_add_tidal_data(
+    atl_add_tidal_data(
       data = list(),
       tide_data = data.table(),
       tide_data_highres = data.table(),
@@ -121,7 +119,7 @@ test_that("atl_add_tidal_data errors on incorrect inputs", {
     y = c(200)
   )
   expect_error(
-    tools4watlas::atl_add_tidal_data(
+    atl_add_tidal_data(
       data = tracking_data,
       tide_data = data.table(),
       tide_data_highres = data.table(),
@@ -166,7 +164,7 @@ test_that("atl_add_tidal_data interpolates waterlevel correctly", {
   )
   
   # run with interpolation to 1-minute steps
-  result <- tools4watlas::atl_add_tidal_data(
+  result <- atl_add_tidal_data(
     data = tracking_data,
     tide_data = tide_data,
     tide_data_highres = tide_data_highres,

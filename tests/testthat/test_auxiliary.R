@@ -1,5 +1,3 @@
-# library(testthat)
-# library(tools4watlas)
 
 # Tests for atl_spec_cols
 

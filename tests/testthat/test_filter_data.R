@@ -1,4 +1,5 @@
-testthat::test_that("data is correctly filtered", {
+
+test_that("data is correctly filtered", {
   # make some test data
   test_data <- data.frame(
     x = as.double(1:1e3),
@@ -7,17 +8,17 @@ testthat::test_that("data is correctly filtered", {
     cov_1 = runif(1000, 1, 100)
   )
   # test output here
-  test_output <- tools4watlas::atl_filter_covariates(
+  test_output <- atl_filter_covariates(
     test_data,
     "data.table::between(cov_1, 25, 75)"
   )
   # check for min and max
-  testthat::expect_gte(min(test_output$cov_1), 25)
-  testthat::expect_lte(min(test_output$cov_1), 75)
+  expect_gte(min(test_output$cov_1), 25)
+  expect_lte(min(test_output$cov_1), 75)
 
   # check warning
-  testthat::expect_warning(
-    tools4watlas::atl_filter_covariates(
+  expect_warning(
+    atl_filter_covariates(
       test_data,
       "data.table::between(cov_1, 0, 0.5)"
     ),

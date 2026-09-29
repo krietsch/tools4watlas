@@ -1,6 +1,3 @@
-# library(testthat)
-# library(tools4watlas)
-# library(ggplot2)
 
 test_that("atl_check_res_patch() works with example data files", {
   skip_if_not_installed("tools4watlas")

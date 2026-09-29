@@ -1,7 +1,5 @@
-library(testthat)
-library(tools4watlas)
 
-testthat::test_that("data kept within bounds", {
+test_that("data kept within bounds", {
   # make test_data
   test_data <- data.table::data.table(
     X = as.double(seq_len(1000)),
@@ -26,7 +24,7 @@ testthat::test_that("data kept within bounds", {
   sf::st_crs(test_area) <- 32631 # the WATLAS system CRS
 
   # run function
-  test_output <- tools4watlas::atl_filter_bounds(
+  test_output <- atl_filter_bounds(
     data = test_data,
     x = "X",
     y = "Y",
@@ -38,25 +36,25 @@ testthat::test_that("data kept within bounds", {
 
   # do tests
   # test that the vector class is data.table and data.frame
-  testthat::expect_s3_class(object = test_output, class = c(
+  expect_s3_class(object = test_output, class = c(
     "data.table",
     "data.frame"
   ))
 
   # check that some rows are removed or that none are added
-  testthat::expect_gte(nrow(test_data), nrow(test_output))
+  expect_gte(nrow(test_data), nrow(test_output))
 
   # check the correct points are kept
-  testthat::expect_true(all(data.table::between(test_output$X, 100, 600)),
+  expect_true(all(data.table::between(test_output$X, 100, 600)),
     info = "within bounds not working"
   )
 
-  testthat::expect_true(all(data.table::between(test_output$Y, 100, 650)),
+  expect_true(all(data.table::between(test_output$Y, 100, 650)),
     info = "within bounds not working"
   )
 })
 
-testthat::test_that("data removed within bounds", {
+test_that("data removed within bounds", {
   # make test_data
   test_data <- data.table::data.table(
     X = as.double(seq_len(1000)),
@@ -70,7 +68,7 @@ testthat::test_that("data removed within bounds", {
   )]
 
   # run function
-  test_output <- tools4watlas::atl_filter_bounds(
+  test_output <- atl_filter_bounds(
     data = test_data,
     x = "X",
     y = "Y",
@@ -81,23 +79,23 @@ testthat::test_that("data removed within bounds", {
 
   # do tests
   # test that the vector class is data.table and data.frame
-  testthat::expect_s3_class(object = test_output, class = c(
+  expect_s3_class(object = test_output, class = c(
     "data.table",
     "data.frame"
   ))
 
   # check that some rows are removed or that none are added
-  testthat::expect_gte(nrow(test_data), nrow(test_output))
+  expect_gte(nrow(test_data), nrow(test_output))
 
   # check the correct points are kept
-  testthat::expect_true(
+  expect_true(
     all(!(data.table::between(test_output$X, 200, 500) &
       data.table::between(test_output$Y, 700, 900))),
     info = "within bounds not working"
   )
 })
 
-testthat::test_that("data filtered correctly by polygon only", {
+test_that("data filtered correctly by polygon only", {
   # create test data
   test_data <- data.frame(
     X = c(1, 2, 3, 4, 5),
@@ -118,7 +116,7 @@ testthat::test_that("data filtered correctly by polygon only", {
   sf_poly <- sf::st_sf(geometry = sf::st_sfc(test_polygon, crs = 32631))
   
   # run function to keep points **inside polygon**
-  filtered_inside <- tools4watlas::atl_filter_bounds(
+  filtered_inside <- atl_filter_bounds(
     data = test_data,
     x = "X",
     y = "Y",
@@ -132,26 +130,26 @@ testthat::test_that("data filtered correctly by polygon only", {
   
 })
 
-testthat::test_that("remove_inside = TRUE with polygon removes points inside polygon", {
+test_that("remove_inside = TRUE with polygon removes points inside polygon", {
   
-  data <- data.table::copy(tools4watlas::data_example)
+  data <- data.table::copy(data_example)
   
   # get bbox of data to keep all points in bbox filter
   x_range <- range(data$x, na.rm = TRUE)
   y_range <- range(data$y, na.rm = TRUE)
   
-  result <- tools4watlas::atl_filter_bounds(
+  result <- atl_filter_bounds(
     data = data,
     x = "x",
     y = "y",
-    sf_polygon = tools4watlas::grienderwaard,
+    sf_polygon = grienderwaard,
     remove_inside = TRUE
   )
   
   # use atl_within_polygon to independently check no points inside remain
-  result <- tools4watlas::atl_within_polygon(
+  result <- atl_within_polygon(
     result,
-    polygon = tools4watlas::grienderwaard,
+    polygon = grienderwaard,
     col_name = "on_grienderwaard"
   )
   
@@ -160,13 +158,13 @@ testthat::test_that("remove_inside = TRUE with polygon removes points inside pol
 })
 
 # Test: data.frame input is returned as data.frame (was_df path)
-testthat::test_that("data.frame input is returned as data.frame", {
+test_that("data.frame input is returned as data.frame", {
   test_data <- data.frame(
     X = as.double(1:10),
     Y = as.double(1:10)
   )
   
-  result <- tools4watlas::atl_filter_bounds(
+  result <- atl_filter_bounds(
     data = test_data,
     x = "X",
     y = "Y",
@@ -179,14 +177,14 @@ testthat::test_that("data.frame input is returned as data.frame", {
 })
 
 # Test: warning when all rows are removed
-testthat::test_that("warning issued when all rows removed", {
+test_that("warning issued when all rows removed", {
   test_data <- data.table::data.table(
     X = as.double(1:5),
     Y = as.double(1:5)
   )
   
   expect_warning(
-    tools4watlas::atl_filter_bounds(
+    atl_filter_bounds(
       data = test_data,
       x = "X",
       y = "Y",
@@ -199,9 +197,9 @@ testthat::test_that("warning issued when all rows removed", {
 })
 
 # Test: error on non-dataframe input
-testthat::test_that("error on non-dataframe input", {
+test_that("error on non-dataframe input", {
   expect_error(
-    tools4watlas::atl_filter_bounds(
+    atl_filter_bounds(
       data = "not_a_dataframe",
       x_range = c(1, 10),
       y_range = c(1, 10)
@@ -211,11 +209,11 @@ testthat::test_that("error on non-dataframe input", {
 })
 
 # Test: error when remove_inside is not logical
-testthat::test_that("error when remove_inside is not logical", {
+test_that("error when remove_inside is not logical", {
   test_data <- data.table::data.table(X = as.double(1:5), Y = as.double(1:5))
   
   expect_error(
-    tools4watlas::atl_filter_bounds(
+    atl_filter_bounds(
       data = test_data,
       x_range = c(1, 10),
       y_range = c(1, 10),
@@ -226,11 +224,11 @@ testthat::test_that("error when remove_inside is not logical", {
 })
 
 # Test: error when required x/y columns are missing
-testthat::test_that("error when x or y columns missing from data", {
+test_that("error when x or y columns missing from data", {
   test_data <- data.table::data.table(A = as.double(1:5), B = as.double(1:5))
   
   expect_error(
-    tools4watlas::atl_filter_bounds(
+    atl_filter_bounds(
       data = test_data,
       x = "X",
       y = "Y",
@@ -241,11 +239,11 @@ testthat::test_that("error when x or y columns missing from data", {
 })
 
 # Test: error when no bounds or polygon supplied
-testthat::test_that("error when no bounds or polygon supplied", {
+test_that("error when no bounds or polygon supplied", {
   test_data <- data.table::data.table(X = as.double(1:5), Y = as.double(1:5))
   
   expect_error(
-    tools4watlas::atl_filter_bounds(
+    atl_filter_bounds(
       data = test_data,
       x = "X",
       y = "Y"
@@ -254,11 +252,11 @@ testthat::test_that("error when no bounds or polygon supplied", {
 })
 
 # Test: error when bound lengths are not 2
-testthat::test_that("error on incorrect bound lengths", {
+test_that("error on incorrect bound lengths", {
   test_data <- data.table::data.table(X = as.double(1:5), Y = as.double(1:5))
   
   expect_error(
-    tools4watlas::atl_filter_bounds(
+    atl_filter_bounds(
       data = test_data,
       x = "X",
       y = "Y",

@@ -1,4 +1,5 @@
-testthat::test_that("atl_thin_data handles subsampling correctly", {
+
+test_that("atl_thin_data handles subsampling correctly", {
   # Create test data
   data <- data.table::data.table(
     animal_id = rep(1:2, each = 10),
@@ -15,17 +16,17 @@ testthat::test_that("atl_thin_data handles subsampling correctly", {
   )
 
   # Check structure
-  testthat::expect_true(data.table::is.data.table(thinned))
-  testthat::expect_true(
+  expect_true(data.table::is.data.table(thinned))
+  expect_true(
     all(c("animal_id", "x", "y", "time", "datetime") %in% names(thinned))
   )
 
   # Check thinning interval
   time_diffs <- thinned[, diff(time), by = animal_id]$V1
-  testthat::expect_true(all(time_diffs >= 60, na.rm = TRUE))
+  expect_true(all(time_diffs >= 60, na.rm = TRUE))
 })
 
-testthat::test_that("atl_thin_data handles aggregation correctly", {
+test_that("atl_thin_data handles aggregation correctly", {
   data <- data.table::data.table(
     animal_id = rep(1:2, each = 10),
     time = rep(seq(1696218720, 1696218720 + 90, by = 10), 2),
@@ -39,18 +40,18 @@ testthat::test_that("atl_thin_data handles aggregation correctly", {
     method = "aggregate"
   )
 
-  testthat::expect_true(data.table::is.data.table(thinned))
-  testthat::expect_true(
+  expect_true(data.table::is.data.table(thinned))
+  expect_true(
     all(c("animal_id", "x", "y", "time", "datetime") %in% names(thinned))
   )
 
-  testthat::expect_equal(nrow(thinned), 4)
-  testthat::expect_true(
+  expect_equal(nrow(thinned), 4)
+  expect_true(
     all(thinned[, diff(time), by = animal_id]$V1 >= 60, na.rm = TRUE)
   )
 })
 
-testthat::test_that("atl_thin_data throws error for invalid method", {
+test_that("atl_thin_data throws error for invalid method", {
   data <- data.table::data.table(
     animal_id = rep(1:2, each = 10),
     time = rep(seq(1696218720, 1696218720 + 90, by = 10), 2),
@@ -59,7 +60,7 @@ testthat::test_that("atl_thin_data throws error for invalid method", {
   )
   data[, datetime := as.POSIXct(time, origin = "1970-01-01", tz = "UTC")]
 
-  testthat::expect_error(
+  expect_error(
     atl_thin_data(data,
       interval = 60, id_columns = "animal_id",
       method = "invalid"
@@ -68,8 +69,8 @@ testthat::test_that("atl_thin_data throws error for invalid method", {
   )
 })
 
-testthat::test_that("atl_thin_data throws error for invalid data input", {
-  testthat::expect_error(
+test_that("atl_thin_data throws error for invalid data input", {
+  expect_error(
     atl_thin_data(list(),
       interval = 60, id_columns = "animal_id",
       method = "subsample"
@@ -78,7 +79,7 @@ testthat::test_that("atl_thin_data throws error for invalid data input", {
   )
 })
 
-testthat::test_that("atl_thin_data handles missing id_columns gracefully", {
+test_that("atl_thin_data handles missing id_columns gracefully", {
   data <- data.table::data.table(
     time = seq(1696218720, 1696218720 + 90, by = 10),
     x = stats::rnorm(10, 10, 1),
@@ -91,11 +92,11 @@ testthat::test_that("atl_thin_data handles missing id_columns gracefully", {
     method = "subsample"
   )
 
-  testthat::expect_true(data.table::is.data.table(thinned))
-  testthat::expect_true(all(c("x", "y", "time", "datetime") %in% names(thinned)))
+  expect_true(data.table::is.data.table(thinned))
+  expect_true(all(c("x", "y", "time", "datetime") %in% names(thinned)))
 })
 
-testthat::test_that(
+test_that(
   "atl_thin_data throws error for interval smaller than tracking interval",
   {
     data <- data.table::data.table(
@@ -106,7 +107,7 @@ testthat::test_that(
     )
     data[, datetime := as.POSIXct(time, origin = "1970-01-01", tz = "UTC")]
 
-    testthat::expect_error(
+    expect_error(
       atl_thin_data(data,
         interval = 5, id_columns = "animal_id",
         method = "aggregate"
@@ -116,7 +117,7 @@ testthat::test_that(
   }
 )
 
-testthat::test_that(
+test_that(
   "atl_thin_data handles missing error columns during aggregation",
   {
     data <- data.table::data.table(
@@ -132,12 +133,12 @@ testthat::test_that(
       method = "aggregate"
     )
 
-    testthat::expect_true(data.table::is.data.table(thinned))
-    testthat::expect_true(all(!c("varx", "vary") %in% names(thinned)))
+    expect_true(data.table::is.data.table(thinned))
+    expect_true(all(!c("varx", "vary") %in% names(thinned)))
   }
 )
 
-testthat::test_that("atl_thin_data aggregates correctly with varx and vary columns", {
+test_that("atl_thin_data aggregates correctly with varx and vary columns", {
   # Create data that includes varx and vary
   data <- data.table::data.table(
     animal_id = rep(1:2, each = 10),
@@ -159,15 +160,15 @@ testthat::test_that("atl_thin_data aggregates correctly with varx and vary colum
   )
   
   # Basic checks
-  testthat::expect_true(data.table::is.data.table(thinned))
-  testthat::expect_true(all(c("varx", "vary") %in% names(thinned)))
-  testthat::expect_true(all(thinned$n_aggregated > 0))
+  expect_true(data.table::is.data.table(thinned))
+  expect_true(all(c("varx", "vary") %in% names(thinned)))
+  expect_true(all(thinned$n_aggregated > 0))
   
   # Check that varx and vary were aggregated correctly
-  testthat::expect_true(all(thinned$varx <= max(data$varx)))
-  testthat::expect_true(all(thinned$vary <= max(data$vary)))
+  expect_true(all(thinned$varx <= max(data$varx)))
+  expect_true(all(thinned$vary <= max(data$vary)))
   
   # Ensure time differences are consistent
   lag <- thinned[, diff(time), by = animal_id]$V1
-  testthat::expect_true(all(lag >= 60, na.rm = TRUE))
+  expect_true(all(lag >= 60, na.rm = TRUE))
 })

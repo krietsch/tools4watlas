@@ -1,5 +1,3 @@
-# library(testthat)
-# library(tools4watlas)
 
 test_that("atl_compare_res_patch_summary works correctly", {
   
