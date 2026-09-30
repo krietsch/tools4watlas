@@ -158,6 +158,10 @@ atl_check_tag(data, option = "nbs")
 atl_check_tag(data, option = "var")
 atl_check_tag(data, option = "speed_in")
 atl_check_tag(data, option = "gap")
+
+# add outliers, for example for speed:
+data[, outlier := speed_in > 35]
+atl_check_tag(data, option = "speed_in", highlight_outliers = TRUE)
 }
 \author{
 Johannes Krietsch
