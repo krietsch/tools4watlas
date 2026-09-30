@@ -35,7 +35,6 @@ expand or contract the bounding box.
 }
 \examples{
 # packages
-library(tools4watlas)
 library(ggplot2)
 library(sf)
 

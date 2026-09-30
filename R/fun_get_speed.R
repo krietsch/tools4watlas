@@ -3,7 +3,7 @@
 #' Returns additional columns for incoming and outcoming speed to the
 #' data.table. Speed in metres per time interval. The time interval is dependent
 #' on the units of the column specified in \code{time}.
-#' 
+#'
 #' Derived from `atlastools::atl_get_speed()` in the \pkg{atlastools}
 #' package (Gupte et al., 2022), licensed under GPL-3.
 #'

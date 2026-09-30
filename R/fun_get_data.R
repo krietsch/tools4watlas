@@ -36,9 +36,9 @@
 #' posID	  =	Unique number for positions \cr
 #' tag		  =	4 digit tag number (character) \cr
 #' time		  =	UNIX time (seconds) \cr
-#' datetime = Timestamp in POSIXct (UTC) \cr
-#' x		    =	x-ccordinates in meters (UTM 31 N) \cr
-#' y		    =	y-ccordinates in meters (UTM 31 N) \cr
+#' datetime = Time stamp in POSIXct (UTC) \cr
+#' x		    =	x-coordinates in meters (UTM 31 N) \cr
+#' y		    =	y-coordinates in meters (UTM 31 N) \cr
 #' nbs		  =	Number of Base Stations (receivers) used in calculating
 #' coordinates \cr
 #' varx		  =	Variance in estimating x-coordinates \cr

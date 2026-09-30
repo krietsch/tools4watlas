@@ -4,7 +4,7 @@
 \alias{atl_progress_bar}
 \title{Display a live progress bar for PNG file generation in a directory}
 \usage{
-atl_progress_bar(file_path, total = NULL, refresh_rate = 1)
+atl_progress_bar(file_path, total = NULL, refresh_rate = 1, quietly = FALSE)
 }
 \arguments{
 \item{file_path}{Path to the directory containing PNG files.}
@@ -15,6 +15,9 @@ same directory.}
 
 \item{refresh_rate}{Numeric value in seconds specifying how often the
 progress bar updates.}
+
+\item{quietly}{Logical. If \code{TRUE}, no progress or completion messages are
+printed. Default is \code{FALSE}.}
 }
 \value{
 No return value. Prints progress bar to the console.

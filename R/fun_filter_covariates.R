@@ -11,7 +11,7 @@
 #' conditions.
 #' Users must make sure that the filtering variables exist in their dataset in
 #' order to avoid errors.
-#' 
+#'
 #' Derived from `atlastools::atl_filter_covariates()` in the \pkg{atlastools}
 #' package (Gupte et al., 2022), licensed under GPL-3.
 #'
@@ -97,7 +97,8 @@ atl_filter_covariates <- function(data,
   data <- data[eval(filters), ]
 
   # check for class and whether there are rows
-  assertthat::assert_that("data.frame" %in% class(data),
+  assertthat::assert_that(
+    inherits(data, "data.frame"),
     msg = "filter_covariates: cleaned data is not a dataframe object!"
   )
 

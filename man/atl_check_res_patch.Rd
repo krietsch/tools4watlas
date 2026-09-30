@@ -33,6 +33,7 @@ atl_check_res_patch(
   mudflat_fill = "#faf5ef",
   mudflat_alpha = 0.6,
   roosts = FALSE,
+  seed = 1,
   filename = NULL,
   png_width = 3840,
   png_height = 2160
@@ -95,7 +96,7 @@ speed (default: 3 m/s).}
 
 \item{water_fill}{Water fill (default "#D7E7FF")}
 
-\item{water_colour}{Water coulour (default "grey80")}
+\item{water_colour}{Water colour (default "grey80")}
 
 \item{land_fill}{Land fill (default "#faf5ef")}
 
@@ -109,6 +110,9 @@ speed (default: 3 m/s).}
 
 \item{roosts}{Logical. Whether to add the roost polygon around Griend or not
 (default: FALSE).}
+
+\item{seed}{Integer seed used to shuffle the patch colours, so that the
+colour order is reproducible. Default is 1.}
 
 \item{filename}{Character (or NULL). If provided, the plot is saved as a
 \code{.png} file to this path and with this name; otherwise, the function

@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tools4watlas <a href="https://allertbijleveld.github.io/tools4watlas/"><img src="man/figures/logo.png" align="right" height="300" alt="tools4watlas website" /></a>
+# tools4watlas <a href="https://allertbijleveld.github.io/tools4watlas"><img src="man/figures/logo.png" align="right" height="300" alt="tools4watlas website" /></a>
 
 <!-- badges: start -->
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![R-CMD-check](https://github.com/allertbijleveld/tools4watlas/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/allertbijleveld/tools4watlas/actions/workflows/R-CMD-check.yaml)
@@ -27,7 +27,8 @@ and to read the latest project news. **Feel free to reach out by
 [e-mail](mailto:allert.bijleveld@nioz.nl) for questions or
 collaborations if you would like to work with WATLAS data.**
 
-The package `tools4watlas` builds on the package
+The package `tools4watlas` incorporates code from and builds on the
+foundation of the package
 [`atlastools`](https://github.com/pratikunterwegs/atlastools) ([Gupte et
 al. 2021. A Guide to Pre-processing High-throughput Animal Tracking
 Data](https://doi.org/10.1111/1365-2656.13610)). Some major developments

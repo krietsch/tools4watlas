@@ -45,6 +45,8 @@
 #' @param mudflat_colour Mudflat border colour (default: `"#faf5ef"`).
 #' @param mudflat_fill Mudflat fill colour (default: `"#faf5ef"`).
 #' @param mudflat_alpha Mudflat transparency (default: 0.6).
+#' @param seed Integer seed used to shuffle the patch colours, so that the
+#'   colour order is reproducible. Default is 1.
 #' @param filename Character (or `NULL`). If provided, the plot is saved as a
 #'   `.png` file to this path and filename; otherwise the plot is returned.
 #' @param png_width Width of saved PNG in pixels (default: 3840).
@@ -91,17 +93,20 @@
 #'   patch_v2 = change_summary$patch_v2[i]
 #' )
 #'
-#' # plot all changes in loop
+#' # plot all changes in loop (requires the foreach package)
 #' # for many changes, it makes sense to set a filename to save the plots
-#' foreach(i = 1:nrow(change_summary)) %do% {
-#'   atl_compare_res_patch_plot(
-#'     data_v1 = data_v1,
-#'     data_v2 = data_v2,
-#'     tag = change_summary$tag[i],
-#'     change = change_summary$change[i],
-#'     patch_v1 = change_summary$patch_v1[i],
-#'     patch_v2 = change_summary$patch_v2[i]
-#'   )
+#' if (requireNamespace("foreach", quietly = TRUE)) {
+#'   library(foreach)
+#'   foreach(i = seq_len(nrow(change_summary))) %do% {
+#'     atl_compare_res_patch_plot(
+#'       data_v1 = data_v1,
+#'       data_v2 = data_v2,
+#'       tag = change_summary$tag[i],
+#'       change = change_summary$change[i],
+#'       patch_v1 = change_summary$patch_v1[i],
+#'       patch_v2 = change_summary$patch_v2[i]
+#'     )
+#'   }
 #' }
 #'
 #' @export
@@ -130,6 +135,7 @@ atl_compare_res_patch_plot <- function(data_v1,
                                        mudflat_colour = "#faf5ef",
                                        mudflat_fill = "#faf5ef",
                                        mudflat_alpha = 0.6,
+                                       seed = 1,
                                        filename = NULL,
                                        png_width = 3840,
                                        png_height = 2160) {
@@ -233,13 +239,19 @@ atl_compare_res_patch_plot <- function(data_v1,
   tide_id <- if ("tideID" %in% names(ds1)) ds1[1, tideID] else NA
 
   # generate shuffled colour palette
-  set.seed(1)
+  patch_colours <- withr::with_seed(seed, {
+    list(
+      v1 = if (n_patches1 > 0) sample(scales::hue_pal()(n_patches1)),
+      v2 = if (n_patches2 > 0) sample(scales::hue_pal()(n_patches2))
+    )
+  })
+
   if (n_patches1 > 0) {
-    patch_colours1 <- sample(scales::hue_pal()(n_patches1))
+    patch_colours1 <- patch_colours$v1
     names(patch_colours1) <- v1_ids
   }
   if (n_patches2 > 0) {
-    patch_colours2 <- sample(scales::hue_pal()(n_patches2))
+    patch_colours2 <- patch_colours$v2
     names(patch_colours2) <- v2_ids
   }
 
@@ -336,7 +348,7 @@ atl_compare_res_patch_plot <- function(data_v1,
       ) +
       theme(
         legend.position = "inside",
-        legend.position.inside = c(.08, .3),
+        legend.position.inside = c(0.08, 0.3),
         legend.background = element_rect(fill = "transparent"),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(size = element_text_size)
@@ -405,7 +417,7 @@ atl_compare_res_patch_plot <- function(data_v1,
       ) +
       theme(
         legend.position = "inside",
-        legend.position.inside = c(.08, .3),
+        legend.position.inside = c(0.08, 0.3),
         legend.background = element_rect(fill = "transparent"),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(size = element_text_size)

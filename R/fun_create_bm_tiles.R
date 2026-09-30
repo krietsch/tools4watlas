@@ -171,7 +171,7 @@ atl_create_bm_tiles <- function(data = NULL,
       axis.ticks.x = element_blank(),
       axis.ticks.y = element_blank(),
       axis.title = element_blank(),
-      plot.margin = unit(c(0, 0, -0.2, -0.2), "lines"),
+      plot.margin = unit(c(0, 0, -0.2, -0.2), "lines")
     )
 
   bm

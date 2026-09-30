@@ -5,7 +5,7 @@
 #'
 #' Derived from `atlastools::atl_check_data()` in the \pkg{atlastools}
 #' package (Gupte et al., 2022), licensed under GPL-3.
-#' 
+#'
 #' @author Pratik R. Gupte
 #' @references
 #' Gupte, P. R., Beardsworth, C. E., Spiegel, O., Lourie, E., Toledo, S.,

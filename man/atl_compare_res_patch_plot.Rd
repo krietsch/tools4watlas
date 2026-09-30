@@ -30,6 +30,7 @@ atl_compare_res_patch_plot(
   mudflat_colour = "#faf5ef",
   mudflat_fill = "#faf5ef",
   mudflat_alpha = 0.6,
+  seed = 1,
   filename = NULL,
   png_width = 3840,
   png_height = 2160
@@ -95,6 +96,9 @@ around the polygon of each residence patch (default: 20).}
 
 \item{mudflat_alpha}{Mudflat transparency (default: 0.6).}
 
+\item{seed}{Integer seed used to shuffle the patch colours, so that the
+colour order is reproducible. Default is 1.}
+
 \item{filename}{Character (or \code{NULL}). If provided, the plot is saved as a
 \code{.png} file to this path and filename; otherwise the plot is returned.}
 
@@ -152,17 +156,20 @@ atl_compare_res_patch_plot(
   patch_v2 = change_summary$patch_v2[i]
 )
 
-# plot all changes in loop
+# plot all changes in loop (requires the foreach package)
 # for many changes, it makes sense to set a filename to save the plots
-foreach(i = 1:nrow(change_summary)) \%do\% {
-  atl_compare_res_patch_plot(
-    data_v1 = data_v1,
-    data_v2 = data_v2,
-    tag = change_summary$tag[i],
-    change = change_summary$change[i],
-    patch_v1 = change_summary$patch_v1[i],
-    patch_v2 = change_summary$patch_v2[i]
-  )
+if (requireNamespace("foreach", quietly = TRUE)) {
+  library(foreach)
+  foreach(i = seq_len(nrow(change_summary))) \%do\% {
+    atl_compare_res_patch_plot(
+      data_v1 = data_v1,
+      data_v2 = data_v2,
+      tag = change_summary$tag[i],
+      change = change_summary$change[i],
+      patch_v1 = change_summary$patch_v1[i],
+      patch_v2 = change_summary$patch_v2[i]
+    )
+  }
 }
 
 }

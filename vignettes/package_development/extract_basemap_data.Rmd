@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This script shows how to extract the basemap data of `tools4watlas`, which are a land polygon of the Dutch Wadden Sea, the mudflats of North Holland and Friesland and waterbodies on Griend. These data were choosen provide a simple map with relevant data allowing fast plotting. Customized basemap data could be created in a similar way and could additional contain buildings, roads, lakes, rivers etc. All data can be found in the "Birds, fish 'n chips" SharePoint folder: `Documents/data/GIS/shapefiles/`. To run the script set the file path (`fp`) to the local copy of the folder on your computer. 
+This script shows how to extract the basemap data of `tools4watlas`, which are a land polygon of the Dutch Wadden Sea, the mudflats of North Holland and Friesland and waterbodies on Griend. These data were chosen provide a simple map with relevant data allowing fast plotting. Customized basemap data could be created in a similar way and could additional contain buildings, roads, lakes, rivers etc. All data can be found in the "Birds, fish 'n chips" SharePoint folder: `Documents/data/GIS/shapefiles/`. To run the script set the file path (`fp`) to the local copy of the folder on your computer. 
 
 The `OpenStreetMap` land polygon can also be downloaded from [`osmdata`](https://osmdata.openstreetmap.de/data/land-polygons.html) and the regional data of the Netherlands (here used are North Holland and Friesland) can be downloaded from [`Geofabrik`](https://download.geofabrik.de/europe/netherlands.html). 
 

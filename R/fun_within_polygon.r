@@ -62,11 +62,11 @@ atl_within_polygon <- function(data,
                                col_name = deparse(substitute(polygon))) {
   # check inputs
   assertthat::assert_that(
-    "data.frame" %in% class(data),
+    inherits(data, "data.frame"),
     msg = "atl_within_polygon: input not a dataframe object!"
   )
   assertthat::assert_that(
-    any(c("sf", "sfc") %in% class(polygon)),
+    inherits(polygon, "sf") || inherits(polygon, "sfc"),
     msg = "atl_within_polygon: polygon is not class sf or sfc"
   )
   assertthat::assert_that(

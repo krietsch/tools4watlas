@@ -5,7 +5,7 @@
 #' ranges, or by an \code{sf-POLYGON} object.
 #' \code{MULTIPOLYGON} objects are supported by the internal function
 #' \code{atl_within_polygon}.
-#' 
+#'
 #' Derived from `atlastools::atl_filter_bounds()` in the \pkg{atlastools}
 #' package (Gupte et al., 2022), licensed under GPL-3.
 #'
@@ -114,7 +114,7 @@ atl_filter_bounds <- function(data,
 
   # check input type
   assertthat::assert_that(
-    "data.frame" %in% class(data),
+    inherits(data, "data.frame"),
     msg = "filter_bbox: input not a dataframe object!"
   )
   assertthat::assert_that(
@@ -136,9 +136,7 @@ atl_filter_bounds <- function(data,
   # make input list of bound limits
   bounds <- list(x_range = x_range, y_range = y_range)
   # remove NA ie unsupplied limits
-  bounds[sapply(bounds, function(b) {
-    any(is.na(b))
-  })] <- NULL
+  bounds[vapply(bounds, anyNA, logical(1))] <- NULL
 
   # check input length of attractors
   invisible(lapply(bounds, function(f) {
@@ -211,7 +209,7 @@ atl_filter_bounds <- function(data,
   }
 
   assertthat::assert_that(
-    "data.frame" %in% class(data_),
+    inherits(data_, "data.frame"),
     msg = "filter_bbox: cleaned data is not a data.frame or data.table object!"
   )
 

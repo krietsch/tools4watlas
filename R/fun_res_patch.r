@@ -150,7 +150,7 @@ atl_res_patch <- function(data,
           end = as.double(data.table::last(d))
         )
       }), recursive = FALSE), .SDcols = c("x", "y", "time")]
-      setnames(dt2, stringr::str_replace(colnames(dt2), "\\.", "_"))
+      setnames(dt2, sub(".", "_", colnames(dt2), fixed = TRUE))
       dt2
     }))]
 

@@ -1,30 +1,28 @@
 Package: tools4watlas
-Title: An R package for processing and visualizing high-throughput
-    tracking data
+Title: Process and Visualize High-Throughput Animal Tracking Data
 Version: 2.0.0
 Authors@R: c(
     person("Johannes", "Krietsch", , "johannes.krietsch@nioz.nl", role = "aut",
            comment = c(ORCID = "0000-0002-8080-1734")),
-    person("Allert", "Bijleveld", , "allert.bijleveld@nioz.nl", role = c("aut", "cre"),
+    person("Allert", "Bijleveld", , "allert.bijleveld@nioz.nl", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-3159-8944")),
     person("Pratik", "Gupte", role = "ctb",
            comment = c(ORCID = "0000-0001-5294-7819")),
     person("Christine", "Beardsworth", role = "ctb",
            comment = c(ORCID = "0000-0003-1308-1455"))
   )
-Description: `tools4watlas` is an R package for processing and visualizing
-    high-throughput animal tracking data. While tailored for the WATLAS
-    system (Wadden Sea Advanced Tracking and Localization of Animals in
-    real-life Systems; Bijleveld et al., 2022), its functions are broadly
-    applicable to other high-throughput tracking datasets, and study
+Description: Tools for processing and visualising high-throughput animal
+    tracking data. While tailored for WATLAS (Wadden Sea Advanced Tracking
+    and Localization of Animals in real-life Systems), many functions
+    apply to other high-throughput tracking datasets, and study
     system-specific steps can be adapted easily. In addition, the package
     enables the integration of environmental data (e.g., water level,
     bathymetry, or any other raster data), allowing to link movement data
     easily to other ecological data. Beyond data processing workflows,
-    `tools4watlas` includes tutorials, and visualization functions that
+    'tools4watlas' includes tutorials, and visualization functions that
     support static plots, interactive plots and animations of movement
     data, as well as base map data of the Dutch Wadden Sea.
-License: GPL-3 + file LICENSE
+License: GPL (>= 3)
 URL: https://allertbijleveld.github.io/tools4watlas/
 BugReports: https://github.com/allertbijleveld/tools4watlas/issues
 Depends: 
@@ -41,7 +39,6 @@ Imports:
     ggtext,
     glue,
     lubridate,
-    magrittr,
     maptiles,
     patchwork,
     purrr,
@@ -56,6 +53,7 @@ Imports:
     terra,
     tidyterra,
     viridis,
+    withr,
     zoo
 Suggests:
     doFuture,
@@ -79,7 +77,7 @@ VignetteBuilder:
 Config/roxygen2/version: 8.1.0
 Config/testthat/edition: 3
 Encoding: UTF-8
+Language: en-GB
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
-Language: en-GB

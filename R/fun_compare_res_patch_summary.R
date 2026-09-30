@@ -19,6 +19,8 @@
 #' @param data_v2 A data.table with residence patches assigned using the second
 #' parameter set. Must have the same structure and row order as
 #' \code{data_v1}, as patch columns are compared position-by-position.
+#' @param quietly Logical. If `TRUE`, no summary messages are
+#'   printed. Default is `FALSE`.
 #'
 #' @return A data.table summarising all detected patch changes with columns
 #' \code{tag}, \code{tideID}, \code{change} (one of \code{"lost"},
@@ -52,7 +54,9 @@
 #' # change summary
 #' atl_compare_res_patch_summary(data_v1, data_v2)
 #' @export
-atl_compare_res_patch_summary <- function(data_v1, data_v2) {
+atl_compare_res_patch_summary <- function(data_v1,
+                                          data_v2,
+                                          quietly = FALSE) {
 
   # Initialize necessary variables to avoid NSE (Non-Standard Evaluation) issues
   patch_v1 <- patch_v2 <- n_v2_patches <- v2_patches <- n_v1_patches <- NULL
@@ -170,11 +174,13 @@ atl_compare_res_patch_summary <- function(data_v1, data_v2) {
   setorder(change_summary, tag, tideID, change)
 
   # print
-  cat("=== Patch changes summary ===\n")
-  cat("Lost    (v1 patches gone in v2) :", nrow(lost_patches), "\n")
-  cat("Gained  (new patches in v2)     :", nrow(gained_patches), "\n\n")
-  cat("Splits  (one v1 -> multiple v2):", nrow(splits), "\n")
-  cat("Merges  (multiple v1 -> one v2):", nrow(merges), "\n\n")
+  if (!quietly) {
+    cat("=== Patch changes summary ===\n")
+    cat("Lost    (v1 patches gone in v2) :", nrow(lost_patches), "\n")
+    cat("Gained  (new patches in v2)     :", nrow(gained_patches), "\n\n")
+    cat("Splits  (one v1 -> multiple v2):", nrow(splits), "\n")
+    cat("Merges  (multiple v1 -> one v2):", nrow(merges), "\n\n")
+  }
 
   # return
   change_summary

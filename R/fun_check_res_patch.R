@@ -39,7 +39,7 @@
 #' @param patch_alpha Alpha for patch polygons (default: 0.7).
 #' @param element_text_size Font size for axis and legend text (default: 11).
 #' @param water_fill Water fill (default "#D7E7FF")
-#' @param water_colour Water coulour (default "grey80")
+#' @param water_colour Water colour (default "grey80")
 #' @param land_fill Land fill (default "#faf5ef")
 #' @param land_colour Land colour (default "grey80")
 #' @param mudflat_colour Mudflat colour (default "#faf5ef")
@@ -47,6 +47,8 @@
 #' @param mudflat_alpha Mudflat alpha (default 0.6)
 #' @param roosts Logical. Whether to add the roost polygon around Griend or not
 #' (default: FALSE).
+#' @param seed Integer seed used to shuffle the patch colours, so that the
+#'   colour order is reproducible. Default is 1.
 #' @param filename Character (or NULL). If provided, the plot is saved as a
 #'   `.png` file to this path and with this name; otherwise, the function
 #'   returns the plot.
@@ -121,6 +123,7 @@ atl_check_res_patch <- function(data,
                                 mudflat_fill = "#faf5ef",
                                 mudflat_alpha = 0.6,
                                 roosts = FALSE,
+                                seed = 1,
                                 filename = NULL,
                                 png_width = 3840,
                                 png_height = 2160) {
@@ -148,13 +151,13 @@ atl_check_res_patch <- function(data,
   }
 
   # convert to DT if not
-  if (data.table::is.data.table(data) != TRUE) {
+  if (!data.table::is.data.table(data)) {
     data.table::setDT(data)
   }
-  if (data.table::is.data.table(tide_data) != TRUE) {
+  if (!data.table::is.data.table(tide_data)) {
     data.table::setDT(tide_data)
   }
-  if (data.table::is.data.table(tide_data_highres) != TRUE) {
+  if (!data.table::is.data.table(tide_data_highres)) {
     data.table::setDT(tide_data_highres)
   }
 
@@ -198,7 +201,7 @@ atl_check_res_patch <- function(data,
   if (!no_patches) dp[, patch := as.factor(patch)]
 
   # speed in
-  ds <- atl_get_speed(ds, type = c("in"))
+  ds <- atl_get_speed(ds, type = "in")
 
   # join duration to ds
   if (!no_patches) {
@@ -263,8 +266,10 @@ atl_check_res_patch <- function(data,
   }
   # generate shuffled colour palette (only if patches exist)
   if (!no_patches) {
-    set.seed(1)
-    patch_colours <- sample(scales::hue_pal()(n_patches))
+    patch_colours <- withr::with_seed(
+      seed,
+      sample(scales::hue_pal()(n_patches))
+    )
     names(patch_colours) <- unique(dp$patch)
   }
 
@@ -284,10 +289,14 @@ atl_check_res_patch <- function(data,
   bbox <- atl_bbox(ds, buffer = buffer_bm, asp = "4.3:3")
 
   # if roosts = TRUE add roost polygon
-  if (roosts == TRUE) {
+  if (roosts) {
     bm <- suppressMessages(
       bm +
-        geom_sf(data = tools4watlas::roosts_griend, fill = NA, color = "black")
+        geom_sf(
+          data = tools4watlas::roosts_griend,
+          fill = NA,
+          color = "black"
+        )
     )
   }
 
@@ -360,7 +369,7 @@ atl_check_res_patch <- function(data,
       # adjust legend position
       theme(
         legend.position = "inside",
-        legend.position.inside = c(.08, .3),
+        legend.position.inside = c(0.08, 0.3),
         legend.background = element_rect(fill = "transparent"),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(size = element_text_size)

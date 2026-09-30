@@ -37,7 +37,7 @@ knitr::opts_chunk$set(
 
 Tracking animal movement is crucial for understanding interactions with changing environments and predicting the effects of anthropogenic activities, particularly in ecologically significant areas like the Wadden Sea. The WATLAS system (i.e. the Wadden Sea deployment of ATLAS - Advanced Tracking and Localisation of Animals in real life Systems) enables high-resolution monitoring of small bird movements, offering insights into space use, individual variation, and social networks, thereby supporting research and conservation efforts in the region. A detailed description of WATLAS can be found in **@bijleveld2022**.
 
-In **@nathan2022** we discuss how big-data approaches, such as high-throughput tracking with WATLAS, can lead to an increased understanding of the ecology of animal movement. Particularly that advances in high-throughput wildlife tracking systems now allow more thorough investigation of variation among individuals and species across space and time, the nature of biological interactions, and behavioral responses to the environment.  
+In **@nathan2022** we discuss how big-data approaches, such as high-throughput tracking with WATLAS, can lead to an increased understanding of the ecology of animal movement. Particularly that advances in high-throughput wildlife tracking systems now allow more thorough investigation of variation among individuals and species across space and time, the nature of biological interactions, and behavioural responses to the environment.  
 
 ## Prologue to WATLAS
 
@@ -47,13 +47,13 @@ After these initial tests in 2008-2009, this pre-WATLAS 'Time Of Arrival'-tracki
 
 After the success in the Wadden Sea, we also deployed TOA-tracking in Mauritania. Consistent with previous empirical studies, patch residence times in the field were positively correlated with gizzard mass. A manipulation of gizzard mass revealed that Red Knots released with experimentally reduced gizzard masses did not decrease patch residence times accordingly. These findings suggest that diet preferences can cause the observed among-individual variation in gizzard mass and patch residence times **[@oudman2016]**.
 
-Having deployed the same tracking and resouce sampling methods in Mauritania and the Wadden Sea allowed a comparisson within species **[@oudman2018]**. Compared to Banc d’Arguin, resource patches in the Wadden Sea were larger and the maximum local resource abundance was higher. However, because of constraints set by digestive capacity, the average potential intake rates by red knots were similar at the two study sites. Space-use patterns differed as predicted from these differences in resource landscapes. Foraging red knots in the Wadden Sea roamed the mudflats in large aggregations without site fidelity (i.e. grouping nomads), whereas in Banc d’Arguin they acted more individually with strong site-fidelity (i.e. solitary residents).
+Having deployed the same tracking and resource sampling methods in Mauritania and the Wadden Sea allowed a comparison within species **[@oudman2018]**. Compared to Banc d’Arguin, resource patches in the Wadden Sea were larger and the maximum local resource abundance was higher. However, because of constraints set by digestive capacity, the average potential intake rates by red knots were similar at the two study sites. Space-use patterns differed as predicted from these differences in resource landscapes. Foraging red knots in the Wadden Sea roamed the mudflats in large aggregations without site fidelity (i.e. grouping nomads), whereas in Banc d’Arguin they acted more individually with strong site-fidelity (i.e. solitary residents).
 
-For a broader review on circadian rhythms, we re-analysed the high resolution tracking data from Red Knots in Mauritanie. We revealed individual differences in tidal and circadian foraging rhythms and highlight potential fruitful avenues for further studies **[@bulla2017]**.
+For a broader review on circadian rhythms, we re-analysed the high resolution tracking data from Red Knots in Mauritania. We revealed individual differences in tidal and circadian foraging rhythms and highlight potential fruitful avenues for further studies **[@bulla2017]**.
 
 ## WATLAS research
 
-After an intitial development starting in 2016, we first deployed WATLAS as a pilot study near Griend with 5 receivers in 2017. After its succes, we deployed 15 recievers in 2018 and scaled-up to almost 30 receivers in 2019 covering a large part of the Western Dutch Wadden Sea. From 2025 onwards, WATLAS will be further developed to cover the entire Dutch Wadden Sea.  
+After an initial development starting in 2016, we first deployed WATLAS as a pilot study near Griend with 5 receivers in 2017. After its success, we deployed 15 receivers in 2018 and scaled-up to almost 30 receivers in 2019 covering a large part of the Western Dutch Wadden Sea. From 2025 onwards, WATLAS will be further developed to cover the entire Dutch Wadden Sea.  
 
 ### Validation
 
@@ -63,7 +63,7 @@ Validation of methods is crucial for understanding the strengths and limitations
 
 A pipeline with coding examples for cleaning (e.g. Filter-Smoothing) high-throughput tracking data with `atlastools` is presented in **@gupte2022**. Note that `tools4watlas` is developed from `atlastools`.
 
-In  **@toledo2022** we describe our tags and particulary the design of these versatile, widely-applicable, and field-proven 'Vildehaye' tags for wildlife sensing and radio tracking. Also, we discuss longevity of tags and show that WATLAS tags with a CR2032 battery transmitting at 6 s can last 226 days. 
+In  **@toledo2022** we describe our tags and particularly the design of these versatile, widely-applicable, and field-proven 'Vildehaye' tags for wildlife sensing and radio tracking. Also, we discuss longevity of tags and show that WATLAS tags with a CR2032 battery transmitting at 6 s can last 226 days. 
 
 ### Ecology
 

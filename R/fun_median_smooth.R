@@ -2,7 +2,7 @@
 #'
 #' Applies a median smooth defined by a rolling window to the x and y
 #' coordinates of the data, by tag ID
-#' 
+#'
 #' Derived from `atlastools::atl_median_smooth()` in the \pkg{atlastools}
 #' package (Gupte et al., 2022), licensed under GPL-3.
 #'
@@ -84,7 +84,8 @@ atl_median_smooth <- function(data,
   x_raw <- y_raw <- NULL
 
   # check parameter types and assumptions
-  assertthat::assert_that("data.frame" %in% class(data),
+  assertthat::assert_that(
+    inherits(data, "data.frame"),
     msg = "cleanData: not a dataframe object!"
   )
 
@@ -125,7 +126,8 @@ atl_median_smooth <- function(data,
   .SDcols = c(x, y),
   by = tag]
 
-  assertthat::assert_that("data.frame" %in% class(data),
+  assertthat::assert_that(
+    inherits(data, "data.frame"),
     msg = "median_smooth: cleanded data is not a dataframe object!"
   )
 

@@ -75,7 +75,7 @@ atl_add_tidal_data <- function(data,
 
   # check data format
   assertthat::assert_that(
-    "data.frame" %in% class(data),
+    inherits(data, "data.frame"),
     msg = "Data not a data.frame object!"
   )
 
@@ -86,7 +86,10 @@ atl_add_tidal_data <- function(data,
   )
 
   # check if datetime is POSIXct
-  assertthat::assert_that("POSIXct" %in% class(data$datetime))
+  assertthat::assert_that(
+    inherits(data$datetime, "POSIXct"),
+    msg = "datetime must be a POSIXct object!"
+  )
 
   # check columns are not present already
   cols_tidal <- c("tideID", "tidaltime", "time2lowtide", "waterlevel")
@@ -101,13 +104,13 @@ atl_add_tidal_data <- function(data,
   )
 
   # convert to data.table if not
-  if (data.table::is.data.table(data) != TRUE) {
+  if (!data.table::is.data.table(data)) {
     data.table::setDT(data)
   }
-  if (data.table::is.data.table(tide_data) != TRUE) {
+  if (!data.table::is.data.table(tide_data)) {
     data.table::setDT(tide_data)
   }
-  if (data.table::is.data.table(tide_data_highres) != TRUE) {
+  if (!data.table::is.data.table(tide_data_highres)) {
     data.table::setDT(tide_data_highres)
   }
 

@@ -98,7 +98,7 @@
 #' atl_check_tag(data, option = "var")
 #' atl_check_tag(data, option = "speed_in")
 #' atl_check_tag(data, option = "gap")
-#' 
+#'
 #' # add outliers, for example for speed:
 #' data[, outlier := speed_in > 35]
 #' atl_check_tag(data, option = "speed_in", highlight_outliers = TRUE)
@@ -148,23 +148,23 @@ atl_check_tag <- function(data,
   # check data structure
   required_columns <- c("tag", "x", "y", "time", "datetime")
   option_columns <- list(
-    datetime = c(),
-    nbs = c("nbs"),
+    datetime = NULL,
+    nbs = "nbs",
     var = c("varx", "vary"),
-    speed_in = c("speed_in"),
-    gap = c("time")
+    speed_in = "speed_in",
+    gap = "time"
   )
   atl_check_data(data, names_expected = c(
     required_columns, option_columns[[option]]
   ))
 
   # if if (highlight_outliers == TRUE) {
-  if (highlight_outliers == TRUE) {
+  if (highlight_outliers) {
     atl_check_data(data, names_expected = c("outlier"))
   }
 
   # convert to DT if not
-  if (data.table::is.data.table(data) != TRUE) {
+  if (!data.table::is.data.table(data)) {
     data.table::setDT(data)
   }
 
@@ -415,10 +415,10 @@ atl_check_tag <- function(data,
   }
 
   # highlight first point if TRUE
-  if (highlight_first == TRUE) {
+  if (highlight_first) {
     p <- p +
       geom_point(
-        data = ds[is_first == TRUE],
+        data = ds[is_first],
         aes(x, y), color = "darkgreen",
         pch = 5, size = 10, stroke = 2,
         show.legend = FALSE
@@ -426,10 +426,10 @@ atl_check_tag <- function(data,
   }
 
   # highlight last point if TRUE
-  if (highlight_last == TRUE) {
+  if (highlight_last) {
     p <- p +
       geom_point(
-        data = ds[is_last == TRUE],
+        data = ds[is_last],
         aes(x, y), color = "firebrick",
         pch = 4, size = 10, stroke = 2,
         show.legend = FALSE
@@ -437,10 +437,10 @@ atl_check_tag <- function(data,
   }
 
   # highlight outlier point if TRUE
-  if (highlight_outliers == TRUE) {
+  if (highlight_outliers) {
     p <- p +
       geom_point(
-        data = ds[outlier == TRUE],
+        data = ds[outlier],
         aes(x, y), color = "dodgerblue",
         pch = 8, size = 10, stroke = 2,
         show.legend = FALSE

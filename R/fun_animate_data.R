@@ -116,12 +116,15 @@ atl_time_steps <- function(datetime_vector,
 #'   same directory.
 #' @param refresh_rate Numeric value in seconds specifying how often the
 #' progress bar updates.
+#' @param quietly Logical. If `TRUE`, no progress or completion messages are
+#'   printed. Default is `FALSE`.
 #'
 #' @returns No return value. Prints progress bar to the console.
 #' @export
 atl_progress_bar <- function(file_path,
                              total = NULL,
-                             refresh_rate = 1) {
+                             refresh_rate = 1,
+                             quietly = FALSE) {
   # check if total is provided
   if (is.null(total)) {
     total_file <- file.path(file_path, "total_frames.txt")
@@ -154,7 +157,9 @@ atl_progress_bar <- function(file_path,
     Sys.sleep(refresh_rate)
   }
 
-  cat("\nDone!\n")
+  if (!quietly) {
+    cat("\nDone!\n")
+  }
 }
 
 #' Creates different alpha values along a vector

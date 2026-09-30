@@ -4,7 +4,7 @@
 \alias{atl_compare_res_patch_summary}
 \title{Compare residence patches between two parameter sets}
 \usage{
-atl_compare_res_patch_summary(data_v1, data_v2)
+atl_compare_res_patch_summary(data_v1, data_v2, quietly = FALSE)
 }
 \arguments{
 \item{data_v1}{A data.table with residence patches assigned using the first
@@ -15,6 +15,9 @@ Data must be ordered by tag and time and can contain multiple tags.}
 \item{data_v2}{A data.table with residence patches assigned using the second
 parameter set. Must have the same structure and row order as
 \code{data_v1}, as patch columns are compared position-by-position.}
+
+\item{quietly}{Logical. If \code{TRUE}, no summary messages are
+printed. Default is \code{FALSE}.}
 }
 \value{
 A data.table summarising all detected patch changes with columns

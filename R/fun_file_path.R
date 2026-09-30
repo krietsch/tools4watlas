@@ -118,7 +118,7 @@ atl_file_path <- function(data_type = c("watlas_teams",
     ),
     stop(
       "User not recognized, please add data for your user in this function ",
-      "in tools4watlas or define the path to the folder directly.", 
+      "in tools4watlas or define the path to the folder directly.",
       call. = FALSE
     )
   )

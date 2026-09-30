@@ -4,11 +4,11 @@
 \name{tools4watlas-package}
 \alias{tools4watlas}
 \alias{tools4watlas-package}
-\title{tools4watlas: An R package for processing and visualizing high-throughput tracking data}
+\title{tools4watlas: Process and Visualize High-Throughput Animal Tracking Data}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-`tools4watlas` is an R package for processing and visualizing high-throughput animal tracking data. While tailored for the WATLAS system (Wadden Sea Advanced Tracking and Localization of Animals in real-life Systems; Bijleveld et al., 2022), its functions are broadly applicable to other high-throughput tracking datasets, and study system-specific steps can be adapted easily. In addition, the package enables the integration of environmental data (e.g., water level, bathymetry, or any other raster data), allowing to link movement data easily to other ecological data. Beyond data processing workflows, `tools4watlas` includes tutorials, and visualization functions that support static plots, interactive plots and animations of movement data, as well as base map data of the Dutch Wadden Sea.
+Tools for processing and visualising high-throughput animal tracking data. While tailored for WATLAS (Wadden Sea Advanced Tracking and Localization of Animals in real-life Systems), many functions apply to other high-throughput tracking datasets, and study system-specific steps can be adapted easily. In addition, the package enables the integration of environmental data (e.g., water level, bathymetry, or any other raster data), allowing to link movement data easily to other ecological data. Beyond data processing workflows, 'tools4watlas' includes tutorials, and visualization functions that support static plots, interactive plots and animations of movement data, as well as base map data of the Dutch Wadden Sea.
 }
 \seealso{
 Useful links:
@@ -19,11 +19,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Allert Bijleveld \email{allert.bijleveld@nioz.nl} (\href{https://orcid.org/0000-0002-3159-8944}{ORCID})
+\strong{Maintainer}: Allert Bijleveld \email{allert.bijleveld@nioz.nl} (\href{https://orcid.org/0000-0002-3159-8944}{ORCID}) [copyright holder]
 
 Authors:
 \itemize{
-  \item Allert Bijleveld \email{allert.bijleveld@nioz.nl} (\href{https://orcid.org/0000-0002-3159-8944}{ORCID})
+  \item Allert Bijleveld \email{allert.bijleveld@nioz.nl} (\href{https://orcid.org/0000-0002-3159-8944}{ORCID}) [copyright holder]
   \item Johannes Krietsch \email{johannes.krietsch@nioz.nl} (\href{https://orcid.org/0000-0002-8080-1734}{ORCID})
 }
 

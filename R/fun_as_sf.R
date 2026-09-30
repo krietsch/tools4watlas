@@ -38,14 +38,12 @@
 #' @import data.table
 #' @examples
 #' # packages
-#' library(tools4watlas)
 #' library(ggplot2)
-#' library(mapview)
 #'
 #' # load example data
 #' data <- data_example
 #'
-#' ### example "points" and "lines"
+#' # example POINTS and LINES
 #'
 #' # subset data one tag and tide
 #' data_subset <- data[tag == "3063" & tideID == "2023513"]
@@ -63,20 +61,19 @@
 #'   option = "lines"
 #' )
 #'
-#' # plot interactive map
-#' mapview(d_sf_lines, zcol = "speed_in", legend = FALSE) +
-#'   mapview(d_sf, zcol = "speed_in")
+#' # plot interactive map (only if mapview is installed)
+#' if (requireNamespace("mapview", quietly = TRUE)) {
+#'   mapview::mapview(d_sf_lines, zcol = "speed_in", legend = FALSE) +
+#'     mapview::mapview(d_sf, zcol = "speed_in")
+#' }
 #'
-#'
-#' ### example "lines"
-#'
-#' ### example "table"
+#' # example TABLE
 #'
 #' # create sf table with spatial points
 #' sf_table <- atl_as_sf(data, x = "x", y = "y", tag = "tag", option = "table")
 #' sf_table
 #'
-#' ### example "res_patches"
+#' # example RES_PATCHES
 #'
 #' # calculate residence patches for one red knot
 #' data <- atl_res_patch(

@@ -88,7 +88,7 @@ atl_thin_data <- function(data,
 
   # Input validation
   assertthat::assert_that(
-    "data.frame" %in% class(data),
+    inherits(data, "data.frame"),
     msg = "thin_data: input is not a data.frame object!"
   )
   assertthat::assert_that(
@@ -126,7 +126,7 @@ atl_thin_data <- function(data,
 
   # Identify numeric and non-numeric columns (excluding grouping/key columns)
   num_cols <- setdiff(
-    names(data)[sapply(data, is.numeric)],
+    names(data)[vapply(data, \(x) is.numeric(x), logical(1))],
     c("time_agg", id_columns)
   )
   non_num_cols <- setdiff(
@@ -232,7 +232,7 @@ atl_thin_data <- function(data,
 
   # Final validation
   assertthat::assert_that(
-    "data.frame" %in% class(data_s),
+    inherits(data_s, "data.frame"),
     msg = "thin_data: thinned data is not a data.frame object!"
   )
 
