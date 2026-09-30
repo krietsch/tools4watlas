@@ -68,7 +68,7 @@ In  **@toledo2022** we describe our tags and particulary the design of these ver
 ### Ecology
 
 #### Migration, relocation and departure decisions  
-Using WATLAS to record the timing of migration, we showed that red knots that had ad libitum food in captivity departed earlier on spring migration from the Wadden Sea than birds with restricted food access. Becasue Red Knots adjust their mass gain and moult rates to local foraging conditions, this study suggests that improved food conditions at staging sites, like the Wadden Sea, could enable earlier departures and help migratory birds better track advancing spring under climate warming **[@lameris2025]**.
+Using WATLAS to record the timing of migration, we showed that red knots that had ad libitum food in captivity departed earlier on spring migration from the Wadden Sea than birds with restricted food access. Because Red Knots adjust their mass gain and moult rates to local foraging conditions, this study suggests that improved food conditions at staging sites, like the Wadden Sea, could enable earlier departures and help migratory birds better track advancing spring under climate warming **[@lameris2025]**.
 
 In **@gobbens2024**, we studied the environmental conditions that red knots selected for relocation flights across the North Sea to the United Kingdom. Approximately 37% of tagged red knots departed yearly and on average did so a few hours after sunset, 4h before high tide, with tailwinds, and little cloud cover.  
 
@@ -83,6 +83,8 @@ In **@DanielsonOwczynsky2026**, we show that Bar-tailed Godwits select areas whe
 In **@ersoy2022**, we showed that foraging tactics and diet are associated with the personality trait 'exploration' independent of morphological differences. WATLAS was used to locate tagged individuals on mudflats for detailed behavioural observations.  
 
 Following this result, in **@ersoy2024**, we studied the development of consistency in behaviour and found that juvenile red knots had a more diverse diet than adults and had less consistent personalites. We discuss a pathway how early foraging experiences could shape development of exploratory personalities. WATLAS was used to show how juvenile red knots differed in habitat use, which is presented in the appendix. 
+
+Combining personality assays and experimental feeding manipulations with WATLAS-tracking after release, **@Tal2026** found that Red Knots’ exploration speed, measured on a small 2 by 2m spatial scale, affected spring departure timing. Fast-exploring birds departed later than slow explorers, but only when birds first faced experimentally restricted food access. Personality, thus, interacts with environmental conditions to affect large-scale global migration behaviour. 
 
 #### Climate change 
 With the climiate crisis, extreme wind speeds are predicted to occur more frequently and pose a threat to shorebirds. In **@keuning2026**, we studied how strong winds affect the availability of intertidal foraging habitat through increased water levels ('wind setup') and the behaviour of Red Knots. With high wind speeds from the West, up to 50% of mudflats stayed submerged and the availability of prey was reduced by 44%. Moreover, with strong headwinds, birds roosted closer by. These wind-driven effects are likely to increase energetic costs while reducing opportunities for food intake, thereby reshaping energy balances. 

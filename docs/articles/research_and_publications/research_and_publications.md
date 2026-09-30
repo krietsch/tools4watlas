@@ -116,7 +116,7 @@ CR2032 battery transmitting at 6 s can last 226 days.
 Using WATLAS to record the timing of migration, we showed that red knots
 that had ad libitum food in captivity departed earlier on spring
 migration from the Wadden Sea than birds with restricted food access.
-Becasue Red Knots adjust their mass gain and moult rates to local
+Because Red Knots adjust their mass gain and moult rates to local
 foraging conditions, this study suggests that improved food conditions
 at staging sites, like the Wadden Sea, could enable earlier departures
 and help migratory birds better track advancing spring under climate
@@ -165,6 +165,15 @@ consistent personalites. We discuss a pathway how early foraging
 experiences could shape development of exploratory personalities. WATLAS
 was used to show how juvenile red knots differed in habitat use, which
 is presented in the appendix.
+
+Combining personality assays and experimental feeding manipulations with
+WATLAS-tracking after release, **Tal et al. ([2026](#ref-Tal2026))**
+found that Red Knots’ exploration speed, measured on a small 2 by 2m
+spatial scale, affected spring departure timing. Fast-exploring birds
+departed later than slow explorers, but only when birds first faced
+experimentally restricted food access. Personality, thus, interacts with
+environmental conditions to affect large-scale global migration
+behaviour.
 
 #### Climate change
 
@@ -326,6 +335,11 @@ aggregation and site fidelity by red knots at two wintering sites**.
 
 Penning, E. (2023). ***Sanderlinks*** \[Thesis\].
 <https://doi.org/10.33612/diss.830020613>
+
+Tal, T., Bijleveld, A. I., Bijssum, K. van, Kressin, H., & Lameris, T.
+K. (2026). **Exploration speed in red knots affects spring migration
+timing, but only after experimentally constrained fuelling conditions**.
+*Ibis*, *n/a*, n/a. <https://doi.org/10.1111/ibi.70098>
 
 Toledo, S., Mendel, S., Levi, A., Vortman, Y., Ullmann, W., Scherer,
 L.-R., Pufelski, J., Maarseveen, F. van, Denissen, B., Bijleveld, A. I.,
