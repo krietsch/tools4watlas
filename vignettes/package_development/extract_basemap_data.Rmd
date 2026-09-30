@@ -280,5 +280,5 @@ Includes data in the package, if `tools4watlas` is opened as project.
 
 ```{r, eval=FALSE}
 # save data
-save(roosts_griend, file = "../../data/roosts_griend.rda", compress = "xz")
+usethis::use_data(roosts_griend, compress = "xz", overwrite = TRUE)
 ```

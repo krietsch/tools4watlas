@@ -103,7 +103,7 @@ head(data[, .(tag, datetime, bathymetry)]) |>
 ### Save as example data for `tools4watlas`.
 # reassign so data_example is data and select two tides
 data_example <- data[tideID %in% c(2023513, 2023514)]
-save(data_example, file = "../../data/watlas_data_example.rda")
+usethis::use_data(watlas_data_example, overwrite = TRUE)
 ```	
 
 ## Examples
