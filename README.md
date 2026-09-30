@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tools4watlas <a href="https://allertbijleveld.github.io/tools4watlas"><img src="man/figures/logo.png" align="right" height="300" alt="tools4watlas website" /></a>
+# tools4watlas <a href="https://allertbijleveld.github.io/tools4watlas/"><img src="man/figures/logo.png" align="right" height="300" alt="tools4watlas website" /></a>
 
 <!-- badges: start -->
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![R-CMD-check](https://github.com/allertbijleveld/tools4watlas/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/allertbijleveld/tools4watlas/actions/workflows/R-CMD-check.yaml)
