@@ -211,7 +211,7 @@ data[, N := NULL]
 
 ## Filtering location errors
 
-Here, we will show two ways of filtering the data by positioning errors. First, by the size of the error estimate as provided by the algorithm for calculating positions. Second, based on unreleastic speeds between sequential positions.  
+Here, we will show two ways of filtering the data by positioning errors. First, by the size of the error estimate as provided by the algorithm for calculating positions. Second, based on unrealistic speeds between sequential positions.  
 
 ### Based on WATLAS error estimate
 

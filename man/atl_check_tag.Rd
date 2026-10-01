@@ -44,7 +44,7 @@ the plot (default: 1000).}
 
 \item{asp}{The aspect ratio of the plot (default: \code{"16:9"}).}
 
-\item{option}{Determines the color mapping variable. Options are:
+\item{option}{Determines the colour mapping variable. Options are:
 \itemize{
 \item \code{"datetime"}: Datetime along the track
 \item \code{"nbs"}: Number of receiver (base) stations that contributed to the
@@ -54,12 +54,12 @@ localization
 \item \code{"gap"}: Gaps coloured by time and as point size
 }}
 
-\item{scale_option}{Character. The color scheme option from \code{viridis}
+\item{scale_option}{Character. The colour scheme option from \code{viridis}
 (default: \code{"A"}). See
 https://search.r-project.org/CRAN/refmans/viridisLite/html/viridis.html
 for all options (A-H).}
 
-\item{scale_direction}{Numeric. Direction of the color scale
+\item{scale_direction}{Numeric. Direction of the colour scale
 (-1 reverses, default: -1).}
 
 \item{scale_trans}{Transformation of the scale. Default is "identity",
@@ -67,8 +67,8 @@ for all options (A-H).}
 See scale_*_trans() for all options.}
 
 \item{scale_max}{If set, determines the max value of the scale for options:
-nbs (numeric), var (numberic), speed_in (numeric m/s), gap
-(numeric in seconds). Everything above the max value will get the max color.}
+nbs (numeric), var (numeric), speed_in (numeric m/s), gap
+(numeric in seconds). Everything above the max value will get the max colour.}
 
 \item{first_n}{Numeric (or NULL). If provided, only the first \code{n} locations
 are shown.}
@@ -99,7 +99,7 @@ track (default: \code{FALSE}).}
 
 \item{water_fill}{Water fill (default "#D7E7FF")}
 
-\item{water_colour}{Water coulour (default "grey80")}
+\item{water_colour}{Water colour (default "grey80")}
 
 \item{land_fill}{Land fill (default "#faf5ef")}
 
@@ -126,7 +126,7 @@ being returned.
 }
 \description{
 This function processes tracking data for a specific tag and generates a
-visualization using \code{ggplot2}. It allows customization of colors, point
+visualization using \code{ggplot2}. It allows customization of colours, point
 sizes, and track styles, and supports various display options such as
 datetime, nbs (number of base stations / receivers), standard deviation,
 speed_in and gap. The function can either return the plot or save it as an

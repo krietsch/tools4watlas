@@ -122,7 +122,7 @@ atl_check_res_patch(
 )
 ```
 
-It might also be convenient to zoom in on specifc range of residence patches, to inspect them in more detail.
+It might also be convenient to zoom in on specific range of residence patches, to inspect them in more detail.
 
 ```{r, fig.align = "center", fig.alt = "Overview plot res patches one tide", fig.width = 11.3, fig.height = 6.5}
 # set parameters for subsetting data
@@ -239,7 +239,7 @@ Here is description of the different columns in the output data table:
 
 
 ## Plotting residence patches
-Residence patches can be conveniently plotted using `ggplot2`. Here, we will show plotting residence patchs by individuals or species. 
+Residence patches can be conveniently plotted using `ggplot2`. Here, we will show plotting residence patches by individuals or species. 
 
 ### Plot by individual
 Here, we will provide three examples of plotting residence patches for one red knot (tag 3038). 
@@ -356,7 +356,7 @@ bm +
 
 Selecting appropriate parameters for assigning residence patches was based on a combination of biological relevance, visual inspection, systematic testing, and expert judgement.
 
-First, 'min_duration', 'lim_time_indep', and 'min_fixes' were set. To maintain biological relevance for the creation of proto-pacthes, a minimum duration of 60 s and temporal limit of 180 min were selected a-priori. Additionally, a minimum of 2 positions for a proto-patch was selected to avoid the creation of too many proto-patches with very short (biologically irrelevant) durations. These parameter settings were extensively evaluated using visual inspection. 
+First, 'min_duration', 'lim_time_indep', and 'min_fixes' were set. To maintain biological relevance for the creation of proto-patches, a minimum duration of 60 s and temporal limit of 180 min were selected a-priori. Additionally, a minimum of 2 positions for a proto-patch was selected to avoid the creation of too many proto-patches with very short (biologically irrelevant) durations. These parameter settings were extensively evaluated using visual inspection. 
 
 Second, we systematically tested a range of values for two key parameters: `max_speed` and `lim_spat_indep` . Keeping all other parameters constant (see above), we varied `max_speed` between 2, 3, 4, and 5 m/s, and  `lim_spat_indep` between 50, 75, and 100 m. For each combination of parameter values and for eight shorebird species tracked in the Wadden Sea in 2023, residence patches were computed for a subset of 100 randomly selected tag–tide combinations per species (with the condition that there are at least 500 positions per tag-tide combination). We then did a pair-wise comparison of parameter settings using `atl_compare_res_patch_summary()`, which highlighted all new, lost, merged and split residence patches. From this summary, we then selected a subset of 100 random changes that were plotted using `atl_compare_res_patch_plot()`. The 100 resulting plots of pair-wise comparisons were then scored by three expert observers. The observers could choose "left much better", "left slightly better", "similar", "right slightly better", or "right much better".
 

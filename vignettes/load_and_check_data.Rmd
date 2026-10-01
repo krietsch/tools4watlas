@@ -100,7 +100,7 @@ RSQLite::dbDisconnect(con)
 
 #### Alternatively, extract from remote SQL-database
 
-To safely work with database credentials, one option is to store them as environmental variables in R. This allows, for example, to have shared scripts on GitHub without storing the credentials online. Ask Allert for the host, username and password and then add them in your environment as indicated below. After adding the credentials to the R-environment, restart R and access should be available and the scripts should run succesfully.
+To safely work with database credentials, one option is to store them as environmental variables in R. This allows, for example, to have shared scripts on GitHub without storing the credentials online. Ask Allert for the host, username and password and then add them in your environment as indicated below. After adding the credentials to the R-environment, restart R and access should be available and the scripts should run successfully.
 
 ```{r nolint_start, echo = FALSE}
 # nolint start: assignment_linter.

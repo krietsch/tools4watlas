@@ -1,15 +1,15 @@
 #' Add tidal data to tracking data
 #'
-#' Adds a unique tide identifier, waterlevel, time from high tide and time to
+#' Adds a unique tide identifier, water level, time from high tide and time to
 #' low tide for tracking data (both in minutes).
 #'
 #' @author Pratik Gupte & Allert Bijleveld & Johannes Krietsch
 #' @param data A dataframe with the tracking data with the timestamp column
 #' 'datetime' in UTC.
 #' @param tide_data Data on the timing (in UTC) of low and high tides.
-#' @param tide_data_highres Data on the timing (in UTC) of the waterlevel in
-#' small intervals (e.g. every 10 min) as provided from Rijkwaterstaat.
-#' @param waterdata_resolution The resolution of the high resolution waterlevel
+#' @param tide_data_highres Data on the timing (in UTC) of the water level in
+#' small intervals (e.g. every 10 min) as provided from Rijkswaterstaat.
+#' @param waterdata_resolution The resolution of the high resolution water level
 #' data. This is used for matching the high resolution tidal data to the
 #' tracking data. Defaults to 10 minutes but can be set differently.
 #' @param waterdata_interpolation Time interval to which the water level data
@@ -21,7 +21,7 @@
 #' @return The input data but with three columns added: tideID (a unique number
 #' for the tidal period between two consecutive high tides), tidaltime (time
 #' since high tide in minutes), time2lowtide (time to low tide in minutes),
-#' and waterlevel with reference to NAP (cm).
+#' and water level with reference to NAP (cm).
 #' @import data.table
 #'
 #' @examples
@@ -151,7 +151,7 @@ atl_add_tidal_data <- function(data,
     on = "tideID"
   ]
 
-  # add waterlevel to tracking data
+  # add water level to tracking data
   setattr(tide_data_highres$dateTime, "tzone", "UTC")
   tide_data_highres[, dateTime := dateTime + offset * 60]
 

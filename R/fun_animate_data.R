@@ -105,7 +105,7 @@ atl_time_steps <- function(datetime_vector,
 
 #' Display a live progress bar for PNG file generation in a directory
 #'
-#' This function is meant to track the progress of PNG's created in a parallel
+#' This function is meant to track the progress of PNGs created in a parallel
 #' loop. It will check the number of PNG files in a specified directory and
 #' make a progress bar in the console. To use the function, open a new R session
 #' and run the function there.
@@ -164,14 +164,14 @@ atl_progress_bar <- function(file_path,
 
 #' Creates different alpha values along a vector
 #'
-#' Copied from https://github.com/mpio-be/windR
+#' Copied from https://github.com/ornitho-logics/windR
 #'
 #' @author Mihai Valcu & Johannes Krietsch
 #' @param x Vector along which alpha is created
-#' @param head Numeric parameter influencing the lenght of the head
+#' @param head Numeric parameter influencing the length of the head
 #' @param skew Numeric parameter influencing the skew of alpha
 #'
-#' @return Numeric verctor with different alpha values
+#' @return Numeric vector with different alpha values
 #' @export
 #'
 #' @importFrom scales rescale
@@ -194,14 +194,14 @@ atl_alpha_along <- function(x, head = 20, skew = -2) {
 
 #' Creates different size values along a vector
 #'
-#' Copied from https://github.com/mpio-be/windR
+#' Copied from https://github.com/ornitho-logics/windR
 #'
 #' @author Mihai Valcu & Johannes Krietsch
 #' @param x Vector along which alpha is created
-#' @param head Numeric parameter influencing the lenght of the head
+#' @param head Numeric parameter influencing the length of the head
 #' @param to Numeric vector including the minimum and maximum size
 #'
-#' @return Numeric verctor with different size values
+#' @return Numeric vector with different size values
 #' @export
 #'
 #' @importFrom scales rescale

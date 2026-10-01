@@ -1,6 +1,6 @@
 #' Calculate instantaneous speed
 #'
-#' Returns additional columns for incoming and outcoming speed to the
+#' Returns additional columns for incoming and outgoing speed to the
 #' data.table. Speed in metres per time interval. The time interval is dependent
 #' on the units of the column specified in \code{time}.
 #'

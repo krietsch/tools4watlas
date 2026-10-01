@@ -9,15 +9,15 @@ atl_size_along(x, head = 20, to = c(0.1, 2.5))
 \arguments{
 \item{x}{Vector along which alpha is created}
 
-\item{head}{Numeric parameter influencing the lenght of the head}
+\item{head}{Numeric parameter influencing the length of the head}
 
 \item{to}{Numeric vector including the minimum and maximum size}
 }
 \value{
-Numeric verctor with different size values
+Numeric vector with different size values
 }
 \description{
-Copied from https://github.com/mpio-be/windR
+Copied from https://github.com/ornitho-logics/windR
 }
 \examples{
 library(ggplot2)

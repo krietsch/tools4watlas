@@ -127,7 +127,7 @@ head(thinned_aggregated[, .(tag, time, datetime, x, y, n_aggregated)]) |>
   knitr::kable(digits = 2)
 ```
 
-### By subsampling
+### By sub-sampling
 
 Returns the first position for each time step. The column `n_subsampled` shows from how many positions this position was sampled.
 

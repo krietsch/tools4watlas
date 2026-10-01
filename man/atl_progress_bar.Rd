@@ -23,7 +23,7 @@ printed. Default is \code{FALSE}.}
 No return value. Prints progress bar to the console.
 }
 \description{
-This function is meant to track the progress of PNG's created in a parallel
+This function is meant to track the progress of PNGs created in a parallel
 loop. It will check the number of PNG files in a specified directory and
 make a progress bar in the console. To use the function, open a new R session
 and run the function there.

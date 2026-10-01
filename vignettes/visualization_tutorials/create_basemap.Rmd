@@ -48,7 +48,7 @@ bm +
 
 ### Basemap independent of movement data
 
-This can be useful when one wants to zoom into a specific area of the plot or has an area of interest, but the movement data can extent beyond this specifieds range. If no data are provided, the function defaults to a map around Griend (our main study site) with a specified buffer. 
+This can be useful when one wants to zoom into a specific area of the plot or has an area of interest, but the movement data can extent beyond this specified range. If no data are provided, the function defaults to a map around Griend (our main study site) with a specified buffer. 
 
 ```{r, fig.alt = "Basemap around Griend"}
 # create basemap
@@ -164,7 +164,7 @@ bm <- atl_create_bm(
 bm
 ```
 
-We can also add some shading (`shade = TRUE`) to the bathymetry data to highlight the geomorphological structures better. Note that calculating shading can take a while, especially for large maps. We remommend using this option only for polished maps.
+We can also add some shading (`shade = TRUE`) to the bathymetry data to highlight the geomorphological structures better. Note that calculating shading can take a while, especially for large maps. We recommend using this option only for polished maps.
 
 ```{r, fig.alt = "Bathymetry map with shade", warning=FALSE}
 # additional packages

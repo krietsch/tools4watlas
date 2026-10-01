@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tools4watlas <a href="https://allertbijleveld.github.io/tools4watlas"><img src="man/figures/logo.png" align="right" height="300" alt="tools4watlas website" /></a>
+# tools4watlas <a href="https://allertbijleveld.github.io/tools4watlas/"><img src="man/figures/logo.png" align="right" height="300" alt="tools4watlas website" /></a>
 
 <!-- badges: start -->
 

@@ -35,8 +35,8 @@
 #'   Default is `unit(0.5, "cm")`.
 #' @param projection The coordinate reference system (CRS) for the spatial data.
 #'   Defaults to EPSG:32631 (WGS 84 / UTM zone 31N). Output is always EPSG:4326.
-#'   Bounding box calculation is much faster when uusing EPSG:3263, so use it
-#'   like this whenwever possible and then only plot the movement tracks in
+#'   Bounding box calculation is much faster when using EPSG:3263, so use it
+#'   like this whenever possible and then only plot the movement tracks in
 #'   EPSG:4326 on the map.
 #' @return A `ggplot2` object representing the base map with the specified
 #'   settings.

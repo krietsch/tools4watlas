@@ -88,7 +88,7 @@ Defaults to EPSG:32631 (WGS 84 / UTM zone 31N). Output is always UTM 31N}
 
 \item{water_fill}{Water fill (default "#D7E7FF")}
 
-\item{water_colour}{Water coulour (default "grey80")}
+\item{water_colour}{Water colour (default "grey80")}
 
 \item{land_fill}{Land fill (default "#faf5ef")}
 

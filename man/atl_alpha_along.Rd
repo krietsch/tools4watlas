@@ -9,15 +9,15 @@ atl_alpha_along(x, head = 20, skew = -2)
 \arguments{
 \item{x}{Vector along which alpha is created}
 
-\item{head}{Numeric parameter influencing the lenght of the head}
+\item{head}{Numeric parameter influencing the length of the head}
 
 \item{skew}{Numeric parameter influencing the skew of alpha}
 }
 \value{
-Numeric verctor with different alpha values
+Numeric vector with different alpha values
 }
 \description{
-Copied from https://github.com/mpio-be/windR
+Copied from https://github.com/ornitho-logics/windR
 }
 \examples{
 library(ggplot2)

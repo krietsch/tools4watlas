@@ -1,7 +1,7 @@
 #' Check the data from one tag on a map
 #'
 #' This function processes tracking data for a specific tag and generates a
-#' visualization using `ggplot2`. It allows customization of colors, point
+#' visualization using `ggplot2`. It allows customization of colours, point
 #' sizes, and track styles, and supports various display options such as
 #' datetime, nbs (number of base stations / receivers), standard deviation,
 #' speed_in and gap. The function can either return the plot or save it as an
@@ -13,25 +13,25 @@
 #' @param buffer Numeric. The buffer size in meters around the data points in
 #' the plot (default: 1000).
 #' @param asp The aspect ratio of the plot (default: `"16:9"`).
-#' @param option Determines the color mapping variable. Options are:
+#' @param option Determines the colour mapping variable. Options are:
 #'   - `"datetime"`: Datetime along the track
 #'   - `"nbs"`: Number of receiver (base) stations that contributed to the
 #'   localization
 #'   - `"var"`: Error as maximal variance of varx and vary
 #'   - `"speed_in"`: Speed in m/s
 #'   - `"gap"`: Gaps coloured by time and as point size
-#' @param scale_option Character. The color scheme option from `viridis`
+#' @param scale_option Character. The colour scheme option from `viridis`
 #'   (default: `"A"`). See
 #'    https://search.r-project.org/CRAN/refmans/viridisLite/html/viridis.html
 #'    for all options (A-H).
-#' @param scale_direction Numeric. Direction of the color scale
+#' @param scale_direction Numeric. Direction of the colour scale
 #'   (-1 reverses, default: -1).
 #' @param scale_trans Transformation of the scale. Default is "identity",
 #' (no transformation), could be e.g. "log", "log10" or "sqrt".
 #' See scale_*_trans() for all options.
 #' @param scale_max If set, determines the max value of the scale for options:
-#' nbs (numeric), var (numberic), speed_in (numeric m/s), gap
-#' (numeric in seconds). Everything above the max value will get the max color.
+#' nbs (numeric), var (numeric), speed_in (numeric m/s), gap
+#' (numeric in seconds). Everything above the max value will get the max colour.
 #' @param first_n Numeric (or NULL). If provided, only the first `n` locations
 #'   are shown.
 #' @param last_n Numeric (or NULL). If provided, only the last `n` locations
@@ -50,7 +50,7 @@
 #' @param path_alpha Transparency of the track lines (default: 0.1).
 #' @param element_text_size Adjust size of the text.
 #' @param water_fill Water fill (default "#D7E7FF")
-#' @param water_colour Water coulour (default "grey80")
+#' @param water_colour Water colour (default "grey80")
 #' @param land_fill Land fill (default "#faf5ef")
 #' @param land_colour Land colour (default "grey80")
 #' @param mudflat_colour Mudflat colour (default "#faf5ef")

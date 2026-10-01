@@ -36,7 +36,7 @@
 
 #' Data from two red knots and one redshank
 #'
-#' @format data.table of watlas data with tide data added
+#' @format data.table of WATLAS data with tide data added
 #'
-#' @source watlas data example
+#' @source WATLAS data example
 "data_example"

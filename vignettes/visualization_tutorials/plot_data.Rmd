@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 This article shows different ways of plotting WATLAS position data. In these examples, we use a simple basemap with the extend of the data, but any other type could be used too (see Article [Create a basemap](https://allertbijleveld.github.io/tools4watlas/articles/visualization_tutorials/create_basemap.html)).
 
-We first present some examples of plotting data grouped by tag ID, then by species, and then by individual. These individual plots allow quickly check the data. We end by whoing how to plot heatmaps of the position data. These examples give a starting point, and can be customized as desired.
+We first present some examples of plotting data grouped by tag ID, then by species, and then by individual. These individual plots allow quickly check the data. We end by showing how to plot heatmaps of the position data. These examples give a starting point, and can be customized as desired.
 
 ## Load packages
 

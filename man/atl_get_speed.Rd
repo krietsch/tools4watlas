@@ -33,7 +33,7 @@ by \code{type = "out"} or both c("in", "out").}
 Data.table changed in place with additional speed columns
 }
 \description{
-Returns additional columns for incoming and outcoming speed to the
+Returns additional columns for incoming and outgoing speed to the
 data.table. Speed in metres per time interval. The time interval is dependent
 on the units of the column specified in \code{time}.
 }

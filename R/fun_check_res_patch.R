@@ -9,7 +9,7 @@
 #'   `patch`,  as created by `atl_res_patch()`.
 #' @param tide_data Data on the timing (in UTC) of low and high tides.
 #' @param tide_data_highres Data on the timing (in UTC) of the waterlevel in
-#' small intervals (e.g. every 10 min) as provided from Rijkwaterstaat.
+#' small intervals (e.g. every 10 min) as provided from Rijkswaterstaat.
 #' @param tide Tide ID to subset.
 #' @param offset The offset in minutes between the location of the tidal gauge
 #' and the tracking area. This value will be added to the timing of the

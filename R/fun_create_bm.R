@@ -40,7 +40,7 @@
 #' @param projection The coordinate reference system (CRS) for the spatial data.
 #'   Defaults to EPSG:32631 (WGS 84 / UTM zone 31N). Output is always UTM 31N
 #' @param water_fill Water fill (default "#D7E7FF")
-#' @param water_colour Water coulour (default "grey80")
+#' @param water_colour Water colour (default "grey80")
 #' @param land_fill Land fill (default "#faf5ef")
 #' @param land_colour Land colour (default "grey80")
 #' @param mudflat_colour Mudflat colour (default "#faf5ef")

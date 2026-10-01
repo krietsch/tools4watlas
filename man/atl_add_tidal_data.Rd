@@ -19,10 +19,10 @@ atl_add_tidal_data(
 
 \item{tide_data}{Data on the timing (in UTC) of low and high tides.}
 
-\item{tide_data_highres}{Data on the timing (in UTC) of the waterlevel in
-small intervals (e.g. every 10 min) as provided from Rijkwaterstaat.}
+\item{tide_data_highres}{Data on the timing (in UTC) of the water level in
+small intervals (e.g. every 10 min) as provided from Rijkswaterstaat.}
 
-\item{waterdata_resolution}{The resolution of the high resolution waterlevel
+\item{waterdata_resolution}{The resolution of the high resolution water level
 data. This is used for matching the high resolution tidal data to the
 tracking data. Defaults to 10 minutes but can be set differently.}
 
@@ -38,10 +38,10 @@ water data.}
 The input data but with three columns added: tideID (a unique number
 for the tidal period between two consecutive high tides), tidaltime (time
 since high tide in minutes), time2lowtide (time to low tide in minutes),
-and waterlevel with reference to NAP (cm).
+and water level with reference to NAP (cm).
 }
 \description{
-Adds a unique tide identifier, waterlevel, time from high tide and time to
+Adds a unique tide identifier, water level, time from high tide and time to
 low tide for tracking data (both in minutes).
 }
 \examples{

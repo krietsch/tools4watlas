@@ -25,12 +25,12 @@
 #' coordinates column or "res_patches" to return sf polygons with residency
 #' patches. For the latter, it is best to specify the buffer around points to
 #' half of \code{lim_spat_indep} of the residency patch calculation. If not
-#' the function can create MULTIPOLGONS for single residency patches. That will
+#' the function can create MULTIPOLYGONS for single residency patches. That will
 #' give a warning message, but works if desired.
 #' @param buffer A numeric value (in meters) specifying the buffer around the
 #' polygon of each residency patch. This should be set to half of
 #' \code{lim_spat_indep} of the residency patch calculation. If not
-#' the function can create MULTIPOLGONS for single residency patches. That will
+#' the function can create MULTIPOLYGONS for single residency patches. That will
 #' give a warning message, but works if desired.
 #' \code{lim_spat_indep} of the residency patch calculation.
 #' @return An `sf` object containing the specified coordinates as geometry and

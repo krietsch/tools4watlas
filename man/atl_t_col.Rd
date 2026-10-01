@@ -7,35 +7,35 @@
 atl_t_col(color, percent = 50, name = NULL)
 }
 \arguments{
-\item{color}{The color to make transparant.}
+\item{color}{The colour to make transparent.}
 
-\item{percent}{The percentage of transparancy to apply .}
+\item{percent}{The percentage of transparency to apply .}
 
 \item{name}{The name argument as passed on to rgb.}
 }
 \value{
-The transparant color will be returned.
+The transparent colour will be returned.
 }
 \description{
-A functionm that will make the provided colour transparent.
+A function that will make the provided colour transparent.
 }
 \examples{
 # Example with 50\% transparency
-color_with_alpha <- atl_t_col("blue", percent = 50)
-print(color_with_alpha)
+colour_with_alpha <- atl_t_col("blue", percent = 50)
+print(colour_with_alpha)
 
 plot(1, 1,
-  col = color_with_alpha, pch = 16, cex = 20,
-  xlab = "X", ylab = "Y", main = "Point with Transparent Color"
+  col = colour_with_alpha, pch = 16, cex = 20,
+  xlab = "X", ylab = "Y", main = "Point with Transparent Colour"
 )
 
 # Example with 30\% transparency
-color_with_alpha <- atl_t_col("red", percent = 90)
-print(color_with_alpha)
+colour_with_alpha <- atl_t_col("red", percent = 90)
+print(colour_with_alpha)
 
 plot(1, 1,
   col = color_with_alpha, pch = 16, cex = 20,
-  xlab = "X", ylab = "Y", main = "Point with Transparent Color"
+  xlab = "X", ylab = "Y", main = "Point with Transparent Colour"
 )
 }
 \author{

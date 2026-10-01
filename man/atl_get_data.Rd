@@ -41,7 +41,7 @@ Must be a valid timezone for the as.POSIXct function.}
 \item{password}{Password to access the server.}
 
 \item{SQLiteDB}{The full path including the filename of a local
-SQLite-database whith tracking data. This argument overrules establishing
+SQLite-database with tracking data. This argument overrules establishing
 a connection with the remote host.}
 
 \item{use_connection}{An R-object with a previously established connection,
