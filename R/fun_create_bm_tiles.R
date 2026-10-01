@@ -45,9 +45,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' # packages
-#' library(tools4watlas)
 #' library(ggplot2)
 #'
 #' # example with open street map
@@ -80,7 +78,7 @@
 #'   ) +
 #'   scale_color_discrete(name = paste("N = ", length(unique(data$tag)))) +
 #'   theme(legend.position = "top")
-#' }
+#'
 atl_create_bm_tiles <- function(data = NULL,
                                 x = "x",
                                 y = "y",

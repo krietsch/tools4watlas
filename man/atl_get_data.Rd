@@ -75,6 +75,47 @@ existing opened data base connection that can be provided in
 loop of tags and tide ID's. Because establishing a connection within a
 for-loop takes a long time, an established connection can be used.
 }
+\examples{
+\dontshow{if (requireNamespace("readxl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+# packages
+library(data.table)
+
+# file path to the metadata
+fp <- system.file(
+  "extdata", "tags_watlas_subset.xlsx", package = "tools4watlas"
+)
+
+# load meta data
+all_tags <- readxl::read_excel(fp, sheet = "tags_watlas_all") |>
+  data.table()
+
+# subset desired tags using data.table
+# (for example all tags from 2023)
+tags <- all_tags[year == 2023]$tag
+
+# time period for which data should be extracted form the database (in CET)
+from <- "2023-09-21 00:00:00"
+to <- "2023-09-25 00:00:00"
+
+# establish database connection
+sqlite_db <- system.file(
+  "extdata", "watlas_example.SQLite", package = "tools4watlas"
+)
+con <- RSQLite::dbConnect(RSQLite::SQLite(), sqlite_db)
+
+# load data from database
+data <- atl_get_data(
+  tags,
+  tracking_time_start = from,
+  tracking_time_end = to,
+  timezone = "CET",
+  use_connection = con
+)
+
+# close connection
+RSQLite::dbDisconnect(con)
+\dontshow{\}) # examplesIf}
+}
 \author{
 Pratik R. Gupte & Allert I. Bijleveld & Johannes Krietsch
 }

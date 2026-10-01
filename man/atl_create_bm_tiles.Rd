@@ -79,9 +79,7 @@ This function creates a basemap using spatial data layers, allowing for
 custom bounding boxes, aspect ratios, and scale bar adjustments.
 }
 \examples{
-\dontrun{
 # packages
-library(tools4watlas)
 library(ggplot2)
 
 # example with open street map
@@ -114,7 +112,7 @@ bm +
   ) +
   scale_color_discrete(name = paste("N = ", length(unique(data$tag)))) +
   theme(legend.position = "top")
-}
+
 }
 \author{
 Johannes Krietsch

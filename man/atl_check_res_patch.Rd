@@ -148,16 +148,19 @@ measured_water_height_fp <- system.file(
 tidal_pattern <- fread(tidal_pattern_fp, yaml = TRUE)
 measured_water_height <- fread(measured_water_height_fp)
 
+# subset data of one red knot
+data_subset <- data[tag == "3038"]
+
 # calculate residence patches for one red knot
-data <- atl_res_patch(
-  data[tag == "3038"],
+data_subset <- atl_res_patch(
+  data_subset,
   max_speed = 3, lim_spat_indep = 75, lim_time_indep = 180,
   min_fixes = 2, min_duration = 60
 )
 
 # plot example
 atl_check_res_patch(
-  data[tag == "3038"],
+  data_subset,
   tide_data = tidal_pattern, tide_data_highres = measured_water_height,
   tide = "2023513", offset = 30,
   buffer_res_patches = 75 / 2

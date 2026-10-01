@@ -19,6 +19,35 @@
 #' @param change_unit Numeric value by which to multiply extracted raster values
 #' #'   before adding them to the data. Defaults to `1`.
 #'
+#' @examples
+#' library(terra)
+#' 
+#' # example data: subset one tag 
+#' data <- data_example[tag == "3027"]
+#' 
+#' # made-up bathymetry raster (cm) covering the data, 20 m resolution,
+#' # with a west-east gradient from -200 to 200
+#' bat <- rast(
+#'   xmin = floor(min(data$x)) - 100, xmax = ceiling(max(data$x)) + 100,
+#'   ymin = floor(min(data$y)) - 100, ymax = ceiling(max(data$y)) + 100,
+#'   resolution = 20, crs = "EPSG:32631"
+#' )
+#' xs <- xFromCell(bat, seq_len(ncell(bat)))
+#' values(bat) <- (xs - min(xs)) / (max(xs) - min(xs)) * 400 - 200
+#' names(bat) <- "bathymetry"
+#' 
+#' # add raster values to the data (first raster layer by default)
+#' data <- atl_add_raster_data(data, raster_data = bat)
+#' head(data[, .(tag, x, y, bathymetry)])
+#' 
+#' # choose the layer, name the new column and convert units (cm to m)
+#' data <- atl_add_raster_data(
+#'   data,
+#'   raster_data = bat, var_name = "bathymetry",
+#'   new_name = "bathymetry_m", change_unit = 0.01
+#' )
+#' head(data[, .(tag, x, y, bathymetry, bathymetry_m)])
+#'
 #' @return A `data.table` with the extracted raster data added as a new column.
 #' @export
 atl_add_raster_data <- function(data = NULL,

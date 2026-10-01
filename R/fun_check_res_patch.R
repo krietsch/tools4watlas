@@ -80,16 +80,19 @@
 #' tidal_pattern <- fread(tidal_pattern_fp, yaml = TRUE)
 #' measured_water_height <- fread(measured_water_height_fp)
 #'
+#' # subset data of one red knot
+#' data_subset <- data[tag == "3038"]
+#' 
 #' # calculate residence patches for one red knot
-#' data <- atl_res_patch(
-#'   data[tag == "3038"],
+#' data_subset <- atl_res_patch(
+#'   data_subset,
 #'   max_speed = 3, lim_spat_indep = 75, lim_time_indep = 180,
 #'   min_fixes = 2, min_duration = 60
 #' )
 #'
 #' # plot example
 #' atl_check_res_patch(
-#'   data[tag == "3038"],
+#'   data_subset,
 #'   tide_data = tidal_pattern, tide_data_highres = measured_water_height,
 #'   tide = "2023513", offset = 30,
 #'   buffer_res_patches = 75 / 2
@@ -529,15 +532,14 @@ atl_check_res_patch <- function(data,
 
   # return or save
   if (is.null(filename)) {
-    # return if no filename provided
     p
   } else {
-    # save the plot if filename provided
-    agg_png(
+    ggplot2::ggsave(
       filename = paste0(filename, ".png"),
-      width = png_width, height = png_height, units = "px", res = 300
+      plot = p,
+      device = ragg::agg_png,
+      width = png_width, height = png_height, units = "px", dpi = 300
     )
-    print(p)
-    dev.off()
+    invisible(p)
   }
 }

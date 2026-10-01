@@ -122,9 +122,6 @@ setting \code{time_buffer} other patches (or parts within the buffer) will be
 shown in the plot if they are within the period.
 }
 \examples{
-# packages
-library(tools4watlas)
-library(foreach)
 
 # load example data
 data <- data_example

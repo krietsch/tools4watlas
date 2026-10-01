@@ -28,3 +28,21 @@ loop. It will check the number of PNG files in a specified directory and
 make a progress bar in the console. To use the function, open a new R session
 and run the function there.
 }
+\examples{
+# create a temporary directory with dummy png files
+dir <- file.path(tempdir(), "animation")
+dir.create(dir, showWarnings = FALSE)
+file.create(file.path(dir, sprintf("frame_\%03d.png", 1:10)))
+
+# progress bar with a known total number of frames
+atl_progress_bar(file_path = dir, total = 10, refresh_rate = 0.1)
+
+# total read from 'total_frames.txt' in the same directory
+# (normally created by atl_time_steps())
+writeLines("10", file.path(dir, "total_frames.txt"))
+atl_progress_bar(file_path = dir, refresh_rate = 0.1)
+
+# clean up
+unlink(dir, recursive = TRUE)
+
+}

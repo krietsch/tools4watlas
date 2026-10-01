@@ -76,6 +76,10 @@ VignetteBuilder:
     knitr
 Config/roxygen2/version: 8.1.0
 Config/testthat/edition: 3
+Config/checktor/allow: acronyms:WATLAS,
+    print_cat_usage:fun_check_res_patch.R,
+    print_cat_usage:fun_check_tag.R,
+    print_cat_usage:fun_compare_res_patch_plot.R
 Encoding: UTF-8
 Language: en-GB
 LazyData: true

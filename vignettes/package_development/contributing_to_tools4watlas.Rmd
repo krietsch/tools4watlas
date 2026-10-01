@@ -95,6 +95,22 @@ devtools::test()
 covr::package_coverage()
 ```
 
+### Check for good practice
+
+For further in-depth checking of CRAN coding standards, one can use the [`goodpractice`](https://ropensci-review-tools.github.io/goodpractice/articles/goodpractice.html) and [`checktor`](https://r-packages.io/packages/checktor) package. At the moment `tools4watlas` does not pass all the checks and currently we are not planning to submit the package to CRAN, but especially for new code, it makes sense to follow these standards.
+
+```{r, eval=FALSE}
+# full test of good practices
+goodpractice::gp()
+
+# basic CRAN checks
+checks <- checktor::checktor()
+checks
+
+# treatment recommendations
+checktor::prescribe(checks)
+```
+
 ### Vignettes and articles
 
 Vignettes and articles are both types of documentation of an R package. The difference is that vignettes are included in the package (always checked with `devtools::check()` and would be included on CRAN) and have to run with all data provided with the package. Articles on the other hand, are not included in the package and can include links to local data (e.g. that are to large to include in the package). They are only presented on the package website (see below). All vignettes are articles, but not all articles are vignettes.

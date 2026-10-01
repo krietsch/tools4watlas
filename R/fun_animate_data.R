@@ -119,6 +119,23 @@ atl_time_steps <- function(datetime_vector,
 #' @param quietly Logical. If `TRUE`, no progress or completion messages are
 #'   printed. Default is `FALSE`.
 #'
+#' @examples
+#' # create a temporary directory with dummy png files
+#' dir <- file.path(tempdir(), "animation")
+#' dir.create(dir, showWarnings = FALSE)
+#' file.create(file.path(dir, sprintf("frame_%03d.png", 1:10)))
+#'
+#' # progress bar with a known total number of frames
+#' atl_progress_bar(file_path = dir, total = 10, refresh_rate = 0.1)
+#'
+#' # total read from 'total_frames.txt' in the same directory
+#' # (normally created by atl_time_steps())
+#' writeLines("10", file.path(dir, "total_frames.txt"))
+#' atl_progress_bar(file_path = dir, refresh_rate = 0.1)
+#'
+#' # clean up
+#' unlink(dir, recursive = TRUE)
+#' 
 #' @returns No return value. Prints progress bar to the console.
 #' @export
 atl_progress_bar <- function(file_path,
