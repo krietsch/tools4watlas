@@ -55,7 +55,7 @@ basemap](create_basemap_files/figure-html/unnamed-chunk-2-1.png)
 
 This can be useful when one wants to zoom into a specific area of the
 plot or has an area of interest, but the movement data can extent beyond
-this specifieds range. If no data are provided, the function defaults to
+this specified range. If no data are provided, the function defaults to
 a map around Griend (our main study site) with a specified buffer.
 
 ``` r
@@ -233,7 +233,7 @@ map](create_basemap_files/figure-html/unnamed-chunk-8-1.png)
 
 We can also add some shading (`shade = TRUE`) to the bathymetry data to
 highlight the geomorphological structures better. Note that calculating
-shading can take a while, especially for large maps. We remommend using
+shading can take a while, especially for large maps. We recommend using
 this option only for polished maps.
 
 ``` r

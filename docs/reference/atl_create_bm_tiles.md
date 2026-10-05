@@ -97,8 +97,8 @@ atl_create_bm_tiles(
 
   The coordinate reference system (CRS) for the spatial data. Defaults
   to EPSG:32631 (WGS 84 / UTM zone 31N). Output is always EPSG:4326.
-  Bounding box calculation is much faster when uusing EPSG:3263, so use
-  it like this whenwever possible and then only plot the movement tracks
+  Bounding box calculation is much faster when using EPSG:3263, so use
+  it like this whenever possible and then only plot the movement tracks
   in EPSG:4326 on the map.
 
 ## Value
@@ -113,9 +113,7 @@ Johannes Krietsch
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
 # packages
-library(tools4watlas)
 library(ggplot2)
 
 # example with open street map
@@ -124,11 +122,13 @@ bm <- atl_create_bm_tiles(
 )
 print(bm)
 
+
 # example with satellite map
 bm <- atl_create_bm_tiles(
   buffer = 15000, option = "Esri.WorldImagery", zoom = 12
 )
 print(bm)
+
 
 # example with bbox from data and movement data
 data <- data_example
@@ -148,5 +148,5 @@ bm +
   ) +
   scale_color_discrete(name = paste("N = ", length(unique(data$tag)))) +
   theme(legend.position = "top")
-} # }
+
 ```

@@ -62,7 +62,7 @@ atl_as_sf(
   coordinates column or "res_patches" to return sf polygons with
   residency patches. For the latter, it is best to specify the buffer
   around points to half of `lim_spat_indep` of the residency patch
-  calculation. If not the function can create MULTIPOLGONS for single
+  calculation. If not the function can create MULTIPOLYGONS for single
   residency patches. That will give a warning message, but works if
   desired.
 
@@ -71,7 +71,7 @@ atl_as_sf(
   A numeric value (in meters) specifying the buffer around the polygon
   of each residency patch. This should be set to half of
   `lim_spat_indep` of the residency patch calculation. If not the
-  function can create MULTIPOLGONS for single residency patches. That
+  function can create MULTIPOLYGONS for single residency patches. That
   will give a warning message, but works if desired. `lim_spat_indep` of
   the residency patch calculation.
 
@@ -90,12 +90,11 @@ Johannes Krietsch
 # packages
 library(tools4watlas)
 library(ggplot2)
-library(mapview)
 
 # load example data
 data <- data_example
 
-### example "points" and "lines"
+# example POINTS and LINES
 
 # subset data one tag and tide
 data_subset <- data[tag == "3063" & tideID == "2023513"]
@@ -113,37 +112,36 @@ d_sf_lines <- atl_as_sf(
   option = "lines"
 )
 
-# plot interactive map
-mapview(d_sf_lines, zcol = "speed_in", legend = FALSE) +
-  mapview(d_sf, zcol = "speed_in")
+# plot interactive map (only if mapview is installed)
+if (requireNamespace("mapview", quietly = TRUE)) {
+  mapview::mapview(d_sf_lines, zcol = "speed_in", legend = FALSE) +
+    mapview::mapview(d_sf, zcol = "speed_in")
+}
 
-
-### example "lines"
-
-### example "table"
+# example TABLE
 
 # create sf table with spatial points
 sf_table <- atl_as_sf(data, x = "x", y = "y", tag = "tag", option = "table")
 sf_table
 #>           tag                 geometry
 #>        <char>              <sfc_POINT>
-#>     1:   3212 POINT (650151.6 5902407)
-#>     2:   3158   POINT (649975 5902425)
-#>     3:   3288 POINT (650188.7 5902413)
-#>     4:   3038 POINT (650120.1 5902400)
-#>     5:   3038 POINT (650120.1 5902400)
+#>     1:   3027 POINT (650705.6 5902556)
+#>     2:   3027 POINT (650705.6 5902556)
+#>     3:   3027   POINT (650721 5902559)
+#>     4:   3027 POINT (650721.1 5902559)
+#>     5:   3027 POINT (650723.1 5902564)
 #>    ---                                
-#> 84411:   3212 POINT (650183.4 5902397)
-#> 84412:   3158 POINT (650004.4 5902405)
-#> 84413:   3038 POINT (650159.1 5902391)
-#> 84414:   3158 POINT (650004.4 5902405)
-#> 84415:   3038 POINT (650159.1 5902391)
+#> 84411:   3288 POINT (650178.5 5902404)
+#> 84412:   3288 POINT (650178.5 5902404)
+#> 84413:   3288 POINT (650178.5 5902404)
+#> 84414:   3288 POINT (650178.2 5902403)
+#> 84415:   3288 POINT (650177.5 5902403)
 
-### example "res_patches"
+# example RES_PATCHES
 
 # calculate residence patches for one red knot
 data <- atl_res_patch(
-  data[tag == "3038"],
+  data_subset,
   max_speed = 3, lim_spat_indep = 75, lim_time_indep = 180,
   min_fixes = 3, min_duration = 120
 )

@@ -19,7 +19,7 @@ increased understanding of the ecology of animal movement. Particularly
 that advances in high-throughput wildlife tracking systems now allow
 more thorough investigation of variation among individuals and species
 across space and time, the nature of biological interactions, and
-behavioral responses to the environment.
+behavioural responses to the environment.
 
 ## Prologue to WATLAS
 
@@ -55,8 +55,8 @@ times accordingly. These findings suggest that diet preferences can
 cause the observed among-individual variation in gizzard mass and patch
 residence times **([Oudman et al., 2016](#ref-oudman2016))**.
 
-Having deployed the same tracking and resouce sampling methods in
-Mauritania and the Wadden Sea allowed a comparisson within species
+Having deployed the same tracking and resource sampling methods in
+Mauritania and the Wadden Sea allowed a comparison within species
 **([Oudman et al., 2018](#ref-oudman2018))**. Compared to Banc d’Arguin,
 resource patches in the Wadden Sea were larger and the maximum local
 resource abundance was higher. However, because of constraints set by
@@ -68,19 +68,19 @@ fidelity (i.e. grouping nomads), whereas in Banc d’Arguin they acted
 more individually with strong site-fidelity (i.e. solitary residents).
 
 For a broader review on circadian rhythms, we re-analysed the high
-resolution tracking data from Red Knots in Mauritanie. We revealed
+resolution tracking data from Red Knots in Mauritania. We revealed
 individual differences in tidal and circadian foraging rhythms and
 highlight potential fruitful avenues for further studies **([Bulla et
 al., 2017](#ref-bulla2017))**.
 
 ## WATLAS research
 
-After an intitial development starting in 2016, we first deployed WATLAS
-as a pilot study near Griend with 5 receivers in 2017. After its succes,
-we deployed 15 recievers in 2018 and scaled-up to almost 30 receivers in
-2019 covering a large part of the Western Dutch Wadden Sea. From 2025
-onwards, WATLAS will be further developed to cover the entire Dutch
-Wadden Sea.
+After an initial development starting in 2016, we first deployed WATLAS
+as a pilot study near Griend with 5 receivers in 2017. After its
+success, we deployed 15 receivers in 2018 and scaled-up to almost 30
+receivers in 2019 covering a large part of the Western Dutch Wadden Sea.
+From 2025 onwards, WATLAS will be further developed to cover the entire
+Dutch Wadden Sea.
 
 ### Validation
 
@@ -104,7 +104,7 @@ et al. ([2022](#ref-gupte2022))**. Note that `tools4watlas` is developed
 from `atlastools`.
 
 In **Toledo et al. ([2022](#ref-toledo2022))** we describe our tags and
-particulary the design of these versatile, widely-applicable, and
+particularly the design of these versatile, widely-applicable, and
 field-proven ‘Vildehaye’ tags for wildlife sensing and radio tracking.
 Also, we discuss longevity of tags and show that WATLAS tags with a
 CR2032 battery transmitting at 6 s can last 226 days.
@@ -140,7 +140,7 @@ In **Penning et al. (in prep)**, we show that Sanderling select
 intertidal mudflats that contain the highest densities of Brown Shrimp.
 Because of tag weight constraints and Sanderling being so small, this is
 the first time ever that Sanderling have been tracked at such high
-spatiotemporal resolution.
+spatio-temporal resolution.
 
 In **Danielson-Owczynsky et al. ([2026](#ref-DanielsonOwczynsky2026))**,
 we show that Bar-tailed Godwits select areas where they their preferred
@@ -161,7 +161,7 @@ tagged individuals on mudflats for detailed behavioural observations.
 Following this result, in **Ersoy et al. ([2024](#ref-ersoy2024))**, we
 studied the development of consistency in behaviour and found that
 juvenile red knots had a more diverse diet than adults and had less
-consistent personalites. We discuss a pathway how early foraging
+consistent personalties. We discuss a pathway how early foraging
 experiences could shape development of exploratory personalities. WATLAS
 was used to show how juvenile red knots differed in habitat use, which
 is presented in the appendix.
@@ -177,8 +177,8 @@ behaviour.
 
 #### Climate change
 
-With the climiate crisis, extreme wind speeds are predicted to occur
-more frequently and pose a threat to shorebirds. In **Keuning et al.
+With the climate crisis, extreme wind speeds are predicted to occur more
+frequently and pose a threat to shorebirds. In **Keuning et al.
 ([2026](#ref-keuning2026))**, we studied how strong winds affect the
 availability of intertidal foraging habitat through increased water
 levels (‘wind setup’) and the behaviour of Red Knots. With high wind

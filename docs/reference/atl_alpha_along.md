@@ -1,6 +1,6 @@
 # Creates different alpha values along a vector
 
-Copied from https://github.com/mpio-be/windR
+Copied from https://github.com/ornitho-logics/windR
 
 ## Usage
 
@@ -16,7 +16,7 @@ atl_alpha_along(x, head = 20, skew = -2)
 
 - head:
 
-  Numeric parameter influencing the lenght of the head
+  Numeric parameter influencing the length of the head
 
 - skew:
 
@@ -24,7 +24,7 @@ atl_alpha_along(x, head = 20, skew = -2)
 
 ## Value
 
-Numeric verctor with different alpha values
+Numeric vector with different alpha values
 
 ## Author
 

@@ -3,13 +3,13 @@
 This vignette shows how to filter WATLAS-data based on spatial
 boundaries, temporal windows, and positioning errors.
 
+**Before you start:** load and check your data as described in [Load and
+check
+data](https://allertbijleveld.github.io/tools4watlas/articles/load_and_check_data.html).
+
 ## Loading the data
 
-In the previous step [Load and check
-data](https://allertbijleveld.github.io/tools4watlas/articles/load_and_check_data.html#save-data),
-we have saved the raw data. You can run the code in sequence without
-saving the data, but extracting and processing large datasets can take a
-long time. Here, we work with the previously saved example data.
+Here, we work with the previously saved example data.
 
 ``` r
 
@@ -238,7 +238,7 @@ data[, N := NULL]
 
 Here, we will show two ways of filtering the data by positioning errors.
 First, by the size of the error estimate as provided by the algorithm
-for calculating positions. Second, based on unreleastic speeds between
+for calculating positions. Second, based on unrealistic speeds between
 sequential positions.
 
 ### Based on WATLAS error estimate
@@ -389,3 +389,6 @@ data <- atl_get_speed(data, type = c("in", "out"))
 # save data
 fwrite(data, file = "../inst/extdata/watlas_data_filtered.csv", yaml = TRUE)
 ```
+
+The filtered data is now ready for the next step: [**Smooth and thin
+data**](https://allertbijleveld.github.io/tools4watlas/articles/smooth_and_thin_data.html).

@@ -52,7 +52,6 @@ Johannes Krietsch
 
 ``` r
 # packages
-library(tools4watlas)
 library(ggplot2)
 library(sf)
 #> Linking to GEOS 3.13.1, GDAL 3.11.0, PROJ 9.6.0; sf_use_s2() is TRUE

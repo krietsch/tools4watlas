@@ -132,7 +132,7 @@ atl_create_bm(
 
 - water_colour:
 
-  Water coulour (default "grey80")
+  Water colour (default "grey80")
 
 - land_fill:
 

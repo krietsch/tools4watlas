@@ -4,6 +4,14 @@ This article shows how to add tidal and bathymetry data to WATLAS data,
 subset data within tidal cycle, and visualise the tracking data on the
 bathymetry.
 
+**Before you start:** this article assumes you have completed the basic
+WATLAS data processing, i.e. you have [loaded and checked your
+data](https://allertbijleveld.github.io/tools4watlas/articles/load_and_check_data.html),
+[filtered
+it](https://allertbijleveld.github.io/tools4watlas/articles/filter_data.html),
+and [smoothed and thinned
+it](https://allertbijleveld.github.io/tools4watlas/articles/smooth_and_thin_data.html).
+
 #### Load packages and movement data
 
 ``` r
@@ -120,7 +128,7 @@ head(data[, .(tag, datetime, bathymetry)]) |>
 
 ### Filter data by specific times within the tide cycle
 
-To select localizations when mudlfats are available for foraging, we can
+To select localizations when mudflats are available for foraging, we can
 for example select a low tide period from -2.5 hours to +2.5 hours
 around low tide [(Bijleveld et
 al. 2016)](https://royalsocietypublishing.org/doi/10.1098/rspb.2015.1557):

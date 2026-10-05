@@ -2,6 +2,12 @@
 
 This vignette shows how to smooth and thin WATLAS data.
 
+**Before you start:** load and check your data as described in [Load and
+check
+data](https://allertbijleveld.github.io/tools4watlas/articles/load_and_check_data.html)
+and filter them them as described in [**Filter
+data**](https://allertbijleveld.github.io/tools4watlas/articles/filter_data.html).
+
 ``` r
 
 # Packages
@@ -141,7 +147,7 @@ head(thinned_aggregated[, .(tag, time, datetime, x, y, n_aggregated)]) |>
 | 3027 | 1695439440 | 2023-09-23 03:24:00 | 650705.2 | 5902576 |            6 |
 | 3027 | 1695439500 | 2023-09-23 03:25:00 | 650700.1 | 5902562 |           17 |
 
-### By subsampling
+### By sub-sampling
 
 Returns the first position for each time step. The column `n_subsampled`
 shows from how many positions this position was sampled.
@@ -169,3 +175,7 @@ head(thinned_subsampled[, .(tag, time, datetime, x, y, n_subsampled)]) |>
 | 3027 | 1695439261 | 2023-09-23 03:21:01 | 650702.9 | 5902562 |            1 |
 | 3027 | 1695439477 | 2023-09-23 03:24:37 | 650702.8 | 5902562 |            6 |
 | 3027 | 1695439501 | 2023-09-23 03:25:01 | 650709.9 | 5902598 |           17 |
+
+This finishes the basic processing of WATLAS data and further analysis
+depend on the specific research questions. For further described
+workflows look at the extended workflows articles.

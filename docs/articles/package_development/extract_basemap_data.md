@@ -2,7 +2,7 @@
 
 This script shows how to extract the basemap data of `tools4watlas`,
 which are a land polygon of the Dutch Wadden Sea, the mudflats of North
-Holland and Friesland and waterbodies on Griend. These data were choosen
+Holland and Friesland and water bodies on Griend. These data were chosen
 provide a simple map with relevant data allowing fast plotting.
 Customized basemap data could be created in a similar way and could
 additional contain buildings, roads, lakes, rivers etc. All data can be
@@ -229,7 +229,7 @@ save(mudflats, file = "../../data/muddflats.rda", compress = "xz")
 save(lakes, file = "../../data/lakes.rda", compress = "xz")
 ```
 
-## Load Grinderwaard data
+## Load Grienderwaard data
 
 Polygon made to capture all mudflat areas associated to the
 Grienderwaard based on OSM, but smoothed to capture most low tides (-161
@@ -322,5 +322,5 @@ Includes data in the package, if `tools4watlas` is opened as project.
 ``` r
 
 # save data
-save(roosts_griend, file = "../../data/roosts_griend.rda", compress = "xz")
+usethis::use_data(roosts_griend, compress = "xz", overwrite = TRUE)
 ```

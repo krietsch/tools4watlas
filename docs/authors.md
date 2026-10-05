@@ -7,7 +7,8 @@
 
 - **[Allert
   Bijleveld](https://www.nioz.nl/en/about/organisation/staff/allert-bijleveld)**.
-  Author, maintainer. [](https://orcid.org/0000-0002-3159-8944)
+  Author, maintainer, copyright holder.
+  [](https://orcid.org/0000-0002-3159-8944)
 
 - **[Pratik Gupte](https://github.com/pratikunterwegs)**. Contributor.
   [](https://orcid.org/0000-0001-5294-7819)

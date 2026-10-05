@@ -11,7 +11,8 @@ and to read the latest project news. **Feel free to reach out by
 [e-mail](mailto:allert.bijleveld@nioz.nl) for questions or
 collaborations if you would like to work with WATLAS data.**
 
-The package `tools4watlas` builds on the package
+The package `tools4watlas` incorporates code from and builds on the
+foundation of the package
 [`atlastools`](https://github.com/pratikunterwegs/atlastools) ([Gupte et
 al. 2021. A Guide to Pre-processing High-throughput Animal Tracking
 Data](https://doi.org/10.1111/1365-2656.13610)). Some major developments

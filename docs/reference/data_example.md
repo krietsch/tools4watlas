@@ -10,8 +10,8 @@ data_example
 
 ## Format
 
-data.table of watlas data with tide data added
+data.table of WATLAS data with tide data added
 
 ## Source
 
-watlas data example
+WATLAS data example

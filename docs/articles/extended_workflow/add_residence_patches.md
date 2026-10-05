@@ -1,7 +1,14 @@
 # Add residence patches
 
 In this vignette, we provide a general workflow to group WATLAS position
-data into so-called ‘residence patches’.
+data into so-called ‘residence patches’. **Before you start:** this
+article assumes you have completed the basic WATLAS data processing,
+i.e. you have [loaded and checked your
+data](https://allertbijleveld.github.io/tools4watlas/articles/load_and_check_data.html),
+[filtered
+it](https://allertbijleveld.github.io/tools4watlas/articles/filter_data.html),
+and [smoothed and thinned
+it](https://allertbijleveld.github.io/tools4watlas/articles/smooth_and_thin_data.html).
 
 ## Background
 
@@ -204,7 +211,7 @@ atl_check_res_patch(
 ![Overview plot res patches one
 tide](add_residence_patches_files/figure-html/unnamed-chunk-3-1.png)
 
-It might also be convenient to zoom in on specifc range of residence
+It might also be convenient to zoom in on specific range of residence
 patches, to inspect them in more detail.
 
 ``` r
@@ -345,7 +352,7 @@ Here is description of the different columns in the output data table:
 ## Plotting residence patches
 
 Residence patches can be conveniently plotted using `ggplot2`. Here, we
-will show plotting residence patchs by individuals or species.
+will show plotting residence patches by individuals or species.
 
 ### Plot by individual
 
@@ -492,7 +499,7 @@ based on a combination of biological relevance, visual inspection,
 systematic testing, and expert judgement.
 
 First, ‘min_duration’, ‘lim_time_indep’, and ‘min_fixes’ were set. To
-maintain biological relevance for the creation of proto-pacthes, a
+maintain biological relevance for the creation of proto-patches, a
 minimum duration of 60 s and temporal limit of 180 min were selected
 a-priori. Additionally, a minimum of 2 positions for a proto-patch was
 selected to avoid the creation of too many proto-patches with very short

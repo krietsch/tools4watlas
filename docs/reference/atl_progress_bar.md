@@ -1,6 +1,6 @@
 # Display a live progress bar for PNG file generation in a directory
 
-This function is meant to track the progress of PNG's created in a
+This function is meant to track the progress of PNGs created in a
 parallel loop. It will check the number of PNG files in a specified
 directory and make a progress bar in the console. To use the function,
 open a new R session and run the function there.
@@ -8,7 +8,7 @@ open a new R session and run the function there.
 ## Usage
 
 ``` r
-atl_progress_bar(file_path, total = NULL, refresh_rate = 1)
+atl_progress_bar(file_path, total = NULL, refresh_rate = 1, quietly = FALSE)
 ```
 
 ## Arguments
@@ -28,6 +28,36 @@ atl_progress_bar(file_path, total = NULL, refresh_rate = 1)
   Numeric value in seconds specifying how often the progress bar
   updates.
 
+- quietly:
+
+  Logical. If `TRUE`, no progress or completion messages are printed.
+  Default is `FALSE`.
+
 ## Value
 
 No return value. Prints progress bar to the console.
+
+## Examples
+
+``` r
+# create a temporary directory with dummy png files
+dir <- file.path(tempdir(), "animation")
+dir.create(dir, showWarnings = FALSE)
+file.create(file.path(dir, sprintf("frame_%03d.png", 1:10)))
+#>  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+
+# progress bar with a known total number of frames
+atl_progress_bar(file_path = dir, total = 10, refresh_rate = 0.1)
+#> 
+#> Done!
+
+# total read from 'total_frames.txt' in the same directory
+# (normally created by atl_time_steps())
+writeLines("10", file.path(dir, "total_frames.txt"))
+atl_progress_bar(file_path = dir, refresh_rate = 0.1)
+#> 
+#> Done!
+
+# clean up
+unlink(dir, recursive = TRUE)
+```

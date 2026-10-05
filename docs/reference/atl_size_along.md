@@ -1,6 +1,6 @@
 # Creates different size values along a vector
 
-Copied from https://github.com/mpio-be/windR
+Copied from https://github.com/ornitho-logics/windR
 
 ## Usage
 
@@ -16,7 +16,7 @@ atl_size_along(x, head = 20, to = c(0.1, 2.5))
 
 - head:
 
-  Numeric parameter influencing the lenght of the head
+  Numeric parameter influencing the length of the head
 
 - to:
 
@@ -24,7 +24,7 @@ atl_size_along(x, head = 20, to = c(0.1, 2.5))
 
 ## Value
 
-Numeric verctor with different size values
+Numeric vector with different size values
 
 ## Author
 

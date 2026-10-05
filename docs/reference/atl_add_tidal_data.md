@@ -1,6 +1,6 @@
 # Add tidal data to tracking data
 
-Adds a unique tide identifier, waterlevel, time from high tide and time
+Adds a unique tide identifier, water level, time from high tide and time
 to low tide for tracking data (both in minutes).
 
 ## Usage
@@ -29,12 +29,12 @@ atl_add_tidal_data(
 
 - tide_data_highres:
 
-  Data on the timing (in UTC) of the waterlevel in small intervals (e.g.
-  every 10 min) as provided from Rijkwaterstaat.
+  Data on the timing (in UTC) of the water level in small intervals
+  (e.g. every 10 min) as provided from Rijkswaterstaat.
 
 - waterdata_resolution:
 
-  The resolution of the high resolution waterlevel data. This is used
+  The resolution of the high resolution water level data. This is used
   for matching the high resolution tidal data to the tracking data.
   Defaults to 10 minutes but can be set differently.
 
@@ -55,7 +55,7 @@ atl_add_tidal_data(
 The input data but with three columns added: tideID (a unique number for
 the tidal period between two consecutive high tides), tidaltime (time
 since high tide in minutes), time2lowtide (time to low tide in minutes),
-and waterlevel with reference to NAP (cm).
+and water level with reference to NAP (cm).
 
 ## Author
 
@@ -72,6 +72,7 @@ data <- data_example
 
 # delete existing tide data columns to show how they are added
 data[, c("tideID", "tidaltime", "time2lowtide", "waterlevel") := NULL]
+#> Index: <tag>
 #>           species posID    tag       time            datetime        x       y
 #>            <char> <int> <char>      <num>              <POSc>    <num>   <num>
 #>     1:   redshank     2   3027 1695438805 2023-09-23 03:13:25 650705.6 5902556

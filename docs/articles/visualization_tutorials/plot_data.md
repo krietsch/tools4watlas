@@ -7,7 +7,7 @@ basemap](https://allertbijleveld.github.io/tools4watlas/articles/visualization_t
 
 We first present some examples of plotting data grouped by tag ID, then
 by species, and then by individual. These individual plots allow quickly
-check the data. We end by whoing how to plot heatmaps of the position
+check the data. We end by showing how to plot heatmaps of the position
 data. These examples give a starting point, and can be customized as
 desired.
 

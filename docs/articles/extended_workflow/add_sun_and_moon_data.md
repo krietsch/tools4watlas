@@ -8,6 +8,14 @@ whether birds behave differently during day and night or during
 different moon phases, which are closely linked to the strength of the
 tides.
 
+**Before you start:** this article assumes you have completed the basic
+WATLAS data processing, i.e. you have [loaded and checked your
+data](https://allertbijleveld.github.io/tools4watlas/articles/load_and_check_data.html),
+[filtered
+it](https://allertbijleveld.github.io/tools4watlas/articles/filter_data.html),
+and [smoothed and thinned
+it](https://allertbijleveld.github.io/tools4watlas/articles/smooth_and_thin_data.html).
+
 ## Load packages and data
 
 ``` r

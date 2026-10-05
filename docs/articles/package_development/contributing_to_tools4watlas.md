@@ -48,7 +48,7 @@ can be checked using [`lintr`](https://lintr.r-lib.org/). You can use
 [`styler`](https://styler.r-lib.org/) to format your code (will take
 care of most needed changes, but not all). Only use style in the file
 you are working on or selected code. The easiest is to use the R Studio
-addin, otherwise use `styler::style_file("my_file.R")`.
+add-in, otherwise use `styler::style_file("my_file.R")`.
 
 Note that not all code follows this style at the moment (see
 [.lintr](https://github.com/allertbijleveld/tools4watlas/blob/master/.lintr)
@@ -65,18 +65,44 @@ lintr::lint_package()
 
 ### Documentation and functions
 
-The package is documented useing
+The package is documented using
 [`roxygen2`](https://roxygen2.r-lib.org/). Functions are in the [R
 folder](https://github.com/allertbijleveld/tools4watlas/tree/master/R)
 and always have the prefix `atl_`. Each function has a
 [`roxygen2 header`](https://roxygen2.r-lib.org/articles/rd.html). This
 header can be created by using `Ctrl + Alt + Shift + R` within a new
 function, if you’re using RStudio. Optimally, each function has an
-runable example. Once done run:
+runnable example. Once done run:
 
 ``` r
 
 devtools::document()
+```
+
+### Check for spelling mistakes
+
+The [`spelling`](https://docs.ropensci.org/spelling/) package can be
+used to quickly scan for potential typos. If flagged words are confirmed
+as correct, they can be added to the word list of the package.
+
+``` r
+
+# check for spelling mistakes
+spelling::spell_check_package()
+
+# add flagged words to the package word list (only if they are not a mistake!)
+spelling::update_wordlist()
+```
+
+### Check if all URLs are working
+
+The [`urlchecker`](https://urlchecker.r-lib.org/) package can be used to
+quickly scan for broken links.
+
+``` r
+
+# check if all URLs are working
+urlchecker::url_check()
 ```
 
 ### Test coverage
@@ -98,6 +124,28 @@ devtools::test()
 
 # check code coverage
 covr::package_coverage()
+```
+
+### Check for good practice
+
+For further in-depth checking of CRAN coding standards, one can use the
+[`goodpractice`](https://ropensci-review-tools.github.io/goodpractice/articles/goodpractice.html)
+and [`checktor`](https://r-packages.io/packages/checktor) package. At
+the moment `tools4watlas` does not pass all the checks and currently we
+are not planning to submit the package to CRAN, but especially for new
+code, it makes sense to follow these standards.
+
+``` r
+
+# full test of good practices
+goodpractice::gp()
+
+# basic CRAN checks
+checks <- checktor::checktor()
+checks
+
+# treatment recommendations
+checktor::prescribe(checks)
 ```
 
 ### Vignettes and articles
@@ -198,6 +246,12 @@ usethis::use_tidy_description()
 
 # R CMD check
 devtools::check()
+
+# check for spelling mistakes
+spelling::spell_check_package()
+
+# check if all URLs are working
+urlchecker::url_check()
 
 # build website (lazy = TRUE only changes files that were edited)
 pkgdown::build_site(lazy = TRUE)

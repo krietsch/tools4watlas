@@ -111,7 +111,7 @@ scripts on GitHub without storing the credentials online. Ask Allert for
 the host, username and password and then add them in your environment as
 indicated below. After adding the credentials to the R-environment,
 restart R and access should be available and the scripts should run
-succesfully.
+successfully.
 
 ``` r
 
@@ -426,3 +426,6 @@ bm +
 positions](load_and_check_data_files/figure-html/unnamed-chunk-13-1.png)
 
 Heatmap of all positions
+
+The extracted and checked data is now ready for the next step: [**Filter
+data**](https://allertbijleveld.github.io/tools4watlas/articles/filter_data.html).

@@ -14,7 +14,7 @@ identical.
 ## Usage
 
 ``` r
-atl_compare_res_patch_summary(data_v1, data_v2)
+atl_compare_res_patch_summary(data_v1, data_v2, quietly = FALSE)
 ```
 
 ## Arguments
@@ -31,6 +31,11 @@ atl_compare_res_patch_summary(data_v1, data_v2)
   A data.table with residence patches assigned using the second
   parameter set. Must have the same structure and row order as
   `data_v1`, as patch columns are compared position-by-position.
+
+- quietly:
+
+  Logical. If `TRUE`, no summary messages are printed. Default is
+  `FALSE`.
 
 ## Value
 
@@ -78,5 +83,5 @@ atl_compare_res_patch_summary(data_v1, data_v2)
 #> 
 #>       tag  tideID change patch_v1 patch_v2
 #>    <char>   <int> <char>   <char>   <char>
-#> 1:   3038 2023514  merge   13, 14       13
+#> 1:   3038 2023513  merge   13, 14       13
 ```
