@@ -309,7 +309,7 @@ atl_format_time <- function(time) {
 #' print(colour_with_alpha)
 #'
 #' plot(1, 1,
-#'   col = color_with_alpha, pch = 16, cex = 20,
+#'   col = colour_with_alpha, pch = 16, cex = 20,
 #'   xlab = "X", ylab = "Y", main = "Point with Transparent Colour"
 #' )
 #' @export

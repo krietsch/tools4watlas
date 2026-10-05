@@ -34,7 +34,7 @@ colour_with_alpha <- atl_t_col("red", percent = 90)
 print(colour_with_alpha)
 
 plot(1, 1,
-  col = color_with_alpha, pch = 16, cex = 20,
+  col = colour_with_alpha, pch = 16, cex = 20,
   xlab = "X", ylab = "Y", main = "Point with Transparent Colour"
 )
 }
