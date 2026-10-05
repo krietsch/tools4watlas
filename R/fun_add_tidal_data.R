@@ -103,25 +103,12 @@ atl_add_tidal_data <- function(data,
     )
   )
 
-  # convert to data.table if not
+  # convert to data.table if not and copy tide files
   if (!data.table::is.data.table(data)) {
-    data.table::setDT(data)
+    data <- data.table::as.data.table(data)
   }
-  if (!data.table::is.data.table(tide_data)) {
-    data.table::setDT(tide_data)
-  }
-  if (!data.table::is.data.table(tide_data_highres)) {
-    data.table::setDT(tide_data_highres)
-  }
-
-  # to get back original order
-  col_order <- copy(colnames(data))
-
-  # create row id (to order back to original order at the end)
-  data[, row_id := .I]
-
-  # order tracking data
-  data.table::setorder(data, datetime) # order data on time
+  tide_data <- data.table::as.data.table(tide_data)
+  tide_data_highres <- data.table::as.data.table(tide_data_highres)
 
   # process tidal data
   setattr(tide_data$high_start_time, "tzone", "UTC") # time zone to UTC
@@ -129,9 +116,16 @@ atl_add_tidal_data <- function(data,
   tide_data[, low_time := low_time + offset * 60] # 60 because offset is in min
   high_tide_data <- tide_data[, .(high_start_time, tideID)]
 
+  # subset only datetimes from movement data
+  temp_data <- data.table::data.table(
+    datetime = data$datetime,
+    row_id = seq_len(nrow(data))
+  )
+  data.table::setorder(temp_data, datetime)
+  
   # merge tracking and tidal data to get time from high tide
   temp_data <- data.table::merge.data.table(
-    data, high_tide_data,
+    temp_data, high_tide_data,
     by.x = "datetime", by.y = "high_start_time",
     all = TRUE
   )
@@ -196,18 +190,13 @@ atl_add_tidal_data <- function(data,
     )
   }
 
-  # set order back
-  data.table::setorder(temp_data, row_id) # order data on time
-
-  # clean data
-  temp_data[, c("temp_time", "row_id") := NULL]
-  setcolorder(temp_data, col_order)
-
-  # remove offset
-  tide_data[, high_start_time := high_start_time - offset * 60] # add offset
-  tide_data[, low_time := low_time - offset * 60] # 60 because offset is in min
-  tide_data_highres[, dateTime := dateTime - offset * 60]
-
+  # add new columns to data
+  data.table::setorder(temp_data, row_id)
+  idx <- match(seq_len(nrow(data)), temp_data$row_id)
+  new_cols <- c("tideID", "tidaltime", "time2lowtide", "waterlevel")
+  data[, (new_cols) := lapply(new_cols, function(col) temp_data[[col]][idx])]
+  
   # export
-  temp_data
+  data
+
 }
